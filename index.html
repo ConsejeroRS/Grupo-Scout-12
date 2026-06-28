@@ -45,7 +45,7 @@ a,button{-webkit-tap-highlight-color:transparent}
 @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
 
 /* ══════════ FLUID ANIMATED BACKGROUND ══════════ */
-.fluid-bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--black)}
+.fluid-bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--black);isolation:isolate}
 .blob{position:absolute;border-radius:42% 58% 65% 35% / 45% 40% 60% 55%;filter:blur(2px);opacity:.55;animation:morph 18s ease-in-out infinite, drift 26s ease-in-out infinite;mix-blend-mode:screen}
 .blob1{width:55vmax;height:55vmax;top:-20%;left:-15%;background:radial-gradient(circle at 30% 30%,var(--ruby),transparent 70%);animation-delay:0s}
 .blob2{width:45vmax;height:45vmax;bottom:-15%;right:-10%;background:radial-gradient(circle at 70% 70%,var(--amber),transparent 70%);animation-delay:-6s;opacity:.4}
@@ -293,12 +293,12 @@ nav{
 .login-box p{font-size:13px;color:var(--gray);margin-bottom:28px;font-weight:500}
 .login-err{font-size:12px;color:var(--ruby);margin-top:-10px;margin-bottom:12px;display:none;font-weight:600}
 
-#adm-editor{display:none;position:fixed;inset:0;z-index:9999;background:var(--black)}
+#adm-editor{display:none;position:fixed;inset:0;z-index:9999;background:var(--black);isolation:isolate}
 #adm-editor.show{display:flex}
-.adm-shell{display:flex;width:100%;height:100%}
+.adm-shell{display:flex;width:100%;height:100%;overflow:hidden}
 
 /* ── SIDEBAR ── */
-.adm-sidebar{width:248px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;transition:width .25s, padding .25s}
+.adm-sidebar{width:264px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;transition:width .25s, padding .25s;isolation:isolate;position:relative}
 .adm-sidebar.collapsed{width:72px}
 .adm-sidebar-brand{display:flex;align-items:center;gap:10px;padding:18px 16px;border-bottom:1px solid var(--border);flex-shrink:0;min-height:64px}
 .adm-sidebar-brand .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--ruby),var(--ruby-dark));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0}
@@ -310,7 +310,8 @@ nav{
 .adm-nav-group{margin-bottom:18px}
 .adm-nav-group-label{font-size:9.5px;font-weight:800;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.5px;padding:0 10px;margin-bottom:6px;white-space:nowrap}
 .adm-sidebar.collapsed .adm-nav-group-label{display:none}
-.adm-navlink{display:flex;align-items:center;gap:11px;width:100%;padding:9px 10px;border-radius:10px;background:none;border:none;color:var(--gray-light);font-size:13px;font-weight:600;cursor:pointer;text-align:left;transition:background .15s,color .15s;margin-bottom:2px;font-family:'Manrope',sans-serif;white-space:nowrap;overflow:hidden}
+.adm-navlink{display:flex;align-items:center;gap:11px;width:100%;padding:9px 10px;border-radius:10px;background:none;border:none;color:var(--gray-light);font-size:12.5px;font-weight:600;cursor:pointer;text-align:left;transition:background .15s,color .15s;margin-bottom:2px;font-family:'Manrope',sans-serif;white-space:nowrap;overflow:hidden}
+.adm-navlink span:not(.ic):not(.badge){overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
 .adm-navlink .ic{font-size:16px;width:20px;text-align:center;flex-shrink:0}
 .adm-navlink:hover{background:rgba(255,255,255,.05);color:#fff}
 .adm-navlink.active{background:linear-gradient(135deg,rgba(246,34,23,.18),rgba(246,34,23,.06));color:#fff;box-shadow:inset 0 0 0 1px rgba(246,34,23,.3)}
@@ -336,14 +337,14 @@ nav{
 .adm-btn-ghost:hover{background:rgba(255,255,255,.1);color:#fff}
 .adm-btn-icon{width:36px;height:36px;padding:0;justify-content:center;border-radius:10px}
 
-.adm-content{flex:1;overflow-y:auto;padding:24px 28px 60px}
+.adm-content{flex:1;overflow-y:auto;overflow-x:hidden;padding:24px 28px 60px;max-width:100%}
 .adm-view{display:none}
 .adm-view.active{display:block;animation:admFadeIn .35s ease}
 @keyframes admFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── DASHBOARD STAT CARDS ── */
-.adm-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:26px}
-.adm-stat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden;transition:border-color .2s}
+.adm-stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:26px}
+.adm-stat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden;transition:border-color .2s;min-width:0}
 .adm-stat-card:hover{border-color:rgba(255,255,255,.18)}
 .adm-stat-card .icon{position:absolute;top:14px;right:16px;font-size:22px;opacity:.5}
 .adm-stat-card .num{font-size:2rem;font-weight:800;line-height:1}
@@ -351,16 +352,16 @@ nav{
 .adm-stat-card .accent-bar{position:absolute;left:0;top:0;bottom:0;width:3px}
 
 /* ── CARD-BASED FORM SECTIONS (reemplaza el acordeón) ── */
-.adm-section-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;align-items:start}
+.adm-section-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start;min-width:0}
 .adm-section-grid.single{grid-template-columns:1fr}
-.adm-card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:18px}
+.adm-card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:18px;min-width:0}
 .adm-card-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);gap:10px}
 .adm-card-hd h3{font-size:13.5px;font-weight:800;letter-spacing:.2px;display:flex;align-items:center;gap:9px}
 .adm-card-hd h3 .ic{font-size:17px}
 .adm-card-hd .hint{font-size:11px;color:var(--gray);font-weight:500}
 .adm-card-bd{padding:18px 20px}
-.adm-quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
-.adm-quick-btn{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;cursor:pointer;transition:all .2s;text-align:left;font-family:'Manrope',sans-serif;color:#fff}
+.adm-quick-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:24px}
+.adm-quick-btn{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;cursor:pointer;transition:all .2s;text-align:left;font-family:'Manrope',sans-serif;color:#fff;min-width:0;width:100%}
 .adm-quick-btn:hover{border-color:var(--ruby);background:rgba(246,34,23,.05);transform:translateY(-2px)}
 .adm-quick-btn .ic{font-size:22px}
 .adm-quick-btn .t{font-size:12.5px;font-weight:700}
@@ -403,8 +404,8 @@ nav{
 .adm-row-btn.warn:hover{background:rgba(245,191,0,.22)}
 
 /* Sections grid (cards for each scout section in nav) */
-.adm-secgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.adm-seccard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;cursor:pointer;transition:all .2s;text-align:left;font-family:'Manrope',sans-serif;color:#fff;position:relative;overflow:hidden}
+.adm-secgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.adm-seccard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;cursor:pointer;transition:all .2s;text-align:left;font-family:'Manrope',sans-serif;color:#fff;position:relative;overflow:hidden;min-width:0;width:100%}
 .adm-seccard:hover{transform:translateY(-2px);border-color:var(--tc,var(--ruby))}
 .adm-seccard .top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .adm-seccard .logo{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;overflow:hidden}
