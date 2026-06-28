@@ -1,0 +1,2003 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grupo Scout No.12 — San Pedro Apóstol</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#060D0D;
+  --surface:#0d1414;
+  --card:#10191a;
+  --border:rgba(255,255,255,.08);
+  --ruby:#F62217;
+  --ruby-dark:#c41b12;
+  --amber:#FFBF00;
+  --white:#fff;
+  --gray:#8a9594;
+  --gray-light:#cfd6d5;
+  --c-cubil:#38bdf8;
+  --c-manada:#FFBF00;
+  --c-unidad:#22c55e;
+  --c-caminantes:#2563eb;
+  --c-rovers:#F62217;
+  --c-dirigencia:#9333ea;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;font-weight:500;font-size:15.5px;color:var(--white);background:var(--black);overflow-x:hidden;line-height:1.6;min-height:100vh}
+h1,h2,h3,h4,h5{font-family:'Manrope',sans-serif}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--ruby);border-radius:2px}
+::selection{background:rgba(246,34,23,.35);color:#fff}
+a,button{-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+.sec-tile:focus-visible,.gal-item:focus-visible,.album-chip:focus-visible{outline-offset:1px}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+}
+
+/* ══════════ SCROLL REVEAL ══════════ */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.in-view{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+/* ══════════ FLUID ANIMATED BACKGROUND ══════════ */
+.fluid-bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--black)}
+.blob{position:absolute;border-radius:42% 58% 65% 35% / 45% 40% 60% 55%;filter:blur(2px);opacity:.55;animation:morph 18s ease-in-out infinite, drift 26s ease-in-out infinite;mix-blend-mode:screen}
+.blob1{width:55vmax;height:55vmax;top:-20%;left:-15%;background:radial-gradient(circle at 30% 30%,var(--ruby),transparent 70%);animation-delay:0s}
+.blob2{width:45vmax;height:45vmax;bottom:-15%;right:-10%;background:radial-gradient(circle at 70% 70%,var(--amber),transparent 70%);animation-delay:-6s;opacity:.4}
+.blob3{width:38vmax;height:38vmax;top:35%;left:55%;background:radial-gradient(circle at 50% 50%,#7a1410,transparent 70%);animation-delay:-12s;opacity:.5}
+@keyframes morph{
+  0%,100%{border-radius:42% 58% 65% 35% / 45% 40% 60% 55%}
+  25%{border-radius:58% 42% 35% 65% / 60% 55% 40% 45%}
+  50%{border-radius:35% 65% 45% 55% / 40% 60% 55% 45%}
+  75%{border-radius:65% 35% 55% 45% / 55% 45% 35% 60%}
+}
+@keyframes drift{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(3vw,-2vh) scale(1.05)}
+  66%{transform:translate(-2vw,3vh) scale(.97)}
+}
+.fluid-noise{position:absolute;inset:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@media (prefers-reduced-motion: reduce){.blob{animation:none}}
+
+/* ══════════ HORIZONTAL PILL NAV ══════════ */
+.nav-wrap{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:1000;width:calc(100% - 36px);max-width:1440px;display:flex;justify-content:center}
+nav{
+  background:rgba(13,20,20,.7);backdrop-filter:blur(20px) saturate(140%);
+  border:1px solid var(--border);border-radius:100px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 8px 8px 18px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,.4);
+}
+.nav-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0}
+.nav-logo-img{width:32px;height:32px;object-fit:contain;border-radius:50%}
+.nav-logo-hex{width:32px;height:32px;background:linear-gradient(135deg,var(--ruby),var(--amber));border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:#fff;flex-shrink:0}
+.nav-name-main{font-size:12.5px;font-weight:800;letter-spacing:.3px;color:#fff;line-height:1;white-space:nowrap}
+.nav-name-sub{font-size:8.5px;color:var(--amber);letter-spacing:1.5px;text-transform:uppercase;margin-top:1px;font-weight:700}
+.nav-links{display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none;padding:0 6px}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:12.5px;font-weight:700;padding:9px 14px;border-radius:100px;letter-spacing:.3px;white-space:nowrap;transition:all .25s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nav-links a.active{color:#fff;background:linear-gradient(135deg,var(--ruby),#a01510)}
+.nav-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.nav-admin-btn{background:linear-gradient(135deg,var(--amber),#d9a300);color:#1a1400;border:none;padding:9px 16px;border-radius:100px;font-size:11px;font-weight:800;cursor:pointer;letter-spacing:.3px;white-space:nowrap;transition:transform .2s}
+.nav-admin-btn:hover{transform:scale(1.04)}
+.hamburger{display:none;background:rgba(255,255,255,.06);border:none;cursor:pointer;flex-direction:column;gap:4px;padding:10px;border-radius:50%;width:38px;height:38px;align-items:center;justify-content:center}
+.hamburger span{width:16px;height:2px;background:#fff;display:block;border-radius:1px}
+.mobile-drawer{display:none;position:fixed;top:90px;left:18px;right:18px;z-index:999;background:rgba(13,20,20,.96);backdrop-filter:blur(20px);border-radius:24px;border:1px solid var(--border);flex-direction:column;padding:14px;gap:2px;overflow-y:auto;max-height:calc(100vh - 110px);box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.mobile-drawer.open{display:flex}
+.mobile-drawer a{color:var(--gray-light);text-decoration:none;padding:13px 16px;font-size:15px;font-weight:700;border-radius:14px;transition:all .15s}
+.mobile-drawer a:hover{color:#fff;background:rgba(255,255,255,.06)}
+
+/* ══════════ MAIN STAGE ══════════ */
+.stage{position:relative;z-index:1;min-height:100vh;padding-top:108px}
+.page-section{display:none;animation:fadeUp .5s ease}
+.page-section.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* Floating card container */
+.fl-card{
+  max-width:1440px;margin:0 auto 24px;background:rgba(13,20,20,.55);
+  backdrop-filter:blur(16px) saturate(140%);border:1px solid var(--border);
+  border-radius:32px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+.fl-card-pad{padding:3.5rem}
+@media(max-width:900px){.fl-card-pad{padding:2rem 1.5rem}}
+
+/* ── HERO CARRUSEL ── */
+.hero-fl{padding:0 18px;margin-bottom:0}
+.hero-fl-inner{max-width:1440px;margin:0 auto;position:relative;border-radius:32px;overflow:hidden;background:#0d1414;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.35);min-height:640px;display:flex;align-items:flex-end}
+.hero-carousel{position:absolute;inset:0;z-index:0}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.1s ease;background-size:cover;background-position:center}
+.hero-slide.active{opacity:1}
+.hero-slide img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.hero-fl-inner::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(6,13,13,.35) 0%,rgba(6,13,13,.25) 35%,rgba(6,13,13,.75) 75%,rgba(6,13,13,.94) 100%);pointer-events:none}
+.hero-fl-inner::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(6,13,13,.55) 0%,transparent 55%);pointer-events:none}
+.hero-right-placeholder{display:flex;flex-direction:column;align-items:center;gap:10px;opacity:.4;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fff;position:absolute;inset:0;z-index:1;justify-content:center;text-align:center;padding:2rem}
+.hero-right-placeholder span{font-size:3rem}
+.hero-content-overlay{position:relative;z-index:2;padding:3rem 3.5rem 2.6rem;width:100%}
+.hero-logo-row{display:flex;align-items:center;gap:14px;margin-bottom:1.3rem;flex-wrap:wrap}
+.hero-logo-section{flex-shrink:0}
+.hero-logo-img{height:64px;width:64px;object-fit:contain;border-radius:50%;filter:drop-shadow(0 2px 14px rgba(0,0,0,.55));box-shadow:0 0 0 2px rgba(255,255,255,.15)}
+.hero-logo-hex{width:64px;height:64px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;backdrop-filter:blur(6px)}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber);margin-bottom:0;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.hero-title-fl{font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:.98;letter-spacing:-1px;margin-bottom:1rem;text-shadow:0 4px 20px rgba(0,0,0,.45)}
+.hero-title-fl .line-red{color:var(--ruby)}
+.hero-title-fl .line-amber{color:var(--amber)}
+.hero-body{font-size:16px;color:rgba(255,255,255,.92);line-height:1.8;margin-bottom:1.8rem;max-width:520px;font-weight:600;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+.hero-ctas{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn-red{background:linear-gradient(135deg,var(--ruby),var(--ruby-dark));color:#fff;padding:13px 28px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:.5px;transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.3);position:relative;overflow:hidden;isolation:isolate}
+.btn-red::before{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.25) 48%,transparent 66%);transform:translateX(-120%);transition:transform .6s ease;z-index:-1}
+.btn-red:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(246,34,23,.4)}
+.btn-red:hover::before{transform:translateX(120%)}
+.btn-red:active{transform:translateY(0) scale(.97)}
+.btn-outline{background:rgba(255,255,255,.1);color:#fff;padding:13px 28px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:.5px;border:1.5px solid rgba(255,255,255,.3);transition:all .25s cubic-bezier(.16,1,.3,1);cursor:pointer;backdrop-filter:blur(6px)}
+.btn-outline:hover{border-color:var(--amber);color:var(--amber);background:rgba(255,191,0,.1);transform:translateY(-2px)}
+.btn-outline:active{transform:translateY(0) scale(.97)}
+
+/* Carousel controls */
+.hero-dots{display:flex;gap:7px;margin-left:auto}
+.hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35);border:none;cursor:pointer;padding:0;transition:all .25s}
+.hero-dot.active{background:var(--amber);width:22px;border-radius:5px}
+.hero-dot:hover{background:rgba(255,255,255,.6)}
+.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:42px;height:42px;border-radius:50%;background:rgba(13,20,20,.55);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;backdrop-filter:blur(8px)}
+.hero-arrow:hover{background:rgba(230,51,41,.7);border-color:var(--ruby)}
+.hero-arrow.prev{left:18px}
+.hero-arrow.next{right:18px}
+
+
+/* ── SECTIONS within stage ── */
+.sec{padding:0 18px;margin-bottom:24px}
+.sec-tag{font-size:10px;font-weight:800;letter-spacing:3.5px;text-transform:uppercase;color:var(--ruby);margin-bottom:.9rem;display:flex;align-items:center;gap:8px}
+.sec-tag::before{content:'';width:20px;height:2px;background:var(--ruby);flex-shrink:0}
+.sec-title{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:800;letter-spacing:-0.3px;line-height:1.05;margin-bottom:1.1rem}
+.sec-title em{color:var(--amber);font-style:normal}
+.sec-lead{font-size:16px;color:var(--gray-light);line-height:1.85;max-width:640px;font-weight:500}
+
+.quienes-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:3.5rem;align-items:start;margin-top:2.5rem}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:1.6rem}
+.pillar{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:18px;padding:1.1rem;transition:transform .3s cubic-bezier(.16,1,.3,1),border-color .3s,background .3s}
+.pillar:hover{border-color:var(--ruby);background:rgba(246,34,23,.05);transform:translateY(-2px)}
+.pillar-icon{font-size:1.4rem;margin-bottom:6px;display:inline-block;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.pillar:hover .pillar-icon{transform:scale(1.15) rotate(-4deg)}
+.pillar h4{font-size:12.5px;font-weight:800;letter-spacing:.3px;margin-bottom:3px}
+.pillar p{font-size:13px;color:var(--gray);line-height:1.6;font-weight:500}
+.mv-stack{display:flex;flex-direction:column;gap:1rem}
+.mv-item{background:rgba(255,255,255,.03);border-radius:20px;padding:1.5rem;position:relative;overflow:hidden;border:1px solid var(--border)}
+.mv-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ruby);border-radius:0 4px 4px 0}
+.mv-item.y::before{background:var(--amber)}
+.mv-item h3{font-size:1.15rem;font-weight:800;letter-spacing:.2px;margin-bottom:7px}
+.mv-item p{font-size:14px;color:var(--gray-light);line-height:1.75;font-weight:500}
+
+.promesa-quote{font-size:clamp(1rem,1.8vw,1.3rem);font-weight:600;line-height:1.65;color:#fff;padding:1.8rem 2.2rem;background:rgba(255,255,255,.03);border-radius:20px;border:1px solid var(--border);margin:1.6rem 0 2.2rem;position:relative}
+.promesa-quote::before{content:'"';font-size:90px;font-weight:800;color:var(--ruby);position:absolute;top:-18px;left:18px;line-height:1;opacity:.35}
+.pañoleta-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem}
+.pñ-card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:18px;padding:1.15rem;display:flex;gap:.8rem;align-items:flex-start}
+.pñ-swatch{width:38px;height:38px;border-radius:50%;flex-shrink:0}
+.pñ-card h4{font-size:12px;font-weight:800;letter-spacing:.3px;margin-bottom:3px}
+.pñ-card p{font-size:13px;color:var(--gray);line-height:1.6;font-weight:500}
+
+.secciones-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:2.2rem}
+.sec-tile{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:22px;padding:1.5rem 1.2rem;cursor:pointer;text-decoration:none;color:#fff;transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,box-shadow .35s;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.sec-tile-logo-wrap{width:42px;height:42px;display:flex;align-items:center;justify-content:center;margin-bottom:.7rem;flex-shrink:0;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.sec-tile-logo{width:42px;height:42px;object-fit:contain;border-radius:10px}
+.sec-tile-logo-wrap .tile-emoji{font-size:1.7rem;margin-bottom:0;display:flex;align-items:center;justify-content:center;width:100%;height:100%}
+.sec-tile::after{content:'';position:absolute;inset:0;border-radius:22px;border:2px solid var(--tc,var(--ruby));opacity:0;transition:opacity .35s}
+.sec-tile:hover{transform:translateY(-4px);background:rgba(255,255,255,.05);box-shadow:0 14px 32px -8px var(--tc,rgba(246,34,23,.35))}
+.sec-tile:hover::after{opacity:1}
+.sec-tile:hover .sec-tile-logo-wrap{transform:scale(1.12)}
+.sec-tile:hover .tile-arrow{transform:translateX(4px)}
+.tile-emoji{font-size:1.7rem;margin-bottom:.8rem;display:block}
+.tile-title{font-size:1.2rem;font-weight:800;letter-spacing:.2px;margin-bottom:3px}
+.tile-age{font-size:9.5px;color:var(--tc,var(--amber));font-weight:800;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:6px}
+.tile-desc{font-size:13px;color:var(--gray);line-height:1.6;margin-bottom:9px;font-weight:500}
+.tile-arrow{font-size:15px;color:var(--gray);transition:transform .25s cubic-bezier(.16,1,.3,1);display:inline-block}
+
+.seguro-strip{background:linear-gradient(120deg,var(--ruby),#8a0f0a);border-radius:24px;padding:2.2rem 2.4rem;max-width:1440px;margin:0 auto}
+.seguro-inner{display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.seguro-inner>div:first-child{flex:1;min-width:260px}
+.seguro-inner h3{font-size:1.3rem;font-weight:800;letter-spacing:.2px;margin-bottom:3px}
+.seguro-inner p{font-size:12.5px;color:rgba(255,255,255,.88);max-width:540px;line-height:1.7;font-weight:500}
+.seguro-inner>a{background:#fff;color:var(--ruby);padding:11px 22px;border-radius:100px;text-decoration:none;font-weight:800;font-size:11.5px;letter-spacing:.5px;white-space:nowrap;flex-shrink:0;transition:opacity .2s;align-self:center}
+.seguro-inner>a:hover{opacity:.9}
+.seguro-docs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.seguro-doc-link{font-size:11px;color:rgba(255,255,255,.75);text-decoration:underline;font-weight:600}
+
+/* ── PAGE HERO (inner pages) ── */
+.ph-fl{padding:0 18px;margin-bottom:0}
+.ph-fl-inner{max-width:1440px;margin:0 auto;border-radius:32px;overflow:hidden;position:relative;background:rgba(255,255,255,.03);border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.35);padding:3rem 3rem 2.5rem}
+.ph-fl-accent{position:absolute;right:-10%;top:-30%;width:50%;height:160%;opacity:.18;border-radius:50%;filter:blur(40px)}
+.ph-fl-content{position:relative;z-index:1;max-width:760px}
+
+/* ── INFO BLOCKS ── */
+.sec-info-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;align-items:start}
+.info-block{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s}
+.info-block:hover{border-color:rgba(255,255,255,.18)}
+.info-block-header{padding:1.1rem 1.4rem;border-bottom:1px solid var(--border)}
+.info-block-header h3{font-size:.95rem;font-weight:800;letter-spacing:.3px}
+.info-block-body{padding:1.4rem}
+.info-block-body p{font-size:14px;color:var(--gray-light);line-height:1.8;font-weight:500}
+.full-width-info{grid-column:1/-1}
+.oracion-block{font-style:italic;font-size:13px;line-height:2;white-space:pre-line;color:var(--gray-light)}
+.sec-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.sec-photo-item{aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:2.2rem;position:relative}
+.sec-photo-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.sec-photo-item:hover img{transform:scale(1.06)}
+
+/* ── GALERÍA ── */
+.gallery-masonry{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;gap:8px}
+.gal-item{background:rgba(255,255,255,.04);overflow:hidden;position:relative;cursor:pointer;border-radius:18px}
+.gal-item.tall{grid-row:span 2}
+.gal-item.wide{grid-column:span 2}
+.gal-item-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;transition:transform .4s ease}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.gal-item:hover .gal-item-inner,.gal-item:hover img{transform:scale(1.06)}
+.gal-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,transparent 55%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:.9rem}
+.gal-overlay span{font-size:14px;font-weight:700;color:#fff}
+.album-chip{display:flex;align-items:center;gap:8px;padding:7px 16px 7px 7px;border-radius:100px;border:1.5px solid var(--border);background:rgba(255,255,255,.03);color:var(--gray-light);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Manrope',sans-serif}
+.album-chip:hover{border-color:rgba(255,255,255,.3);color:#fff}
+.album-chip.active{background:linear-gradient(135deg,var(--ruby),var(--ruby-dark));border-color:var(--ruby);color:#fff}
+.album-chip-thumb{width:26px;height:26px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.album-chip-thumb-icon{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.album-count{background:rgba(255,255,255,.15);padding:1px 8px;border-radius:10px;font-size:11px;font-weight:800}
+.album-chip.active .album-count{background:rgba(255,255,255,.25)}
+.gal-item:hover .gal-overlay{opacity:1}
+
+/* ── CONTACTO ── */
+.contact-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:2.2rem}
+.cinfo-item{display:flex;gap:.9rem;align-items:flex-start;margin-bottom:1.3rem}
+.cinfo-icon{width:38px;height:38px;background:rgba(246,34,23,.12);border:1px solid rgba(246,34,23,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.cinfo-item h4{font-size:9.5px;font-weight:800;color:var(--gray);text-transform:uppercase;letter-spacing:1.3px;margin-bottom:3px}
+.cinfo-item p{font-size:14.5px;color:#fff;font-weight:500}
+.social-row{display:flex;gap:9px;margin-top:1.3rem}
+.social-btn{display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:100px;text-decoration:none;font-size:11.5px;font-weight:800;transition:all .2s}
+.social-btn.fb{background:#1877f2;color:#fff}
+.social-btn.ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff}
+.social-btn.wa{background:#25D366;color:#062013}
+.social-btn:hover{opacity:.85;transform:translateY(-1px)}
+.map-wrap{border-radius:20px;overflow:hidden;border:1px solid var(--border);margin-top:1.3rem}
+.map-wrap iframe{width:100%;height:240px;border:0;display:block;filter:grayscale(.3) invert(90%) hue-rotate(180deg)}
+.cform{background:rgba(255,255,255,.03);border-radius:24px;padding:1.8rem;border:1px solid var(--border)}
+.cform h3{font-size:1.2rem;font-weight:800;letter-spacing:.2px;margin-bottom:1.3rem}
+.fgroup{margin-bottom:.9rem}
+.fgroup label{display:block;font-size:9.5px;font-weight:800;color:var(--gray);text-transform:uppercase;letter-spacing:1.3px;margin-bottom:5px}
+.fgroup input,.fgroup textarea,.fgroup select{width:100%;padding:10px 14px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;color:#fff;font-size:14.5px;font-family:'Manrope',sans-serif;font-weight:500;transition:border-color .2s}
+.fgroup input:focus,.fgroup textarea:focus,.fgroup select:focus{outline:none;border-color:var(--ruby)}
+.fgroup select option{background:var(--surface)}
+.fgroup textarea{resize:vertical;min-height:95px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+
+/* ── FOOTER ── */
+.footer-fl{padding:2.4rem 3rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem}
+.footer-logo-img{max-height:42px;object-fit:contain;margin-bottom:.9rem}
+.footer-brand .logo-big{font-size:1.5rem;font-weight:800;letter-spacing:.2px}
+.footer-brand .logo-big span{color:var(--ruby)}
+.footer-brand p{font-size:12px;color:var(--gray);line-height:1.8;margin-top:.8rem;font-weight:500}
+.footer-col h4{font-size:10.5px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--amber);margin-bottom:.8rem}
+.footer-col a{display:block;color:var(--gray);text-decoration:none;font-size:13px;padding:2.5px 0;transition:color .15s;font-weight:500}
+.footer-col a:hover{color:#fff}
+.footer-bottom{margin-top:1.6rem;padding-top:1.3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:10.5px;color:var(--gray);flex-wrap:wrap;gap:.7rem;font-weight:500}
+.footer-dot{color:var(--ruby)}
+
+/* ════════════════════════
+   ADMIN DASHBOARD — arquitectura profesional
+════════════════════════ */
+#adm-login-screen{display:none;position:fixed;inset:0;z-index:10000;background:radial-gradient(circle at 30% 20%,rgba(246,34,23,.08),transparent 50%),rgba(6,13,13,.97);backdrop-filter:blur(12px);align-items:center;justify-content:center}
+#adm-login-screen.show{display:flex}
+.login-box{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:40px;width:380px;max-width:95vw;border-top:3px solid var(--ruby);box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
+.login-box h2{font-size:2rem;font-weight:800;letter-spacing:.3px;margin-bottom:4px}
+.login-box p{font-size:13px;color:var(--gray);margin-bottom:28px;font-weight:500}
+.login-err{font-size:12px;color:var(--ruby);margin-top:-10px;margin-bottom:12px;display:none;font-weight:600}
+
+#adm-editor{display:none;position:fixed;inset:0;z-index:9999;background:var(--black)}
+#adm-editor.show{display:flex}
+.adm-shell{display:flex;width:100%;height:100%}
+
+/* ── SIDEBAR ── */
+.adm-sidebar{width:248px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;transition:width .25s, padding .25s}
+.adm-sidebar.collapsed{width:72px}
+.adm-sidebar-brand{display:flex;align-items:center;gap:10px;padding:18px 16px;border-bottom:1px solid var(--border);flex-shrink:0;min-height:64px}
+.adm-sidebar-brand .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--ruby),var(--ruby-dark));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0}
+.adm-sidebar-brand .label{overflow:hidden;white-space:nowrap}
+.adm-sidebar-brand .label .t1{font-size:13px;font-weight:800;letter-spacing:.3px}
+.adm-sidebar-brand .label .t2{font-size:9.5px;color:var(--gray);letter-spacing:1px;text-transform:uppercase}
+.adm-sidebar.collapsed .label{display:none}
+.adm-nav{flex:1;overflow-y:auto;padding:14px 10px}
+.adm-nav-group{margin-bottom:18px}
+.adm-nav-group-label{font-size:9.5px;font-weight:800;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.5px;padding:0 10px;margin-bottom:6px;white-space:nowrap}
+.adm-sidebar.collapsed .adm-nav-group-label{display:none}
+.adm-navlink{display:flex;align-items:center;gap:11px;width:100%;padding:9px 10px;border-radius:10px;background:none;border:none;color:var(--gray-light);font-size:13px;font-weight:600;cursor:pointer;text-align:left;transition:background .15s,color .15s;margin-bottom:2px;font-family:'Manrope',sans-serif;white-space:nowrap;overflow:hidden}
+.adm-navlink .ic{font-size:16px;width:20px;text-align:center;flex-shrink:0}
+.adm-navlink:hover{background:rgba(255,255,255,.05);color:#fff}
+.adm-navlink.active{background:linear-gradient(135deg,rgba(246,34,23,.18),rgba(246,34,23,.06));color:#fff;box-shadow:inset 0 0 0 1px rgba(246,34,23,.3)}
+.adm-navlink .badge{margin-left:auto;font-size:10px;font-weight:800;background:rgba(255,255,255,.08);padding:1px 7px;border-radius:100px;color:var(--gray-light)}
+.adm-sidebar.collapsed .adm-navlink .badge{display:none}
+.adm-sidebar-foot{padding:12px 10px;border-top:1px solid var(--border);flex-shrink:0}
+
+/* ── MAIN AREA ── */
+.adm-main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.adm-topbar{height:64px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 22px;flex-shrink:0;gap:1rem}
+.adm-topbar-left{display:flex;align-items:center;gap:14px;min-width:0}
+.adm-collapse-btn{width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--gray-light);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;font-size:14px}
+.adm-collapse-btn:hover{background:rgba(255,255,255,.1);color:#fff}
+.adm-breadcrumb{display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden}
+.adm-breadcrumb .crumb-icon{font-size:18px;flex-shrink:0}
+.adm-breadcrumb h1{font-size:16px;font-weight:800;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.adm-breadcrumb .crumb-sub{font-size:11.5px;color:var(--gray);white-space:nowrap}
+.adm-topbar-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.adm-btn{padding:9px 16px;border-radius:10px;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .15s;border:none;letter-spacing:.2px;display:inline-flex;align-items:center;gap:6px;font-family:'Manrope',sans-serif}
+.adm-btn-primary{background:linear-gradient(135deg,var(--ruby),var(--ruby-dark));color:#fff;box-shadow:0 4px 14px rgba(246,34,23,.3)}
+.adm-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(246,34,23,.4)}
+.adm-btn-ghost{background:rgba(255,255,255,.05);color:var(--gray-light);border:1px solid var(--border)}
+.adm-btn-ghost:hover{background:rgba(255,255,255,.1);color:#fff}
+.adm-btn-icon{width:36px;height:36px;padding:0;justify-content:center;border-radius:10px}
+
+.adm-content{flex:1;overflow-y:auto;padding:24px 28px 60px}
+.adm-view{display:none}
+.adm-view.active{display:block;animation:admFadeIn .35s ease}
+@keyframes admFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── DASHBOARD STAT CARDS ── */
+.adm-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:26px}
+.adm-stat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden;transition:border-color .2s}
+.adm-stat-card:hover{border-color:rgba(255,255,255,.18)}
+.adm-stat-card .icon{position:absolute;top:14px;right:16px;font-size:22px;opacity:.5}
+.adm-stat-card .num{font-size:2rem;font-weight:800;line-height:1}
+.adm-stat-card .lbl{font-size:11.5px;color:var(--gray);font-weight:600;margin-top:4px}
+.adm-stat-card .accent-bar{position:absolute;left:0;top:0;bottom:0;width:3px}
+
+/* ── CARD-BASED FORM SECTIONS (reemplaza el acordeón) ── */
+.adm-section-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;align-items:start}
+.adm-section-grid.single{grid-template-columns:1fr}
+.adm-card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:18px}
+.adm-card-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);gap:10px}
+.adm-card-hd h3{font-size:13.5px;font-weight:800;letter-spacing:.2px;display:flex;align-items:center;gap:9px}
+.adm-card-hd h3 .ic{font-size:17px}
+.adm-card-hd .hint{font-size:11px;color:var(--gray);font-weight:500}
+.adm-card-bd{padding:18px 20px}
+.adm-quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.adm-quick-btn{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;cursor:pointer;transition:all .2s;text-align:left;font-family:'Manrope',sans-serif;color:#fff}
+.adm-quick-btn:hover{border-color:var(--ruby);background:rgba(246,34,23,.05);transform:translateY(-2px)}
+.adm-quick-btn .ic{font-size:22px}
+.adm-quick-btn .t{font-size:12.5px;font-weight:700}
+.adm-section-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.adm-section-title-row h2{font-size:17px;font-weight:800}
+
+/* Form controls reused inside cards */
+.ctrl{margin-bottom:14px}
+.ctrl:last-child{margin-bottom:0}
+.ctrl label{display:block;font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.ctrl input,.ctrl textarea,.ctrl select{width:100%;padding:10px 12px;background:var(--black);border:1px solid var(--border);border-radius:10px;color:#fff;font-size:13.5px;font-family:'Manrope',sans-serif;font-weight:500;transition:border-color .2s}
+.ctrl input:focus,.ctrl textarea:focus,.ctrl select:focus{outline:none;border-color:var(--ruby)}
+.ctrl select option{background:var(--black)}
+.ctrl textarea{resize:vertical;min-height:76px}
+.ctrl-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ctrl-img-upload{width:100%;aspect-ratio:16/9;background:var(--black);border:2px dashed var(--border);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:all .2s;overflow:hidden;position:relative}
+.ctrl-img-upload:hover{border-color:var(--ruby)}
+.ctrl-img-upload img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.ctrl-img-upload .upload-label{font-size:12px;color:var(--gray);text-align:center;z-index:1;font-weight:600}
+.ctrl-img-upload span{font-size:24px;z-index:1}
+.ctrl-img-input{display:none}
+.ctrl-btn-sm{width:100%;padding:9px;border-radius:10px;background:rgba(246,34,23,.12);color:var(--ruby);border:1px solid rgba(246,34,23,.25);font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.2px;transition:all .15s;margin-top:8px;font-family:'Manrope',sans-serif}
+.ctrl-btn-sm:hover{background:rgba(246,34,23,.22)}
+.ctrl-btn-sm.green{background:rgba(34,197,94,.1);color:#4ade80;border-color:rgba(34,197,94,.2)}
+.ctrl-btn-sm.green:hover{background:rgba(34,197,94,.2)}
+
+/* List rows used inside cards (photos, albums, etc.) */
+.adm-row-list{display:flex;flex-direction:column;gap:7px}
+.adm-row-item{display:flex;gap:9px;align-items:center;background:var(--black);border-radius:10px;padding:8px 10px;border:1px solid var(--border)}
+.adm-row-thumb{width:40px;height:32px;background:var(--surface);border-radius:6px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.adm-row-thumb img{width:100%;height:100%;object-fit:cover}
+.adm-row-text{flex:1;min-width:0}
+.adm-row-text .t{font-size:12.5px;color:var(--gray-light);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.adm-row-text .s{font-size:10.5px;color:var(--amber)}
+.adm-row-btn{background:rgba(255,255,255,.07);border:none;color:#fff;border-radius:6px;padding:5px 8px;cursor:pointer;font-size:11px;transition:background .15s;flex-shrink:0}
+.adm-row-btn:hover{background:rgba(255,255,255,.14)}
+.adm-row-btn.danger{background:rgba(246,34,23,.1);color:var(--ruby)}
+.adm-row-btn.danger:hover{background:rgba(246,34,23,.2)}
+.adm-row-btn.warn{background:rgba(245,191,0,.12);color:var(--amber)}
+.adm-row-btn.warn:hover{background:rgba(245,191,0,.22)}
+
+/* Sections grid (cards for each scout section in nav) */
+.adm-secgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.adm-seccard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;cursor:pointer;transition:all .2s;text-align:left;font-family:'Manrope',sans-serif;color:#fff;position:relative;overflow:hidden}
+.adm-seccard:hover{transform:translateY(-2px);border-color:var(--tc,var(--ruby))}
+.adm-seccard .top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.adm-seccard .logo{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;overflow:hidden}
+.adm-seccard .logo img{width:100%;height:100%;object-fit:cover}
+.adm-seccard .name{font-size:13.5px;font-weight:800}
+.adm-seccard .age{font-size:10px;color:var(--tc,var(--amber));font-weight:700}
+.adm-seccard .accent{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--tc,var(--ruby))}
+
+/* ── EMPTY STATE ── */
+.adm-empty{text-align:center;padding:40px 20px;color:var(--gray)}
+.adm-empty .ic{font-size:2.4rem;opacity:.4;margin-bottom:10px}
+.adm-empty p{font-size:13px}
+
+/* Toast / Modal (shared with public site styles, kept) */
+#toast{position:fixed;bottom:20px;right:20px;z-index:99999;background:var(--surface);border:1px solid var(--border);border-left:3px solid #22c55e;color:#fff;padding:12px 20px;border-radius:14px;font-size:13px;font-weight:600;transform:translateY(80px);opacity:0;transition:all .3s;box-shadow:0 8px 30px rgba(0,0,0,.6)}
+#toast.show{transform:translateY(0);opacity:1}
+#toast.err{border-left-color:var(--ruby)}
+.modal-backdrop{display:none;position:fixed;inset:0;z-index:10002;background:rgba(0,0,0,.82);align-items:center;justify-content:center}
+.modal-backdrop.show{display:flex}
+.modal-box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:26px;width:520px;max-width:96vw;max-height:85vh;overflow-y:auto}
+.modal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.modal-title{font-size:1.2rem;font-weight:800;letter-spacing:.3px}
+.modal-close{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.07);border:none;color:var(--gray);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:rgba(255,255,255,.13);color:#fff}
+.modal-ft{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+.aform-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.aform-full{grid-column:1/-1}
+.aform-group{display:flex;flex-direction:column;gap:5px}
+.aform-group label{font-size:10px;font-weight:800;color:var(--gray);text-transform:uppercase;letter-spacing:1.2px}
+.aform-group input,.aform-group textarea,.aform-group select{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:9px 11px;color:#fff;font-size:13px;font-family:'Manrope',sans-serif;font-weight:500;transition:border-color .2s}
+.aform-group input:focus,.aform-group textarea:focus{outline:none;border-color:var(--ruby)}
+.aform-group select option{background:var(--surface)}
+.aform-group textarea{resize:vertical;min-height:80px}
+
+/* Responsive admin */
+@media(max-width:1100px){.adm-stats-grid{grid-template-columns:repeat(2,1fr)}.adm-quick-actions{grid-template-columns:repeat(2,1fr)}.adm-section-grid{grid-template-columns:1fr}.adm-secgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.adm-sidebar{position:fixed;inset:0 auto 0 0;z-index:50;width:240px;transform:translateX(-100%);transition:transform .25s}.adm-sidebar.mobile-open{transform:translateX(0)}.adm-sidebar.collapsed{width:240px}.adm-topbar{padding:0 14px}.adm-content{padding:16px}.adm-stats-grid{grid-template-columns:1fr 1fr}.adm-quick-actions{grid-template-columns:1fr 1fr}.adm-secgrid{grid-template-columns:1fr}.adm-breadcrumb h1{font-size:14px}}
+
+/* Responsive */
+@media(max-width:1280px){.fl-card,.hero-fl-inner,.ph-fl-inner{max-width:calc(100% - 0px)}.secciones-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:1024px){.secciones-grid{grid-template-columns:repeat(3,1fr)}.gallery-masonry{grid-template-columns:repeat(3,1fr)}.hero-fl-inner{grid-template-columns:1fr}.hero-fl-right{min-height:240px;order:-1}.hero-fl-right::after{background:linear-gradient(180deg,transparent 0%,transparent 55%,rgba(13,20,20,.5) 80%,rgba(13,20,20,.95) 100%)}}
+@media(max-width:900px){.nav-links{display:none}.hamburger{display:flex}.quienes-layout,.contact-layout,.sec-info-layout{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr;gap:1.6rem}.pañoleta-row{grid-template-columns:1fr}.fl-card-pad{padding:2rem 1.4rem}.ph-fl-inner{padding:2.2rem 1.6rem}.nav-wrap{top:12px;width:calc(100% - 20px)}.pillars{grid-template-columns:1fr 1fr}.nav-name-sub{display:none}}
+@media(max-width:768px){.gallery-masonry{grid-template-columns:repeat(2,1fr)}.gal-item.wide{grid-column:span 1}.sec-tile{padding:1.4rem 1.2rem}.nav-brand{gap:6px}.nav-logo-img,.nav-logo-hex{width:28px;height:28px}}
+@media(max-width:640px){.secciones-grid{grid-template-columns:repeat(2,1fr)}.gallery-masonry{grid-template-columns:repeat(2,1fr)}.frow{grid-template-columns:1fr}.aform-grid{grid-template-columns:1fr}.hero-fl-left{padding:2rem 1.5rem}.pillars{grid-template-columns:1fr}.sec{padding:0 12px}.nav-wrap{width:calc(100% - 16px);top:10px}nav{padding:6px 6px 6px 12px}.hero-eyebrow{font-size:9.5px}.modal-box{padding:20px}.hero-logo-img,.hero-logo-hex{width:48px;height:48px}.hero-logo-hex{font-size:18px}}
+@media(max-width:480px){.hero-title-fl{font-size:clamp(2.1rem,9vw,2.8rem)}.sec-title{font-size:clamp(1.5rem,6vw,2rem)}.fl-card-pad{padding:1.5rem 1.1rem}.ph-fl-inner{padding:1.8rem 1.2rem}.cform{padding:1.3rem}.footer-fl{padding:1.8rem 1.4rem}.pñ-card{flex-direction:column;text-align:center;align-items:center}.cinfo-item{flex-direction:column;align-items:flex-start;gap:.5rem}.cinfo-icon{margin-bottom:2px}}
+</style>
+</head>
+<body>
+<div class="fluid-bg"><div class="blob blob1"></div><div class="blob blob2"></div><div class="blob blob3"></div><div class="fluid-noise"></div></div>
+<div class="nav-wrap">
+  <nav id="main-nav">
+    <a class="nav-brand" href="#" onclick="showPage('home');return false">
+      <div id="nav-logo-wrap"><div class="nav-logo-hex" id="nav-logo-hex">⚜</div></div>
+      <div>
+        <div class="nav-name-main" id="nav-name-main">Grupo Scout No.12</div>
+        <div class="nav-name-sub" id="nav-name-sub">San Pedro Apóstol</div>
+      </div>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#" onclick="showPage('home');return false" data-page="home" class="active">Inicio</a>
+      <a href="#" onclick="showPage('cachorros');return false" data-page="cachorros">Cachorros</a>
+      <a href="#" onclick="showPage('manada');return false" data-page="manada">Manada</a>
+      <a href="#" onclick="showPage('unidad');return false" data-page="unidad">Unidad</a>
+      <a href="#" onclick="showPage('caminantes');return false" data-page="caminantes">Caminantes</a>
+      <a href="#" onclick="showPage('rovers');return false" data-page="rovers">Rovers</a>
+      <a href="#" onclick="showPage('dirigencia');return false" data-page="dirigencia">Dirigencia</a>
+      <a href="#" onclick="showPage('comite');return false" data-page="comite">Comité</a>
+      <a href="#" onclick="showPage('galeria');return false" data-page="galeria">Galería</a>
+      <a href="#" onclick="showPage('contacto');return false" data-page="contacto">Contacto</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-admin-btn" onclick="openLogin()">⚙ Admin</button>
+      <button class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</div>
+
+<div class="mobile-drawer" id="mobile-drawer">
+  <a href="#" onclick="showPage('home');closeMobile()">Inicio</a>
+  <a href="#" onclick="showPage('cachorros');closeMobile()">Cachorros</a>
+  <a href="#" onclick="showPage('manada');closeMobile()">Manada</a>
+  <a href="#" onclick="showPage('unidad');closeMobile()">Unidad</a>
+  <a href="#" onclick="showPage('caminantes');closeMobile()">Caminantes</a>
+  <a href="#" onclick="showPage('rovers');closeMobile()">Rovers</a>
+  <a href="#" onclick="showPage('dirigencia');closeMobile()">Dirigencia</a>
+  <a href="#" onclick="showPage('comite');closeMobile()">Comité de Padres</a>
+  <a href="#" onclick="showPage('galeria');closeMobile()">Galería</a>
+  <a href="#" onclick="showPage('contacto');closeMobile()">Contacto</a>
+</div>
+
+<div class="stage">
+
+<!-- ══════════ HOME ══════════ -->
+<div id="page-home" class="page-section active">
+
+  <div class="hero-fl">
+    <div class="hero-fl-inner" id="hero-fl-inner">
+      <div class="hero-carousel" id="hero-carousel">
+        <div class="hero-right-placeholder" id="hero-right-placeholder"><span>📷</span><p>Sube fotos del grupo desde el panel Admin</p></div>
+      </div>
+      <button class="hero-arrow prev" onclick="heroCarouselPrev()" id="hero-arrow-prev" style="display:none">‹</button>
+      <button class="hero-arrow next" onclick="heroCarouselNext()" id="hero-arrow-next" style="display:none">›</button>
+      <div class="hero-content-overlay">
+        <div class="hero-logo-row">
+          <div class="hero-logo-section" id="hero-logo-section"><div class="hero-logo-hex" id="hero-logo-hex">⚜</div></div>
+          <div class="hero-eyebrow">¡Siempre listo para servir!</div>
+        </div>
+        <h1 class="hero-title-fl"><span>Grupo</span> <span class="line-red">Scout</span> <span class="line-amber">No. 12</span></h1>
+        <p class="hero-body" id="txt-hero-body">Los scouts formamos parte de un movimiento mundial llamado escultismo, una propuesta educativa no formal donde jóvenes de todas las edades participan voluntariamente.</p>
+        <div class="hero-ctas">
+          <a class="btn-red" href="#" onclick="showPage('contacto');return false">Únete Ahora</a>
+          <a class="btn-outline" href="#" onclick="document.getElementById('quienes-anch').scrollIntoView({behavior:'smooth'});return false">Conocer Más</a>
+          <div class="hero-dots" id="hero-dots"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="fl-card"><div class="fl-card-pad">
+      <div class="sec-tag">Nuestro Grupo</div>
+      <h2 class="sec-title">Momentos <em>Scout</em></h2>
+      <p class="sec-lead" style="margin-bottom:1.5rem">Una mirada a las actividades y aventuras que vivimos juntos.</p>
+      <div class="gallery-masonry" id="home-gallery-preview" style="grid-auto-rows:160px"></div>
+      <div style="text-align:center;margin-top:1.4rem">
+        <a href="#" class="btn-outline" onclick="showPage('galeria');return false">Ver Galería Completa →</a>
+      </div>
+    </div></div>
+  </div>
+
+  <div id="quienes-anch"></div>
+  <div class="sec">
+    <div class="fl-card"><div class="fl-card-pad">
+      <div class="sec-tag">Quiénes Somos</div>
+      <h2 class="sec-title" id="txt-quienes-title">El Escultismo <em>en Guatemala</em></h2>
+      <div class="quienes-layout">
+        <div>
+          <p class="sec-lead" id="txt-quienes-desc">Buscamos construir un mundo mejor a partir de nuestras propias comunidades, promoviendo el desarrollo integral de las personas a través de actividades que complementan la educación formal y familiar.</p>
+          <div class="pillars">
+            <div class="pillar"><div class="pillar-icon">🏕</div><h4>Liderazgo en Equipo</h4><p id="txt-pilar-1">Formarás parte de un pequeño grupo en el cual vivirás aventuras y compartirás responsabilidades.</p></div>
+            <div class="pillar"><div class="pillar-icon">📚</div><h4>Aprender Haciendo</h4><p id="txt-pilar-2">Alcanzarás conocimientos y competencias que te ayudarán a tener éxito en la vida.</p></div>
+            <div class="pillar"><div class="pillar-icon">🌲</div><h4>Contacto con la Naturaleza</h4><p id="txt-pilar-3">Para amar y cuidar de la naturaleza primero debes conocerla a fondo.</p></div>
+            <div class="pillar"><div class="pillar-icon">🤝</div><h4>Servicio a la Comunidad</h4><p id="txt-pilar-4">Conviértete en un agente de cambio que reconoce necesidades y actúa.</p></div>
+          </div>
+        </div>
+        <div class="mv-stack">
+          <div class="mv-item"><h3>Misión</h3><p id="txt-mision">El escultismo busca educar a los jóvenes a través de un sistema de valores basado en la Promesa y la Ley Scout.</p></div>
+          <div class="mv-item y"><h3>Visión</h3><p id="txt-vision">Ser el movimiento juvenil educativo líder a nivel mundial, impactando a cien millones de jóvenes.</p></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="sec">
+    <div class="fl-card"><div class="fl-card-pad">
+      <div class="sec-tag">La Promesa</div>
+      <h2 class="sec-title">Promesa <em>Scout</em></h2>
+      <div class="promesa-quote" id="txt-promesa">"Yo… , por mi honor prometo, hacer cuanto de mí dependa, para cumplir mis deberes, para con Dios y la patria, ayudar al prójimo en toda circunstancia y cumplir fielmente la ley scout".</div>
+      <h3 style="font-size:.85rem;font-weight:800;letter-spacing:1.8px;color:var(--gray);margin-bottom:1rem;text-transform:uppercase">Significado de la Pañoleta</h3>
+      <div class="pañoleta-row">
+        <div class="pñ-card"><div class="pñ-swatch" style="background:#1a1a1a;border:1px solid #444"></div><div><h4>Color Negro</h4><p>La elegancia del scout.</p></div></div>
+        <div class="pñ-card"><div class="pñ-swatch" style="background:linear-gradient(to bottom,#F62217 50%,#FFBF00 50%)"></div><div><h4>Rojo sobre Amarillo</h4><p>El amor por el escultismo y una sincera amistad.</p></div></div>
+        <div class="pñ-card"><div class="pñ-swatch" style="background:linear-gradient(to bottom,#FFBF00 50%,#F62217 50%)"></div><div><h4>Amarillo sobre Rojo</h4><p>El amor que Dios tiene hacia nosotros que nunca desvanece.</p></div></div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="sec">
+    <div class="fl-card"><div class="fl-card-pad">
+      <div class="sec-tag">Organización</div>
+      <h2 class="sec-title">Secciones <em>Scout</em></h2>
+      <div class="secciones-grid" id="home-secciones-grid"></div>
+    </div></div>
+  </div>
+
+  <div class="sec">
+    <div class="seguro-strip">
+      <div class="seguro-inner">
+        <div>
+          <h3>🛡 Seguro Scout Guatemala</h3>
+          <p id="txt-seguro">Una de las prioridades de la Asociación de Scouts de Guatemala es la salud y seguridad de todos sus miembros, por esta razón cuando te inscribes obtienes un seguro de accidentes personales.</p>
+          <div class="seguro-docs">
+            <a class="seguro-doc-link" href="#" onclick="toast('Documento disponible próximamente');return false">📄 Código de Conducta</a>
+            <a class="seguro-doc-link" href="#" onclick="toast('Documento disponible próximamente');return false">📄 Política A Salvo del Peligro</a>
+          </div>
+        </div>
+        <a href="https://scouts.net.gt/articulos/el-seguro-scout-de-la-asociacion-de-scouts-de-guatemala/" target="_blank">Más información →</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-home -->
+
+<!-- Section pages generated by JS -->
+<div id="page-cachorros" class="page-section"></div>
+<div id="page-manada" class="page-section"></div>
+<div id="page-unidad" class="page-section"></div>
+<div id="page-caminantes" class="page-section"></div>
+<div id="page-rovers" class="page-section"></div>
+<div id="page-dirigencia" class="page-section"></div>
+<div id="page-comite" class="page-section"></div>
+
+<!-- ══════════ GALERÍA ══════════ -->
+<div id="page-galeria" class="page-section">
+  <div class="ph-fl">
+    <div class="ph-fl-inner">
+      <div class="ph-fl-accent" style="background:var(--ruby)"></div>
+      <div class="ph-fl-content">
+        <div class="sec-tag">Momentos</div><h1 class="sec-title">Galería <em>Scout</em></h1><p class="sec-lead">Aventuras, campamentos y actividades del Grupo No.12.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="fl-card"><div class="fl-card-pad">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.2rem">
+        <div class="sec-tag" style="margin-bottom:0">Álbumes</div>
+        <button class="ctrl-btn-sm green" style="width:auto;margin:0;padding:8px 16px" onclick="openAlbumModal()">+ Nuevo Álbum</button>
+      </div>
+      <div id="albums-row" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.8rem"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.4rem">
+        <div class="sec-tag" style="margin-bottom:0">Fotos</div>
+        <div id="gallery-filters" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+      </div>
+      <div class="gallery-masonry" id="gallery-masonry"></div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ══════════ CONTACTO ══════════ -->
+<div id="page-contacto" class="page-section">
+  <div class="ph-fl">
+    <div class="ph-fl-inner">
+      <div class="ph-fl-accent" style="background:var(--ruby)"></div>
+      <div class="ph-fl-content">
+        <div class="sec-tag">Encuéntranos</div><h1 class="sec-title">Ubicación</h1><p class="sec-lead">"Levanta la vista, deja el celular y ven a vivir experiencias que valen la pena."</p>
+      </div>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="fl-card"><div class="fl-card-pad">
+      <div class="contact-layout">
+        <div>
+          <div class="cinfo-item"><div class="cinfo-icon">📍</div><div><h4>Lugar de Reunión</h4><p id="cnt-dir">Parque "Ignacio Fierro" · 16 ave. 17 calle, zona 6, Colonia Cipresales</p></div></div>
+          <div class="cinfo-item"><div class="cinfo-icon">📱</div><div><h4>Teléfono</h4><p id="cnt-tel">4580-4910</p></div></div>
+          <div class="cinfo-item"><div class="cinfo-icon">✉</div><div><h4>Correo</h4><p id="cnt-email">contacto@gruposc12.gt</p></div></div>
+          <div class="cinfo-item"><div class="cinfo-icon">🕐</div><div><h4>Reuniones</h4><p id="cnt-horario">Todos los sábados, de 2:30 pm a 5:30 pm</p></div></div>
+          <div class="social-row">
+            <a href="#" target="_blank" class="social-btn wa" id="wa-direct-link">📱 WhatsApp</a>
+            <a href="https://www.facebook.com/gs12spa" target="_blank" class="social-btn fb">f Facebook</a>
+            <a href="https://www.instagram.com/gs12spa/" target="_blank" class="social-btn ig">◈ Instagram</a>
+          </div>
+          <h4 style="font-size:10.5px;font-weight:800;letter-spacing:1.8px;color:var(--amber);margin:1.3rem 0 .6rem;text-transform:uppercase">📍 Mapa</h4>
+          <div class="map-wrap"><iframe id="map-iframe" src="https://maps-api-ssl.google.com/maps?hl=en-US&ll=14.662596,-90.492014&output=embed&q=14.662455,-90.492271&z=18" allowfullscreen loading="lazy"></iframe></div>
+        </div>
+        <div class="cform">
+          <h3>Enviar Mensaje</h3>
+          <div class="frow">
+            <div class="fgroup"><label>Nombre</label><input type="text" id="cf-name" placeholder="Tu nombre"></div>
+            <div class="fgroup"><label>Teléfono</label><input type="tel" id="cf-phone" placeholder="+502..."></div>
+          </div>
+          <div class="fgroup"><label>Correo</label><input type="email" id="cf-email" placeholder="correo@ejemplo.com"></div>
+          <div class="fgroup"><label>Asunto</label><select id="cf-subject"><option>Quiero unirme al grupo</option><option>Información general</option><option>Actividades próximas</option><option>Otro</option></select></div>
+          <div class="fgroup"><label>Mensaje</label><textarea id="cf-message" placeholder="Escribe tu mensaje..."></textarea></div>
+          <button class="btn-red" style="width:100%;padding:14px;display:flex;align-items:center;justify-content:center;gap:8px" onclick="submitContactForm()"><span style="font-size:16px">📱</span> Enviar por WhatsApp →</button>
+          <p style="font-size:11px;color:var(--gray);text-align:center;margin-top:10px">Se abrirá WhatsApp con tu mensaje listo para enviar</p>
+        </div>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<div class="sec">
+  <footer class="fl-card footer-fl">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img id="footer-logo-img" src="" alt="" class="footer-logo-img" style="display:none">
+        <div class="logo-big" id="footer-logo-text">Grupo <span>Scout</span> No.12</div>
+        <p id="footer-desc">San Pedro Apóstol · Guatemala<br>Asociación de Scouts de Guatemala<br><br>¡Siempre listo para servir!</p>
+      </div>
+      <div class="footer-col">
+        <h4>Secciones</h4>
+        <a href="#" onclick="showPage('cachorros')">Cachorros · 5–6</a>
+        <a href="#" onclick="showPage('manada')">Manada · 7–10</a>
+        <a href="#" onclick="showPage('unidad')">Unidad · 11–14</a>
+        <a href="#" onclick="showPage('caminantes')">Caminantes · 15–17</a>
+        <a href="#" onclick="showPage('rovers')">Rovers · 18–24</a>
+        <a href="#" onclick="showPage('dirigencia')">Dirigencia</a>
+        <a href="#" onclick="showPage('comite')">Comité de Padres</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href="#" onclick="showPage('galeria')">Galería de Fotos</a>
+        <a href="#" onclick="showPage('contacto')">Contáctenos</a>
+        <a href="https://scouts.net.gt" target="_blank">Scouts de Guatemala</a>
+        <a href="https://www.facebook.com/gs12spa" target="_blank">Facebook</a>
+        <a href="https://www.instagram.com/gs12spa/" target="_blank">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span id="footer-copy">© 2025 Grupo Scout No.12 San Pedro Apóstol <span class="footer-dot">·</span> Guatemala</span>
+      <span>Asociación de Scouts de Guatemala</span>
+    </div>
+  </footer>
+</div>
+
+</div><!-- /stage -->
+
+<!-- ADMIN LOGIN -->
+<div id="adm-login-screen">
+  <div class="login-box">
+    <div style="font-size:2rem;margin-bottom:10px">🔒</div>
+    <h2>Admin Panel</h2>
+    <p>Grupo Scout No.12 · Acceso restringido</p>
+    <div class="aform-group" style="margin-bottom:12px"><label>Usuario</label><input type="text" id="l-user" placeholder="admin"></div>
+    <div class="aform-group" style="margin-bottom:6px"><label>Contraseña</label><input type="password" id="l-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <p class="login-err" id="l-err">Credenciales incorrectas</p>
+    <button class="btn-red" style="width:100%;padding:12px;margin-top:10px" onclick="doLogin()">Ingresar →</button>
+    <button class="btn-outline" style="width:100%;padding:10px;margin-top:8px;font-size:11px" onclick="closeLogin()">Cancelar</button>
+    <p style="font-size:10px;color:var(--gray);margin-top:14px;text-align:center">Demo: <strong style="color:rgba(255,255,255,.4)">admin</strong> / <strong style="color:rgba(255,255,255,.4)">scout12</strong></p>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div id="adm-editor">
+  <div class="adm-shell">
+    <!-- SIDEBAR -->
+    <aside class="adm-sidebar" id="adm-sidebar">
+      <div class="adm-sidebar-brand">
+        <div class="mark">⚜</div>
+        <div class="label"><div class="t1">Panel Admin</div><div class="t2">Grupo Scout 12</div></div>
+      </div>
+      <nav class="adm-nav" id="adm-nav"></nav>
+      <div class="adm-sidebar-foot">
+        <button class="adm-btn adm-btn-ghost" style="width:100%;justify-content:center" onclick="closeAdmin()">↩ Salir del panel</button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="adm-main">
+      <div class="adm-topbar">
+        <div class="adm-topbar-left">
+          <button class="adm-collapse-btn" onclick="toggleAdmSidebar()" title="Colapsar menú">☰</button>
+          <button class="adm-collapse-btn" id="adm-back-btn" onclick="goToView('secciones')" title="Volver a Secciones" style="display:none">←</button>
+          <div class="adm-breadcrumb">
+            <span class="crumb-icon" id="adm-crumb-icon">📊</span>
+            <div>
+              <h1 id="adm-crumb-title">Dashboard</h1>
+            </div>
+          </div>
+        </div>
+        <div class="adm-topbar-right">
+          <button class="adm-btn adm-btn-ghost" onclick="previewSiteNow()">👁 Ver sitio</button>
+          <button class="adm-btn adm-btn-primary" id="adm-save-btn" onclick="saveAll()">💾 Guardar Cambios</button>
+        </div>
+      </div>
+      <div class="adm-content" id="adm-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal foto sección -->
+<div class="modal-backdrop" id="sec-photo-modal">
+  <div class="modal-box">
+    <div class="modal-hd"><span class="modal-title" id="sec-photo-modal-title">Añadir Foto</span><button class="modal-close" onclick="closeModal('sec-photo-modal')">✕</button></div>
+    <div class="aform-grid">
+      <input type="hidden" id="spm-sec">
+      <div class="aform-full aform-group">
+        <label>Subir desde tu computadora</label>
+        <div class="ctrl-img-upload" onclick="document.getElementById('spm-file').click()" id="spm-preview-wrap" style="aspect-ratio:16/7">
+          <div class="upload-label"><span>📁</span><br>Click para elegir una foto de tu PC</div>
+        </div>
+        <input type="file" class="ctrl-img-input" id="spm-file" accept="image/*" onchange="handleSecPhotoFile(this)">
+      </div>
+      <div class="aform-full aform-group"><label>O pega una URL de imagen</label><input id="spm-url" type="text" placeholder="https://..." oninput="previewSecPhoto(this.value)"></div>
+      <div class="aform-full aform-group"><label>Descripción</label><input id="spm-desc" type="text" placeholder="Ej: Campamento 2024"></div>
+      <div class="aform-group"><label>Ajuste / recorte</label><select id="spm-position"><option value="center">Centrado</option><option value="top">Arriba</option><option value="bottom">Abajo</option><option value="left">Izquierda</option><option value="right">Derecha</option></select></div>
+    </div>
+    <div class="modal-ft"><button class="elm-btn elm-btn-ghost" onclick="closeModal('sec-photo-modal')">Cancelar</button><button class="elm-btn elm-btn-red" onclick="saveSecPhoto()">Añadir →</button></div>
+  </div>
+</div>
+
+<!-- Modal galería principal -->
+<div class="modal-backdrop" id="gal-modal">
+  <div class="modal-box">
+    <div class="modal-hd"><span class="modal-title" id="gal-modal-title">Añadir Fotos a la Galería</span><button class="modal-close" onclick="closeModal('gal-modal')">✕</button></div>
+    <div class="aform-grid">
+      <div class="aform-full aform-group">
+        <label>Subir desde tu computadora (puedes elegir varias a la vez)</label>
+        <div class="ctrl-img-upload" onclick="document.getElementById('g-file').click()" id="g-preview-wrap" style="aspect-ratio:16/7">
+          <div class="upload-label"><span>📁</span><br>Click para elegir una o varias fotos de tu PC</div>
+        </div>
+        <input type="file" class="ctrl-img-input" id="g-file" accept="image/*" multiple onchange="handleGalPhotoFiles(this)">
+        <div id="g-multi-preview" style="display:none;flex-wrap:wrap;gap:6px;margin-top:8px"></div>
+      </div>
+      <div class="aform-full aform-group"><label>O pega una URL de imagen (solo si subes una sola foto)</label><input id="g-url" type="text" placeholder="https://..." oninput="previewGalPhoto(this.value)"></div>
+      <div class="aform-full aform-group"><label>Descripción ${'(se aplicará a todas si subes varias)'}</label><input id="g-desc" type="text" placeholder="Ej: Campamento 2024"></div>
+      <div class="aform-full aform-group"><label>Álbum</label><select id="g-album"><option value="">Sin álbum</option></select></div>
+      <div class="aform-group"><label>Mes</label><select id="g-month">
+        <option value="1">Enero</option><option value="2">Febrero</option><option value="3">Marzo</option><option value="4">Abril</option><option value="5">Mayo</option><option value="6">Junio</option><option value="7">Julio</option><option value="8">Agosto</option><option value="9">Septiembre</option><option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option>
+      </select></div>
+      <div class="aform-group"><label>Año</label><input id="g-year" type="number" placeholder="2025" value="2025" min="2000" max="2100"></div>
+      <div class="aform-group"><label>Tamaño</label><select id="g-size"><option value="">Normal</option><option value="tall">Alto</option><option value="wide">Ancho</option></select></div>
+      <div class="aform-group"><label>Ajuste / recorte</label><select id="g-position"><option value="center">Centrado</option><option value="top">Arriba</option><option value="bottom">Abajo</option><option value="left">Izquierda</option><option value="right">Derecha</option></select></div>
+      <div class="aform-group"><label>Emoji (fallback)</label><input id="g-emoji" type="text" placeholder="🏕" maxlength="2"></div>
+    </div>
+    <div class="modal-ft"><button class="elm-btn elm-btn-ghost" onclick="closeModal('gal-modal')">Cancelar</button><button class="elm-btn elm-btn-red" id="gal-save-btn" onclick="saveGalItem()">Añadir →</button></div>
+  </div>
+</div>
+
+<!-- Modal álbumes -->
+<div class="modal-backdrop" id="album-modal">
+  <div class="modal-box">
+    <div class="modal-hd"><span class="modal-title" id="album-modal-title">Nuevo Álbum</span><button class="modal-close" onclick="closeModal('album-modal')">✕</button></div>
+    <div class="aform-grid">
+      <input type="hidden" id="am-id">
+      <div class="aform-full aform-group"><label>Nombre del álbum</label><input id="am-name" type="text" placeholder="Ej: Campamento Anual 2025"></div>
+      <div class="aform-full aform-group"><label>Descripción / lugar</label><input id="am-desc" type="text" placeholder="Ej: Bosque Los Aposentos"></div>
+    </div>
+    <div class="modal-ft">
+      <button class="elm-btn elm-btn-ghost" onclick="closeModal('album-modal')">Cancelar</button>
+      <button class="elm-btn elm-btn-red" onclick="saveAlbum()">Guardar Álbum →</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ══════════ DATA STORE ══════════
+const D = {
+  logo:{url:'',navText:'Grupo Scout No.12',navSub:'San Pedro Apóstol'},
+  hero:{images:[],body:'Los scouts formamos parte de un movimiento mundial llamado escultismo, una propuesta educativa no formal donde jóvenes de todas las edades participan voluntariamente.'},
+  textos:{
+    quienesTitle:'El Escultismo en Guatemala',
+    quienesDesc:'Buscamos construir un mundo mejor a partir de nuestras propias comunidades, promoviendo el desarrollo integral de las personas a través de actividades que complementan la educación formal y familiar. El escultismo es un espacio de crecimiento personal, aprendizaje de habilidades y compromiso social.',
+    mision:'El escultismo busca educar a los jóvenes a través de un sistema de valores basado en la Promesa y la Ley Scout. Su objetivo es ayudar a construir un mundo mejor, donde las personas se desarrollen plenamente.',
+    vision:'Ser el movimiento juvenil educativo líder a nivel mundial, impactando a cien millones de jóvenes y motivándolos a convertirse en ciudadanos activos y responsables.',
+    promesa:'"Yo… , por mi honor prometo, hacer cuanto de mí dependa, para cumplir mis deberes, para con Dios y la patria, ayudar al prójimo en toda circunstancia y cumplir fielmente la ley scout".',
+    seguro:'Una de las prioridades de la Asociación de Scouts de Guatemala es la salud y seguridad de todos sus miembros, por esta razón cuando te inscribes obtienes un seguro de accidentes personales que te cubre dentro y fuera de las actividades scout.',
+  },
+  footer:{desc:'San Pedro Apóstol · Guatemala\nAsociación de Scouts de Guatemala\n\n¡Siempre listo para servir!',copy:'© 2025 Grupo Scout No.12 San Pedro Apóstol · Guatemala'},
+  contacto:{dir:'Parque "Ignacio Fierro" · 16 ave. 17 calle, zona 6, Colonia Cipresales',tel:'4580-4910',email:'contacto@gruposc12.gt',horario:'Todos los sábados, de 2:30 pm a 5:30 pm',mapUrl:'https://maps-api-ssl.google.com/maps?hl=en-US&ll=14.662596,-90.492014&output=embed&q=14.662455,-90.492271&z=18'},
+  albums:[
+    {id:1, name:'Rally de Manadas 2025', desc:'Campo Marte', cover:''},
+    {id:2, name:'Ascenso al Ipala', desc:'Chiquimula', cover:''},
+    {id:3, name:'Caminata Nacional', desc:'Zona 1, Ciudad de Guatemala', cover:''},
+    {id:4, name:'Aniversario del Grupo', desc:'Local', cover:''},
+  ],
+  gallery:[
+    {id:1,url:'',desc:'Rally de Manadas — Campo Marte',emoji:'🏕',size:'tall',month:7,year:2025,position:'center',albumId:1},
+    {id:2,url:'',desc:'Ascenso al Volcán Ipala — Chiquimula',emoji:'⛰',size:'wide',month:5,year:2025,position:'center',albumId:2},
+    {id:3,url:'',desc:'Caminata Nacional — Zona 1, Ciudad de Guatemala',emoji:'🥾',size:'',month:8,year:2025,position:'center',albumId:3},
+    {id:4,url:'',desc:'Argolla Maya — Parque Erick Barrondo',emoji:'⚜️',size:'',month:8,year:2025,position:'center',albumId:3},
+    {id:5,url:'',desc:'Altares Cívicos — Local',emoji:'🕯',size:'tall',month:9,year:2025,position:'center',albumId:null},
+    {id:6,url:'',desc:'Aniversario de Grupo — Local',emoji:'🎉',size:'wide',month:12,year:2025,position:'center',albumId:4},
+  ]
+};
+
+// ══════════ SECCIONES — CONTENIDO REAL ══════════
+const SECS={
+  cachorros:{
+    logo:'',emoji:'🐾',colorVar:'--c-cubil',colorHex:'#38bdf8',bg:'#001824',
+    title:'Cachorros',unidadNombre:'Cubil',age:'5 – 6 años',
+    bienvenida:'Bienvenidos al Cubil',
+    oracionTitulo:'Oración del Cachorro',
+    oracion:'Señor, enséñame a amarte,\nayúdame a compartir\ny a cuidar de la naturaleza.\n\nAsí sea.',
+    lema:'COMPARTIR, COMPARTIR, COMPARTIR',
+    marcoSimbolico:'La historia de "La vida de los cachorritos" le da su marco simbólico a la sección de los cachorros. Allí, con Ojo de Halcón, Arco Iris y Burbuja, su hijo se divertirá en un ambiente de fantasía.',
+    desc:'Aquí encontrarán toda la información sobre esta increíble sección en la que los más chicos del movimiento scout aprenden a compartir y disfrutar de la naturaleza. En la sección su hijo aprenderá habilidades en el momento más importante de su vida y cuando más lo necesita. Y lo hará de la forma más divertida: a través del juego.\n\nLa presencia de los voluntarios en el cubil de los cachorros ayudará a su hijo a ser creativo y gracias a los valores que conforman el espíritu Scout aprenderá la importancia del servicio, el trabajo en equipo y el amor a la naturaleza.',
+    progresionUrl:'https://drive.google.com/drive/folders/1QZV0DF62L0fUS9FjREXJSLFK6632EHOk?usp=drive_link',
+    fotos:[]
+  },
+  manada:{
+    logo:'',emoji:'🐺',colorVar:'--c-manada',colorHex:'#FFBF00',bg:'#241c00',
+    title:'Manada',unidadNombre:'Manada de Lobatos',age:'7 – 10 años',
+    bienvenida:'Bienvenidos a la Manada',
+    oracionTitulo:'Oración de la Manada',
+    oracion:'Dulce y buen Señor mío,\nenséñame a ser humilde y bondadoso;\na imitar tu ejemplo,\na amarte con todo mi corazón\ny a seguir el camino que ha de llevarme al cielo junto a ti,\nasí sea.',
+    lema:'SIEMPRE MEJOR',
+    marcoSimbolico:'Las actividades, inspiradas en el Libro de la Selva, facilitan el aprendizaje de cosas interesantes, valores y principios acompañados de sus amigos Akela, Raksha, Baloo y Bagheera.',
+    desc:'Aquí encontrarán toda la información sobre esta dinámica sección del grupo Scout, en la que su hijo aprenderá a convivir con alegría y diversión.\n\nSu hijo encontrará una atmósfera de juegos y actividades que se desarrollan en un ambiente de fantasía, y le permitirá ir aprendiendo valores, principios y conocimientos que le servirán para toda su vida. En la manada de lobatos descubrirá cosas interesantes y aprenderá cómo disfrutar de la vida en la naturaleza.',
+    progresionUrl:'https://drive.google.com/drive/folders/18kb_RkrSZ1_7d1Nubd5zx9vWwz_TmLDa?usp=drive_link',
+    fotos:[]
+  },
+  unidad:{
+    logo:'',emoji:'⚜️',colorVar:'--c-unidad',colorHex:'#22c55e',bg:'#001a0d',
+    title:'Unidad Scout',unidadNombre:'Patrulla Scout',age:'11 – 14 años',
+    bienvenida:'Bienvenido a la Unidad',
+    oracionTitulo:'Oración de Unidad',
+    oracion:'Señor, enséñame a ser generoso,\na servirte como lo mereces,\na dar sin medida,\na combatir sin miedo a que me hieran,\na trabajar sin descanso\ny a no buscar más recompensa\nque el saber que hago tu santa voluntad.\nAsí sea.',
+    lema:'SIEMPRE LISTO',
+    marcoSimbolico:'Disfrutarás la aventura de explorar y descubrir una variedad de cosas que te ayudarán a formarte como una persona útil a la sociedad que luchará por construir un mundo mejor.',
+    desc:'En esta rama vivirás la aventura, el gusto por explorar y descubrir, aprenderás un sin fin de cosas que te ayudarán a formarte como una persona siempre lista para contribuir a la sociedad.\n\nEn la unidad scout aprenderás a convivir y a trabajar en equipo, serás parte de una patrulla scout, aprenderás a cuidar de tu persona manteniéndote fuerte y sano. Disfrutarás de actividades divertidas en exteriores: campamentos, caminatas, dinámicas y juegos. Aprenderás a ser un líder y a trabajar en equipo con tus amigos.',
+    progresionUrl:'https://drive.google.com/drive/folders/1lQpdizsgVU5AgMcElSZbgJdQjg20DUHj?usp=drive_link',
+    fotos:[]
+  },
+  caminantes:{
+    logo:'',emoji:'🌄',colorVar:'--c-caminantes',colorHex:'#2563eb',bg:'#000d24',
+    title:'Caminantes',unidadNombre:'Comunidad de Caminantes',age:'15 – 17 años',
+    bienvenida:'Bienvenido a la Comunidad',
+    oracionTitulo:'Oración de la Comunidad',
+    oracion:'Concédeme Señor:\nHumildad: para seguir tus pasos.\nGenerosidad: para luchar por las causas justas.\nValor: para enfrentar mis temores.\nAmor: para terminar con mi indiferencia.\nServir: para engrandecer tu nombre.\nAsí sea.',
+    lema:'SIEMPRE ADELANTE',
+    marcoSimbolico:'"Vivir tu propia aventura": emprender un viaje con un grupo de amigos en busca de descubrir y construir un mundo mejor.',
+    desc:'La comunidad de Caminantes Scout es una sección que desafiará tus propios límites. Aquí aprenderás a transformar tus sueños en proyectos y actividades de servicio que darán un nuevo sentido a tu vida.\n\nDesarrollarás nuevas habilidades y vivirás grandes aventuras, realizarás proyectos en tu comunidad mientras avanzas en tu progresión. Actúa, sé tú mismo, marca la diferencia y demuestra que puedes dejar este mundo mejor de como lo encontraste.',
+    progresionUrl:'https://drive.google.com/drive/folders/1U6uyivtW7h0SxwSReUsjKaxrvmcEaGhs?usp=drive_link',
+    fotos:[]
+  },
+  rovers:{
+    logo:'',emoji:'🧭',colorVar:'--c-rovers',colorHex:'#F62217',bg:'#220500',
+    title:'Clan de Rovers',unidadNombre:'Clan de Rovers',age:'18 – 24 años',
+    bienvenida:'Bienvenido al Clan',
+    oracionTitulo:'Oración del Clan de Rovers',
+    oracion:'Concédeme Señor:\nHumildad: para seguir tus pasos.\nGenerosidad: para luchar por las causas justas.\nValor: para enfrentar mis temores.\nAmor: para terminar con mi indiferencia.\nServir: para engrandecer tu nombre.\nAsí sea.',
+    lema:'SERVIR',
+    marcoSimbolico:'Los retos, las aventuras y el servicio a la Comunidad te ayudarán a trabajar en el desarrollo de tu proyecto personal e iniciar el camino hacia él.',
+    desc:'En el Clan de Rovers aprenderás a formar tu propio futuro. Las actividades al aire libre te ayudarán a desarrollar tu carácter e inteligencia, habilidades, la salud, la fuerza y el servicio a la comunidad.\n\nTu principal tarea será construir y desarrollar tu proyecto personal, comenzando a caminar en dirección hacia tu futuro. Las experiencias que vivirás tendrán un impacto significativo en tu vida y en la de los demás, ya que al realizar voluntariado puedes contribuir en la construcción de un mundo mejor.',
+    progresionUrl:'https://drive.google.com/drive/u/1/folders/1qiHvBuo0Koe1OzMJxr_vHkvxl1O3TgTZ',
+    fotos:[]
+  },
+  dirigencia:{
+    logo:'',emoji:'🎖',colorVar:'--c-dirigencia',colorHex:'#9333ea',bg:'#0d0018',
+    title:'Dirigencia',unidadNombre:'Consejo de Grupo',age:'Mayores de 25 años',
+    bienvenida:'Bienvenido al Consejo de Grupo',
+    oracionTitulo:'Oración del Dirigente',
+    oracion:'Señor, tú que me diste el deber de dirigir,\ndame ahora la alegría para trabajar,\nseguridad para disponer y\nhumildad para servir.\nConvierte en fortaleza mi debilidad,\nen madurez mi inexperiencia,\nen habilidad mi torpeza y\nen serenidad mi impaciencia.\nQuiero, con tu ayuda generosa,\nrealizar la misión que me has encomendado.\nAsí sea.',
+    lema:'GUÍA, NO JEFE',
+    marcoSimbolico:'El dirigente inspira y motiva sin imponer, fomentando la participación y autonomía de los scouts en cada etapa de su desarrollo.',
+    desc:'Liderazgo positivo: inspira y motiva sin imponer, fomenta la participación y autonomía de los scouts. Es guía, no jefe.\n\nCompromiso con los valores scout: vive y promueve la ley y promesa scout, siendo coherente con los principios del escultismo en su vida diaria.\n\nPasión por educar: disfruta trabajando con jóvenes y cree en el potencial transformador del Movimiento Scout.',
+    progresionUrl:'',
+    fotos:[]
+  },
+  comite:{
+    logo:'',emoji:'👨‍👩‍👧‍👦',colorVar:'--c-dirigencia',colorHex:'#9333ea',bg:'#0d0018',
+    title:'Comité de Padres',unidadNombre:'Comité de Padres',age:'Mayores de 25 años',
+    bienvenida:'Bienvenido al Comité',
+    oracionTitulo:'Oración del Comité',
+    oracion:'Señor, tú que me diste el deber de dirigir,\ndame ahora la alegría para trabajar,\nseguridad para disponer y\nhumildad para servir.\nConvierte en fortaleza mi debilidad,\nen madurez mi inexperiencia,\nen habilidad mi torpeza y\nen serenidad mi impaciencia.\nQuiero, con tu ayuda generosa,\nrealizar la misión que me has encomendado.\nAsí sea.',
+    lema:'COLABORACIÓN ACTIVA',
+    marcoSimbolico:'El Comité de Padres apoya de forma voluntaria y constante las actividades del grupo, siendo un pilar logístico y administrativo fundamental.',
+    desc:'Colaboración activa: apoya de forma voluntaria y constante las actividades del grupo y participa en reuniones con su equipo para el bienestar del grupo.\n\nApoyo administrativo y logístico: ayuda en la administración de fondos (cuando el grupo lo requiere) y gestiona donaciones, materiales, transporte y otros recursos necesarios.\n\nCompromiso con el desarrollo de los jóvenes: comparte los valores del escultismo y aporta con una visión positiva para el crecimiento del grupo y sus integrantes.',
+    progresionUrl:'',
+    fotos:[]
+  }
+};
+
+// ══════════ PAGE ROUTING ══════════
+let currentPage = 'home';
+function showPage(p) {
+  document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
+  const el = document.getElementById('page-'+p);
+  if(el) el.classList.add('active');
+  document.querySelectorAll('[data-page]').forEach(a=>a.classList.toggle('active',a.dataset.page===p));
+  currentPage = p;
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(p==='galeria'){ renderAlbumsRow(); renderGalleryFilters(); renderGallery(); }
+  if(SECS[p]) renderSecPage(p);
+  initScrollReveal();
+}
+
+// ══════════ SCROLL REVEAL (IntersectionObserver) ══════════
+let revealObserver = null;
+function initScrollReveal(){
+  if(!('IntersectionObserver' in window)) return;
+  if(!revealObserver){
+    revealObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  }
+  const activePage = document.querySelector('.page-section.active') || document;
+  const targets = activePage.querySelectorAll('.fl-card:not(.in-view):not(.reveal), .ph-fl-inner:not(.in-view):not(.reveal)');
+  targets.forEach((el,i)=>{
+    el.classList.add('reveal');
+    el.style.transitionDelay = Math.min(i*60,180)+'ms';
+    revealObserver.observe(el);
+  });
+}
+
+// ══════════ SECTION PAGE RENDER ══════════
+function renderSecPage(s) {
+  const sd = SECS[s];
+  const el = document.getElementById('page-'+s);
+  if(!el) return;
+  const color = `var(${sd.colorVar})`;
+  el.innerHTML = `
+    <div class="ph-fl">
+      <div class="ph-fl-inner">
+        <div class="ph-fl-accent" style="background:${color}"></div>
+        <div class="ph-fl-content">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:.9rem">
+            ${sd.logo?`<img src="${sd.logo}" alt="${sd.title}" style="width:56px;height:56px;object-fit:contain;border-radius:14px;flex-shrink:0" onerror="this.style.display='none'">`:''}
+            <div>
+              <div class="sec-tag" style="color:${color};margin-bottom:.3rem">${sd.unidadNombre}</div>
+              <h1 class="sec-title" style="font-size:clamp(2.2rem,4.5vw,3.4rem);margin-bottom:0">${sd.title}</h1>
+            </div>
+          </div>
+          <div style="font-size:.9rem;font-weight:800;letter-spacing:2px;color:${color};text-transform:uppercase;margin-bottom:.6rem">${sd.age}</div>
+          <p class="sec-lead" style="font-weight:700;color:#fff;font-size:15px">⭐ "${sd.lema}"</p>
+        </div>
+      </div>
+    </div>
+    <div class="sec">
+    <div class="fl-card"><div class="fl-card-pad">
+    <div class="sec-info-layout">
+      <div class="info-block full-width-info">
+        <div class="info-block-header"><h3 style="color:${color}">👋 ${sd.bienvenida}</h3></div>
+        <div class="info-block-body"><p style="white-space:pre-line">${sd.desc}</p>
+          ${sd.progresionUrl?`<a href="${sd.progresionUrl}" target="_blank" style="display:inline-block;margin-top:14px;color:${color};font-weight:700;font-size:12px;text-decoration:underline">📋 Ver Plan de Progresión →</a>`:''}
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-header"><h3 style="color:${color}">🙏 ${sd.oracionTitulo}</h3></div>
+        <div class="info-block-body"><p class="oracion-block">${sd.oracion}</p></div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-header"><h3 style="color:${color}">🎭 Marco Simbólico</h3></div>
+        <div class="info-block-body"><p>${sd.marcoSimbolico}</p></div>
+      </div>
+      <div class="info-block full-width-info">
+        <div class="info-block-header" style="display:flex;align-items:center;justify-content:space-between"><h3 style="color:${color}">📷 Fotos de la Sección</h3></div>
+        <div class="info-block-body">
+          ${sd.fotos.length===0?`<p style="color:var(--gray);font-size:13px">Aún no hay fotos en esta sección. Agrégalas desde el panel de administración.</p>`:''}
+          <div class="sec-photos" id="sec-photos-${s}">
+            ${sd.fotos.map(f=>`
+              <div class="sec-photo-item">
+                ${f.url?`<img src="${f.url}" alt="${f.desc}" loading="lazy" style="object-position:${f.position||'center'}" onerror="this.style.display='none'">`:''}
+                ${!f.url?`<span>${f.emoji||'📷'}</span>`:''}
+                <div style="position:absolute;bottom:0;left:0;right:0;padding:6px 8px;background:rgba(0,0,0,.7);font-size:11px;color:#fff">${f.desc}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    </div>
+    </div></div>
+    </div>
+  `;
+}
+
+
+// ══════════ HOME SECCIONES GRID (dinámico, con logos) ══════════
+function renderHomeSeccionesGrid(){
+  const grid = document.getElementById('home-secciones-grid');
+  if(!grid) return;
+  const order = ['cachorros','manada','unidad','caminantes','rovers','dirigencia'];
+  grid.innerHTML = order.map(key=>{
+    const sd = SECS[key];
+    const color = `var(${sd.colorVar})`;
+    const logoHtml = `<div class="sec-tile-logo-wrap">${sd.logo ? `<img src="${sd.logo}" class="sec-tile-logo" alt="${sd.title}" onerror="this.outerHTML='<span class=tile-emoji>${sd.emoji}</span>'">` : `<span class="tile-emoji">${sd.emoji}</span>`}</div>`;
+    return `<a class="sec-tile" style="--tc:${color}" href="#" onclick="showPage('${key==='dirigencia'?'dirigencia':key}');return false">
+      ${logoHtml}
+      <div class="tile-title">${sd.title}</div>
+      <div class="tile-age">${sd.age}</div>
+      <p class="tile-desc">${sd.bienvenida}</p>
+      <span class="tile-arrow">→</span>
+    </a>`;
+  }).join('');
+}
+
+// ══════════ GALLERY & ALBUMS ══════════
+const MESES_NOMBRE=['','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+let galFilterMonth='all', galFilterYear='all', galActiveAlbum='all';
+
+function renderGalleryFilters(){
+  const wrap = document.getElementById('gallery-filters');
+  if(!wrap) return;
+  const pool = galActiveAlbum==='all' ? D.gallery : D.gallery.filter(g=>g.albumId==galActiveAlbum);
+  const years = [...new Set(pool.map(g=>g.year).filter(Boolean))].sort((a,b)=>b-a);
+  const months = [...new Set(pool.filter(g=>galFilterYear==='all'||g.year==galFilterYear).map(g=>g.month).filter(Boolean))].sort((a,b)=>a-b);
+  wrap.innerHTML = `
+    <select id="gal-filter-year" onchange="setGalFilter('year',this.value)" style="background:rgba(255,255,255,.05);border:1px solid var(--border);color:#fff;padding:8px 14px;border-radius:100px;font-size:13px;font-weight:600;font-family:'Manrope',sans-serif">
+      <option value="all" ${galFilterYear==='all'?'selected':''}>Todos los años</option>
+      ${years.map(y=>`<option value="${y}" ${galFilterYear==y?'selected':''}>${y}</option>`).join('')}
+    </select>
+    <select id="gal-filter-month" onchange="setGalFilter('month',this.value)" style="background:rgba(255,255,255,.05);border:1px solid var(--border);color:#fff;padding:8px 14px;border-radius:100px;font-size:13px;font-weight:600;font-family:'Manrope',sans-serif">
+      <option value="all" ${galFilterMonth==='all'?'selected':''}>Todos los meses</option>
+      ${months.map(m=>`<option value="${m}" ${galFilterMonth==m?'selected':''}>${MESES_NOMBRE[m]}</option>`).join('')}
+    </select>
+    ${(galFilterMonth!=='all'||galFilterYear!=='all')?`<button onclick="clearGalFilter()" style="background:rgba(246,34,23,.12);border:1px solid rgba(246,34,23,.25);color:var(--ruby);padding:8px 14px;border-radius:100px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif">✕ Limpiar filtro</button>`:''}
+  `;
+}
+function setGalFilter(type,val){
+  if(type==='year'){galFilterYear=val; galFilterMonth='all';}
+  else{galFilterMonth=val;}
+  renderGalleryFilters();
+  renderGallery();
+}
+function clearGalFilter(){ galFilterMonth='all'; galFilterYear='all'; renderGalleryFilters(); renderGallery(); }
+
+function renderAlbumsRow(){
+  const wrap = document.getElementById('albums-row');
+  if(!wrap) return;
+  const countAll = D.gallery.length;
+  const sinAlbum = D.gallery.filter(g=>!g.albumId).length;
+  wrap.innerHTML = `
+    <button class="album-chip ${galActiveAlbum==='all'?'active':''}" onclick="selectAlbum('all')">📚 Todas las fotos <span class="album-count">${countAll}</span></button>
+    ${D.albums.map(a=>{
+      const photos = D.gallery.filter(g=>g.albumId===a.id);
+      const cover = a.cover || (photos[0]&&photos[0].url) || '';
+      return `<button class="album-chip ${galActiveAlbum==a.id?'active':''}" onclick="selectAlbum(${a.id})">
+        ${cover?`<img src="${cover}" class="album-chip-thumb">`:'<span class="album-chip-thumb-icon">📷</span>'}
+        ${a.name} <span class="album-count">${photos.length}</span>
+      </button>`;
+    }).join('')}
+    ${sinAlbum>0?`<button class="album-chip ${galActiveAlbum==='none'?'active':''}" onclick="selectAlbum('none')">🗂 Sin álbum <span class="album-count">${sinAlbum}</span></button>`:''}
+  `;
+}
+function selectAlbum(id){
+  galActiveAlbum = id;
+  galFilterMonth='all'; galFilterYear='all';
+  renderAlbumsRow();
+  renderGalleryFilters();
+  renderGallery();
+}
+
+function renderGallery() {
+  const g = document.getElementById('gallery-masonry');
+  const hp = document.getElementById('home-gallery-preview');
+  if(g){
+    let filtered = D.gallery;
+    if(galActiveAlbum==='none') filtered = filtered.filter(it=>!it.albumId);
+    else if(galActiveAlbum!=='all') filtered = filtered.filter(it=>it.albumId==galActiveAlbum);
+    if(galFilterYear!=='all') filtered = filtered.filter(it=>it.year==galFilterYear);
+    if(galFilterMonth!=='all') filtered = filtered.filter(it=>it.month==galFilterMonth);
+    g.innerHTML = filtered.length ? filtered.map(item=>galItemHtml(item)).join('') : `<p style="color:var(--gray);font-size:14px;padding:1rem">No hay fotos para este filtro.</p>`;
+  }
+  if(hp){
+    hp.innerHTML = D.gallery.slice(0,6).map(item=>galItemHtml(item)).join('');
+  }
+}
+function galItemHtml(item){
+  return `
+    <div class="gal-item ${item.size||''}">
+      <div class="gal-item-inner">
+        ${item.url?`<img src="${item.url}" alt="${item.desc}" loading="lazy" style="object-position:${item.position||'center'}" onerror="this.parentElement.innerHTML='<span style=font-size:3.5rem>${item.emoji||'🖼'}</span>'">`:`<span>${item.emoji||'🖼'}</span>`}
+      </div>
+      <div class="gal-overlay"><span>${item.desc}${item.month&&item.year?` · ${MESES_NOMBRE[item.month]} ${item.year}`:''}</span></div>
+    </div>
+  `;
+}
+let pendingGalFiles = []; // {url, name} cuando se suben varias fotos a la vez
+
+function populateAlbumSelect(){
+  const sel = document.getElementById('g-album');
+  if(!sel) return;
+  const current = sel.value;
+  sel.innerHTML = `<option value="">Sin álbum</option>` + D.albums.map(a=>`<option value="${a.id}">${a.name}</option>`).join('');
+  if(current) sel.value = current;
+}
+function openGalModal(presetAlbumId){
+  ['g-url','g-desc','g-emoji'].forEach(id=>sv(id,''));sv('g-size','');sv('g-year','2025');sv('g-position','center');
+  pendingGalFiles = [];
+  const w=document.getElementById('g-preview-wrap');
+  if(w){ const img=w.querySelector('img'); if(img) img.remove(); }
+  const mp=document.getElementById('g-multi-preview');
+  if(mp){ mp.style.display='none'; mp.innerHTML=''; }
+  document.getElementById('g-file').value='';
+  document.getElementById('gal-save-btn').textContent='Añadir →';
+  document.getElementById('gal-modal-title').textContent='Añadir Fotos a la Galería';
+  populateAlbumSelect();
+  if(presetAlbumId) sv('g-album', presetAlbumId);
+  else sv('g-album','');
+  openModal('gal-modal');
+}
+function handleGalPhotoFiles(input){
+  const files = Array.from(input.files || []);
+  if(!files.length) return;
+  pendingGalFiles = [];
+  const mp = document.getElementById('g-multi-preview');
+  const singleWrap = document.getElementById('g-preview-wrap');
+  if(files.length === 1){
+    // Una sola foto: comportamiento simple con preview grande
+    mp.style.display='none'; mp.innerHTML='';
+    const reader = new FileReader();
+    reader.onload = e => {
+      sv('g-url', e.target.result);
+      previewGalPhoto(e.target.result);
+      toast('Foto lista — pulsa "Añadir"');
+    };
+    reader.readAsDataURL(files[0]);
+    return;
+  }
+  // Varias fotos: preview en miniaturas, se ignora g-url
+  sv('g-url','');
+  const singleImg = singleWrap.querySelector('img'); if(singleImg) singleImg.remove();
+  mp.style.display='flex'; mp.innerHTML='';
+  document.getElementById('gal-save-btn').textContent = `Añadir ${files.length} fotos →`;
+  let loaded = 0;
+  files.forEach((file,i)=>{
+    const reader = new FileReader();
+    reader.onload = e=>{
+      pendingGalFiles[i] = {url:e.target.result, name:file.name};
+      loaded++;
+      const thumb = document.createElement('div');
+      thumb.style.cssText = 'width:54px;height:54px;border-radius:8px;overflow:hidden;border:1px solid var(--border);background:var(--black)';
+      thumb.innerHTML = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover">`;
+      mp.appendChild(thumb);
+      if(loaded===files.length) toast(`${files.length} fotos listas — pulsa "Añadir"`);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+function previewGalPhoto(url){
+  const w=document.getElementById('g-preview-wrap');
+  if(!w||!url) return;
+  let img=w.querySelector('img');
+  if(!img){img=document.createElement('img');img.style.cssText='width:100%;height:100%;object-fit:cover;position:absolute;inset:0';w.appendChild(img);}
+  img.src=url;
+}
+function saveGalItem(){
+  const desc = v('g-desc') || 'Foto Scout';
+  const albumId = v('g-album') ? parseInt(v('g-album')) : null;
+  const month = parseInt(v('g-month'))||1;
+  const year = parseInt(v('g-year'))||2025;
+  const size = v('g-size');
+  const position = v('g-position')||'center';
+  const emoji = v('g-emoji')||'🖼';
+
+  if(pendingGalFiles.length > 1){
+    // Subida múltiple
+    pendingGalFiles.forEach((f,i)=>{
+      D.gallery.push({id:Date.now()+i, url:f.url, desc: pendingGalFiles.length>1?`${desc} (${i+1})`:desc, emoji, size, month, year, position, albumId});
+    });
+    toast(`${pendingGalFiles.length} fotos añadidas a la galería`);
+  } else {
+    if(!v('g-url')){ toast('Sube una foto o pega una URL primero',true); return; }
+    D.gallery.push({id:Date.now(), url:v('g-url'), desc, emoji, size, month, year, position, albumId});
+    toast('Foto añadida a la galería');
+  }
+  pendingGalFiles = [];
+  renderAlbumsRow(); renderGalleryFilters(); renderGallery(); closeModal('gal-modal');
+  ['g-url','g-desc','g-emoji'].forEach(id=>sv(id,''));sv('g-size','');sv('g-year','2025');sv('g-position','center');
+  if(currentEditor==='galeria') buildControls('galeria');
+  renderHomeGalleryAdminList();
+}
+function deleteGalPhoto(id){
+  D.gallery=D.gallery.filter(g=>g.id!==id);
+  renderAlbumsRow(); renderGallery(); if(currentEditor==='galeria') buildControls('galeria');
+  renderHomeGalleryAdminList();
+  toast('Foto eliminada');
+}
+
+// ── ÁLBUMES ──
+function openAlbumModal(editId){
+  sv('am-id', editId||'');
+  if(editId){
+    const a = D.albums.find(x=>x.id===editId);
+    document.getElementById('album-modal-title').textContent = 'Editar Álbum';
+    sv('am-name', a.name); sv('am-desc', a.desc||'');
+  } else {
+    document.getElementById('album-modal-title').textContent = 'Nuevo Álbum';
+    sv('am-name',''); sv('am-desc','');
+  }
+  openModal('album-modal');
+}
+function saveAlbum(){
+  const name = v('am-name');
+  if(!name){ toast('Ingresa un nombre para el álbum',true); return; }
+  const editId = v('am-id');
+  if(editId){
+    const a = D.albums.find(x=>x.id===parseInt(editId));
+    a.name = name; a.desc = v('am-desc');
+    toast('Álbum actualizado');
+  } else {
+    D.albums.push({id:Date.now(), name, desc:v('am-desc'), cover:''});
+    toast('Álbum creado');
+  }
+  closeModal('album-modal');
+  renderAlbumsRow();
+  if(currentEditor==='galeria') buildControls('galeria');
+}
+function deleteAlbum(id){
+  if(!confirm('¿Eliminar este álbum? Las fotos no se borrarán, solo quedarán sin álbum.')) return;
+  D.albums = D.albums.filter(a=>a.id!==id);
+  D.gallery.forEach(g=>{ if(g.albumId===id) g.albumId=null; });
+  if(galActiveAlbum===id) galActiveAlbum='all';
+  renderAlbumsRow(); renderGallery();
+  if(currentEditor==='galeria') buildControls('galeria');
+  toast('Álbum eliminado');
+}
+function renderHomeGalleryAdminList(){
+  // Refresca el acordeón "Momentos Scout" si el editor de Inicio está abierto
+  if(currentEditor==='home'){ buildControls('home'); }
+  if(currentEditor==='dashboard'){ buildAdmView('dashboard'); }
+}
+
+
+// ══════════ TOAST / HELPERS ══════════
+function toast(msg,err){
+  const t=document.getElementById('toast');
+  t.textContent=(err?'✕ ':'✓ ')+msg;
+  t.className='show'+(err?' err':'');
+  clearTimeout(t._t); t._t=setTimeout(()=>t.className='',3000);
+}
+
+// ══════════ CONTACT FORM ══════════
+function getWhatsAppNumber(){
+  // Limpia el número guardado en D.contacto.tel y le agrega código de país si falta
+  let digits = (D.contacto.tel||'').replace(/\D/g,'');
+  if(digits.length===8) digits = '502'+digits; // número local de Guatemala sin código
+  return digits;
+}
+function submitContactForm(){
+  const name=v('cf-name');
+  if(!name){ toast('Por favor ingresa tu nombre',true); return; }
+  const phone=v('cf-phone');
+  const email=v('cf-email');
+  const subject=document.getElementById('cf-subject').value;
+  const message=v('cf-message');
+
+  const number=getWhatsAppNumber();
+  if(!number){ toast('No hay un número de WhatsApp configurado',true); return; }
+
+  let text = `Hola, soy *${name}*.\n`;
+  text += `Asunto: ${subject}\n`;
+  if(phone) text += `Mi teléfono: ${phone}\n`;
+  if(email) text += `Mi correo: ${email}\n`;
+  if(message) text += `\nMensaje:\n${message}`;
+
+  const url = `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank');
+  toast('Abriendo WhatsApp con tu mensaje...');
+  ['cf-name','cf-phone','cf-email','cf-message'].forEach(id=>sv(id,''));
+}
+function v(id){const el=document.getElementById(id);return el?el.value.trim():''}
+function sv(id,val){const el=document.getElementById(id);if(el)el.value=val}
+function st(id,val){const el=document.getElementById(id);if(el)el.textContent=val}
+function ge(id){return document.getElementById(id)}
+function openModal(id){document.getElementById(id).classList.add('show')}
+function closeModal(id){document.getElementById(id).classList.remove('show')}
+document.addEventListener('click',e=>{if(e.target.classList.contains('modal-backdrop'))closeModal(e.target.id)});
+
+// ══════════ MOBILE ══════════
+function toggleMobile(){document.getElementById('mobile-drawer').classList.toggle('open')}
+function closeMobile(){document.getElementById('mobile-drawer').classList.remove('open')}
+
+// ══════════ HERO CAROUSEL ══════════
+let heroSlideIndex = 0;
+let heroAutoplayTimer = null;
+function renderHeroCarousel(){
+  const carousel = document.getElementById('hero-carousel');
+  const prevBtn = document.getElementById('hero-arrow-prev');
+  const nextBtn = document.getElementById('hero-arrow-next');
+  const dotsWrap = document.getElementById('hero-dots');
+  const images = D.hero.images || [];
+  if(!carousel) return;
+  if(images.length === 0){
+    carousel.innerHTML = `<div class="hero-right-placeholder"><span>📷</span><p>Sube fotos del grupo desde el panel Admin</p></div>`;
+    if(prevBtn) prevBtn.style.display='none';
+    if(nextBtn) nextBtn.style.display='none';
+    if(dotsWrap) dotsWrap.innerHTML='';
+    clearInterval(heroAutoplayTimer);
+    return;
+  }
+  if(heroSlideIndex >= images.length) heroSlideIndex = 0;
+  carousel.innerHTML = images.map((img,i)=>`<div class="hero-slide ${i===heroSlideIndex?'active':''}"><img src="${img.url}" alt="${img.desc||'Grupo Scout'}" style="object-position:${img.position||'center'}" onerror="this.parentElement.style.display='none'"></div>`).join('');
+  if(dotsWrap){
+    dotsWrap.innerHTML = images.length>1 ? images.map((_,i)=>`<button class="hero-dot ${i===heroSlideIndex?'active':''}" onclick="heroCarouselGoto(${i})"></button>`).join('') : '';
+  }
+  if(prevBtn) prevBtn.style.display = images.length>1 ? 'flex' : 'none';
+  if(nextBtn) nextBtn.style.display = images.length>1 ? 'flex' : 'none';
+  if(images.length>1) startHeroAutoplay(); else clearInterval(heroAutoplayTimer);
+}
+function heroCarouselGoto(i){ heroSlideIndex=i; renderHeroCarousel(); }
+function heroCarouselNext(){ const n=(D.hero.images||[]).length; if(n===0)return; heroSlideIndex=(heroSlideIndex+1)%n; renderHeroCarousel(); }
+function heroCarouselPrev(){ const n=(D.hero.images||[]).length; if(n===0)return; heroSlideIndex=(heroSlideIndex-1+n)%n; renderHeroCarousel(); }
+function startHeroAutoplay(){
+  clearInterval(heroAutoplayTimer);
+  heroAutoplayTimer = setInterval(()=>{ heroCarouselNext(); }, 5500);
+}
+
+// ══════════ APPLY DATA ══════════
+function applyAll() {
+  const logoUrl = D.logo.url;
+  if(logoUrl){
+    document.getElementById('nav-logo-wrap').innerHTML=`<img src="${logoUrl}" class="nav-logo-img" onerror="this.parentElement.innerHTML='<div class=nav-logo-hex>⚜</div>'">`;
+  }
+  st('nav-name-main',D.logo.navText);
+  st('nav-name-sub',D.logo.navSub);
+  renderHeroCarousel();
+  const hls=document.getElementById('hero-logo-section');
+  if(logoUrl&&hls){hls.innerHTML=`<img src="${logoUrl}" class="hero-logo-img" onerror="this.parentElement.innerHTML='<div class=hero-logo-hex>⚜</div>'">`;}
+  st('txt-hero-body',D.hero.body);
+  st('txt-quienes-title',D.textos.quienesTitle);
+  st('txt-quienes-desc',D.textos.quienesDesc);
+  st('txt-mision',D.textos.mision);
+  st('txt-vision',D.textos.vision);
+  st('txt-promesa',D.textos.promesa);
+  st('txt-seguro',D.textos.seguro);
+  st('cnt-dir',D.contacto.dir);
+  st('cnt-tel',D.contacto.tel);
+  st('cnt-email',D.contacto.email);
+  st('cnt-horario',D.contacto.horario);
+  const mi=document.getElementById('map-iframe');
+  if(mi&&D.contacto.mapUrl)mi.src=D.contacto.mapUrl;
+  const waLink=document.getElementById('wa-direct-link');
+  if(waLink){
+    const num=getWhatsAppNumber();
+    waLink.href = num ? `https://wa.me/${num}?text=${encodeURIComponent('Hola, quiero más información del Grupo Scout No.12')}` : '#';
+  }
+  const fl=document.getElementById('footer-logo-img');
+  if(logoUrl&&fl){fl.src=logoUrl;fl.style.display='block';document.getElementById('footer-logo-text').style.display='none';}
+  else{if(fl)fl.style.display='none';const ft=document.getElementById('footer-logo-text');if(ft)ft.style.display='';}
+  const fd=document.getElementById('footer-desc');
+  if(fd)fd.innerHTML=D.footer.desc.replace(/\n/g,'<br>');
+  st('footer-copy',D.footer.copy);
+}
+
+// ══════════ LOGIN ══════════
+function openLogin(){document.getElementById('adm-login-screen').classList.add('show');document.getElementById('l-err').style.display='none';setTimeout(()=>document.getElementById('l-user').focus(),80);}
+function closeLogin(){document.getElementById('adm-login-screen').classList.remove('show')}
+function doLogin(){
+  const u=v('l-user'),p=document.getElementById('l-pass').value;
+  if(u==='admin'&&p==='scout12'){
+    closeLogin();
+    document.getElementById('adm-editor').classList.add('show');
+    sv('l-user','');sv('l-pass','');
+    initEditor();
+  } else {
+    document.getElementById('l-err').style.display='block';
+    sv('l-pass','');
+  }
+}
+function closeAdmin(){document.getElementById('adm-editor').classList.remove('show')}
+
+// ══════════ ADMIN DASHBOARD ══════════
+let currentEditor='dashboard';
+let admSidebarCollapsed=false;
+
+const navGroups=[
+  {label:'General', items:[
+    {k:'dashboard', label:'Dashboard', icon:'📊'},
+  ]},
+  {label:'Contenido', items:[
+    {k:'home', label:'Inicio', icon:'🏠'},
+    {k:'secciones', label:'Secciones Scout', icon:'⚜️', badge:7},
+    {k:'galeria', label:'Galería', icon:'🖼'},
+  ]},
+  {label:'Configuración', items:[
+    {k:'contacto', label:'Contacto', icon:'📞'},
+    {k:'general', label:'General y Logo', icon:'🏷'},
+    {k:'apariencia', label:'Apariencia', icon:'🎨'},
+  ]},
+];
+// Mapa plano de metadatos por vista (para breadcrumb e ícono)
+const viewMeta={
+  dashboard:{label:'Dashboard', icon:'📊', sub:'Resumen general del sitio'},
+  home:{label:'Inicio', icon:'🏠', sub:'Hero, Quiénes Somos, Promesa y Seguro'},
+  secciones:{label:'Secciones Scout', icon:'⚜️', sub:'Elige una sección para editar su contenido'},
+  galeria:{label:'Galería', icon:'🖼', sub:'Álbumes y fotografías del grupo'},
+  contacto:{label:'Contacto', icon:'📞', sub:'Datos de contacto y mapa'},
+  general:{label:'General y Logo', icon:'🏷', sub:'Identidad del sitio y pie de página'},
+  apariencia:{label:'Apariencia', icon:'🎨', sub:'Colores de marca y secciones'},
+};
+Object.keys(SECS).forEach(k=>{
+  viewMeta[k]={label:SECS[k].title, icon:SECS[k].emoji, sub:'Editando sección · '+SECS[k].age};
+});
+
+function initEditor(){
+  renderAdmSidebar();
+  goToView('dashboard');
+}
+function renderAdmSidebar(){
+  const nav=document.getElementById('adm-nav');
+  nav.innerHTML=navGroups.map(g=>`
+    <div class="adm-nav-group">
+      <div class="adm-nav-group-label">${g.label}</div>
+      ${g.items.map(it=>`
+        <button class="adm-navlink ${currentEditor===it.k?'active':''}" onclick="goToView('${it.k}')">
+          <span class="ic">${it.icon}</span><span>${it.label}</span>
+          ${it.badge?`<span class="badge">${it.badge}</span>`:''}
+        </button>
+      `).join('')}
+    </div>
+  `).join('');
+}
+function toggleAdmSidebar(){
+  admSidebarCollapsed=!admSidebarCollapsed;
+  document.getElementById('adm-sidebar').classList.toggle('collapsed',admSidebarCollapsed);
+}
+function goToView(k){
+  currentEditor=k;
+  renderAdmSidebar();
+  const meta=viewMeta[k]||{label:k,icon:'📄',sub:''};
+  document.getElementById('adm-crumb-icon').textContent=meta.icon;
+  document.getElementById('adm-crumb-title').textContent=meta.label;
+  const saveBtn=document.getElementById('adm-save-btn');
+  saveBtn.style.display = (k==='dashboard'||k==='secciones'||k==='galeria'||k==='apariencia') ? 'none' : 'inline-flex';
+  document.getElementById('adm-back-btn').style.display = SECS[k] ? 'flex' : 'none';
+  buildAdmView(k);
+  document.getElementById('adm-content').scrollTop=0;
+}
+function gotoEditorPage(k){ goToView(k); }
+function previewSiteNow(){
+  if(currentEditor!=='dashboard' && currentEditor!=='secciones' && currentEditor!=='galeria' && currentEditor!=='apariencia') saveAll();
+  closeAdmin();
+  showPage(SECS[currentEditor]?currentEditor: (currentEditor==='galeria'?'galeria':'home'));
+}
+function saveAndPreview(){ previewSiteNow(); }
+
+// ── DASHBOARD VIEW ──
+function buildDashboardView(){
+  const totalFotos = D.gallery.length;
+  const totalAlbumes = D.albums.length;
+  const seccionesConLogo = Object.values(SECS).filter(s=>s.logo).length;
+  const fotosHero = (D.hero.images||[]).length;
+  return `
+    <div class="adm-stats-grid">
+      <div class="adm-stat-card"><div class="accent-bar" style="background:var(--ruby)"></div><span class="icon">🖼</span><div class="num">${totalFotos}</div><div class="lbl">Fotos en galería</div></div>
+      <div class="adm-stat-card"><div class="accent-bar" style="background:var(--amber)"></div><span class="icon">📁</span><div class="num">${totalAlbumes}</div><div class="lbl">Álbumes creados</div></div>
+      <div class="adm-stat-card"><div class="accent-bar" style="background:#22c55e"></div><span class="icon">⚜️</span><div class="num">${seccionesConLogo}/7</div><div class="lbl">Secciones con logo</div></div>
+      <div class="adm-stat-card"><div class="accent-bar" style="background:#38bdf8"></div><span class="icon">📷</span><div class="num">${fotosHero}</div><div class="lbl">Fotos en el carrusel</div></div>
+    </div>
+    <div class="adm-section-title-row"><h2>Acciones rápidas</h2></div>
+    <div class="adm-quick-actions">
+      <button class="adm-quick-btn" onclick="goToView('home')"><span class="ic">🏠</span><span class="t">Editar Inicio</span></button>
+      <button class="adm-quick-btn" onclick="goToView('secciones')"><span class="ic">⚜️</span><span class="t">Editar Secciones</span></button>
+      <button class="adm-quick-btn" onclick="goToView('galeria')"><span class="ic">🖼</span><span class="t">Gestionar Galería</span></button>
+      <button class="adm-quick-btn" onclick="goToView('apariencia')"><span class="ic">🎨</span><span class="t">Cambiar Colores</span></button>
+    </div>
+    <div class="adm-card">
+      <div class="adm-card-hd"><h3><span class="ic">🧭</span>Estado del sitio</h3></div>
+      <div class="adm-card-bd">
+        <div class="adm-row-list">
+          <div class="adm-row-item"><div class="adm-row-thumb">${D.logo.url?`<img src="${D.logo.url}">`:'🏷'}</div><div class="adm-row-text"><div class="t">Logo del grupo</div><div class="s">${D.logo.url?'Configurado':'Sin subir — usando ícono por defecto'}</div></div></div>
+          <div class="adm-row-item"><div class="adm-row-thumb">${(D.hero.images&&D.hero.images[0])?`<img src="${D.hero.images[0].url}">`:'📷'}</div><div class="adm-row-text"><div class="t">Carrusel de Inicio</div><div class="s">${fotosHero?fotosHero+' foto(s) cargadas':'Sin fotos aún'}</div></div></div>
+          <div class="adm-row-item"><div class="adm-row-thumb">📞</div><div class="adm-row-text"><div class="t">Contacto</div><div class="s">${D.contacto.tel} · ${D.contacto.email}</div></div></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ── SECCIONES OVERVIEW (cuadrícula para elegir sección) ──
+function buildSeccionesOverview(){
+  const order=['cachorros','manada','unidad','caminantes','rovers','dirigencia','comite'];
+  return `
+    <div class="adm-secgrid">
+      ${order.map(k=>{
+        const sd=SECS[k];
+        const color=`var(${sd.colorVar})`;
+        return `<button class="adm-seccard" style="--tc:${color}" onclick="goToView('${k}')">
+          <div class="accent"></div>
+          <div class="top">
+            <div class="logo">${sd.logo?`<img src="${sd.logo}">`:sd.emoji}</div>
+            <div><div class="name">${sd.title}</div><div class="age">${sd.age}</div></div>
+          </div>
+          <div style="font-size:11.5px;color:var(--gray);line-height:1.5">${sd.fotos.length} foto(s) · ${sd.logo?'Logo ✓':'Sin logo'}</div>
+        </button>`;
+      }).join('')}
+    </div>
+  `;
+}
+
+// ── APARIENCIA (colores) ──
+function buildApariencaView(){
+  return `
+    <div class="adm-section-grid">
+      <div class="adm-card">
+        <div class="adm-card-hd"><h3><span class="ic">🎨</span>Colores Principales</h3></div>
+        <div class="adm-card-bd">
+          <div class="ctrl"><label>Negro de fondo</label><div style="display:flex;gap:8px;align-items:center"><input type="color" id="cfg-black" value="#060D0D" style="width:42px;height:38px;border:1px solid var(--border);border-radius:8px;background:transparent;cursor:pointer"><input type="text" id="cfg-black-txt" value="#060D0D" style="flex:1"></div></div>
+          <div class="ctrl"><label>Rojo Ruby</label><div style="display:flex;gap:8px;align-items:center"><input type="color" id="cfg-red" value="#F62217" style="width:42px;height:38px;border:1px solid var(--border);border-radius:8px;background:transparent;cursor:pointer"><input type="text" id="cfg-red-txt" value="#F62217" style="flex:1"></div></div>
+          <div class="ctrl"><label>Ámbar</label><div style="display:flex;gap:8px;align-items:center"><input type="color" id="cfg-amber" value="#FFBF00" style="width:42px;height:38px;border:1px solid var(--border);border-radius:8px;background:transparent;cursor:pointer"><input type="text" id="cfg-amber-txt" value="#FFBF00" style="flex:1"></div></div>
+          <button class="ctrl-btn-sm" onclick="applyColors()">✓ Aplicar Colores Principales</button>
+        </div>
+      </div>
+      <div class="adm-card">
+        <div class="adm-card-hd"><h3><span class="ic">⚜️</span>Colores por Sección</h3></div>
+        <div class="adm-card-bd">
+          <div class="ctrl"><label>🐾 Cubil (Cachorros)</label><input type="color" id="cfg-cubil" value="#38bdf8" style="width:100%;height:38px;cursor:pointer"></div>
+          <div class="ctrl"><label>🐺 Manada</label><input type="color" id="cfg-manada" value="#FFBF00" style="width:100%;height:38px;cursor:pointer"></div>
+          <div class="ctrl"><label>⚜️ Unidad</label><input type="color" id="cfg-unidad" value="#22c55e" style="width:100%;height:38px;cursor:pointer"></div>
+          <div class="ctrl"><label>🌄 Comunidad de Caminantes</label><input type="color" id="cfg-caminantes" value="#2563eb" style="width:100%;height:38px;cursor:pointer"></div>
+          <div class="ctrl"><label>🧭 Clan de Rovers</label><input type="color" id="cfg-rovers" value="#F62217" style="width:100%;height:38px;cursor:pointer"></div>
+          <div class="ctrl"><label>🎖 Dirigencia y Comité</label><input type="color" id="cfg-dirigencia" value="#9333ea" style="width:100%;height:38px;cursor:pointer"></div>
+          <button class="ctrl-btn-sm" onclick="applySectionColors()">✓ Aplicar Colores de Secciones</button>
+        </div>
+      </div>
+      <div class="adm-card">
+        <div class="adm-card-hd"><h3><span class="ic">🔒</span>Seguridad del Panel</h3></div>
+        <div class="adm-card-bd">
+          <div class="ctrl"><label>Contraseña actual</label><input type="password" id="cfg-old-pass" placeholder="scout12"></div>
+          <div class="ctrl"><label>Nueva contraseña</label><input type="password" id="cfg-new-pass" placeholder="Nueva contraseña"></div>
+          <button class="ctrl-btn-sm" onclick="toast('Contraseña actualizada (solo sesión actual)')">Actualizar Contraseña</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function buildAdmView(k){
+  const content=document.getElementById('adm-content');
+  let html='';
+  if(k==='dashboard') html=buildDashboardView();
+  else if(k==='secciones') html=buildSeccionesOverview();
+  else if(k==='apariencia') html=buildApariencaView();
+  else html=`<div id="elm-controls-area"></div>`;
+  content.innerHTML=html;
+  if(['home','contacto','general'].includes(k) || SECS[k] || k==='galeria'){
+    buildControls(k);
+  }
+  if(k==='apariencia') bindColorPickers();
+}
+function bindColorPickers(){
+  ['black','red','amber'].forEach(c=>{
+    const picker=document.getElementById('cfg-'+c);
+    if(picker) picker.addEventListener('input',function(){ const txt=document.getElementById('cfg-'+c+'-txt'); if(txt) txt.value=this.value; });
+  });
+}
+
+// ── CONTROLS ──
+function buildControls(k){
+  const area=document.getElementById('elm-controls-area');
+  if(!area) return;
+  let html='';
+  if(k==='home'){
+    html=`<div class="adm-section-grid">
+    ${card('🏠','Hero — Carrusel de Fotos',`
+      <div class="ctrl"><label>Fotos del carrusel (${(D.hero.images||[]).length})</label>
+        <div class="adm-row-list" id="hero-carousel-list">
+          ${(D.hero.images||[]).map((img,i)=>`<div class="adm-row-item">
+            <div class="adm-row-thumb">${img.url?`<img src="${img.url}">`:'📷'}</div>
+            <div class="adm-row-text"><div class="t">${img.desc||'Foto '+(i+1)}</div></div>
+            <button class="adm-row-btn" onclick="moveHeroImage(${i},-1)" title="Subir">↑</button>
+            <button class="adm-row-btn" onclick="moveHeroImage(${i},1)" title="Bajar">↓</button>
+            <button class="adm-row-btn danger" onclick="deleteHeroImage(${i})">✕</button>
+          </div>`).join('') || '<div class="adm-empty" style="padding:18px"><div class="ic">📷</div><p>Aún no hay fotos. Agrega la primera abajo.</p></div>'}
+        </div>
+      </div>
+      <div class="ctrl" style="margin-top:10px;padding-top:14px;border-top:1px solid var(--border)">
+        <label>Añadir nueva foto</label>
+        <div class="ctrl-img-upload" onclick="document.getElementById('hero-img-file').click()" id="hero-img-preview-wrap">
+          <div class="upload-label"><span>📷</span><br>Click para subir imagen o pegar URL abajo</div>
+        </div>
+        <input type="file" class="ctrl-img-input" id="hero-img-file" accept="image/*" onchange="handleHeroImgFile(this)">
+        <input type="text" id="ctrl-hero-img" value="" placeholder="https://... o subir imagen" style="margin-top:8px;background:var(--black);border:1px solid var(--border);border-radius:10px;padding:9px 11px;color:#fff;font-size:12.5px;width:100%" oninput="previewHeroImg(this.value)">
+        <input type="text" id="ctrl-hero-desc" value="" placeholder="Descripción (ej: Campamento 2025)" style="margin-top:8px;background:var(--black);border:1px solid var(--border);border-radius:10px;padding:9px 11px;color:#fff;font-size:12.5px;width:100%">
+        <select id="ctrl-hero-pos" style="margin-top:8px">
+          <option value="center">Recorte: Centrado</option>
+          <option value="top">Recorte: Arriba</option>
+          <option value="bottom">Recorte: Abajo</option>
+          <option value="left">Recorte: Izquierda</option>
+          <option value="right">Recorte: Derecha</option>
+        </select>
+        <button class="ctrl-btn-sm green" onclick="addHeroImage()">+ Añadir al Carrusel</button>
+      </div>
+    `)}
+    ${card('🔤','Texto Descriptivo',`
+      <div class="ctrl"><label>Texto debajo del título</label><textarea id="ctrl-hero-body" rows="3">${D.hero.body}</textarea></div>
+    `)}
+    ${card('📷','Momentos Scout',`
+      <p style="font-size:12.5px;color:var(--gray);line-height:1.6;margin-bottom:12px">Esta sección de Inicio muestra automáticamente las primeras 6 fotos de tu galería general.</p>
+      <div class="adm-row-list" style="margin-bottom:10px">
+        ${D.gallery.slice(0,6).map(g=>`<div class="adm-row-item"><div class="adm-row-thumb">${g.url?`<img src="${g.url}" onerror="this.parentElement.textContent='${g.emoji||'🖼'}'">`:(g.emoji||'🖼')}</div><div class="adm-row-text"><div class="t">${g.desc}</div></div></div>`).join('') || '<div class="adm-empty" style="padding:14px"><p>Aún no hay fotos en la galería.</p></div>'}
+      </div>
+      <button class="ctrl-btn-sm green" onclick="openGalModal()">+ Añadir Fotos a la Galería</button>
+      <button class="ctrl-btn-sm" onclick="gotoEditorPage('galeria')">🖼 Gestionar Galería Completa</button>
+    `)}
+    ${card('📖','Quiénes Somos',`
+      <div class="ctrl"><label>Título sección</label><input id="ctrl-qt" type="text" value="${D.textos.quienesTitle}"></div>
+      <div class="ctrl"><label>Descripción</label><textarea id="ctrl-qd" rows="3">${D.textos.quienesDesc}</textarea></div>
+      <div class="ctrl"><label>Misión</label><textarea id="ctrl-m" rows="3">${D.textos.mision}</textarea></div>
+      <div class="ctrl"><label>Visión</label><textarea id="ctrl-v" rows="3">${D.textos.vision}</textarea></div>
+    `)}
+    ${card('⚜️','Promesa Scout',`<div class="ctrl"><label>Texto de la Promesa</label><textarea id="ctrl-prom" rows="4">${D.textos.promesa}</textarea></div>`)}
+    ${card('🛡','Seguro Scout',`<div class="ctrl"><label>Texto del seguro</label><textarea id="ctrl-seg" rows="3">${D.textos.seguro}</textarea></div>`)}
+    </div>`;
+  } else if(SECS[k]){
+    const sd=SECS[k];
+    html=`<div class="adm-section-grid">
+    ${card('🏷','Logo de la Sección',`
+      <div class="ctrl"><label>Logo (imagen)</label>
+        <div class="ctrl-img-upload" onclick="document.getElementById('sec-logo-file').click()" id="sec-logo-preview-wrap">
+          ${sd.logo?`<img src="${sd.logo}">`:''}
+          <div class="upload-label"><span>${sd.emoji}</span><br>Click para subir el logo de esta sección</div>
+        </div>
+        <input type="file" class="ctrl-img-input" id="sec-logo-file" accept="image/*" onchange="handleSecLogoFile(this,'${k}')">
+        <input type="text" id="ctrl-s-logo" value="${sd.logo}" placeholder="https://... URL del logo" style="margin-top:8px;background:var(--black);border:1px solid var(--border);border-radius:10px;padding:9px 11px;color:#fff;font-size:12.5px;width:100%">
+        <button class="ctrl-btn-sm" onclick="applySecLogo('${k}')">✓ Aplicar logo</button>
+      </div>
+    `)}
+    ${card(sd.emoji,'Información Principal',`
+      <div class="ctrl"><label>Título</label><input id="ctrl-s-title" type="text" value="${sd.title}"></div>
+      <div class="ctrl"><label>Rango de Edad</label><input id="ctrl-s-age" type="text" value="${sd.age}"></div>
+      <div class="ctrl"><label>Nombre de la unidad</label><input id="ctrl-s-unidad" type="text" value="${sd.unidadNombre}"></div>
+      <div class="ctrl"><label>Frase de bienvenida</label><input id="ctrl-s-bienv" type="text" value="${sd.bienvenida}"></div>
+    `)}
+    ${card('🙏','Oración',`
+      <div class="ctrl"><label>Título de la oración</label><input id="ctrl-s-oraciontitulo" type="text" value="${sd.oracionTitulo}"></div>
+      <div class="ctrl"><label>Texto de la oración</label><textarea id="ctrl-s-oracion" rows="5">${sd.oracion}</textarea></div>
+    `)}
+    ${card('⭐','Lema y Marco Simbólico',`
+      <div class="ctrl"><label>Lema</label><textarea id="ctrl-s-lema" rows="2">${sd.lema}</textarea></div>
+      <div class="ctrl"><label>Marco simbólico</label><textarea id="ctrl-s-marco" rows="3">${sd.marcoSimbolico}</textarea></div>
+    `)}
+    ${card('📖','Descripción Completa',`
+      <div class="ctrl"><label>Descripción</label><textarea id="ctrl-s-desc" rows="6">${sd.desc}</textarea></div>
+      <div class="ctrl"><label>URL Plan de Progresión (Drive)</label><input id="ctrl-s-prog" type="text" value="${sd.progresionUrl}"></div>
+    `)}
+    ${card('📷','Fotos de la Sección',`
+      <div class="adm-row-list" id="ctrl-photos-list-${k}">
+        ${sd.fotos.map((f,i)=>`<div class="adm-row-item">
+          <div class="adm-row-thumb">${f.url?`<img src="${f.url}">`:(f.emoji||'📷')}</div>
+          <div class="adm-row-text"><div class="t">${f.desc}</div></div>
+          <button class="adm-row-btn danger" onclick="deleteSecPhoto('${k}',${i})">✕</button>
+        </div>`).join('') || '<div class="adm-empty" style="padding:14px"><p>Sin fotos aún.</p></div>'}
+      </div>
+      <button class="ctrl-btn-sm green" onclick="openSecPhotoModal('${k}')">+ Añadir Foto</button>
+    `)}
+    </div>`;
+  } else if(k==='galeria'){
+    html=`<div class="adm-section-grid">
+    ${card('📁','Álbumes',`
+      <div class="adm-row-list" id="ctrl-albums-list">
+        ${D.albums.map(a=>{
+          const count = D.gallery.filter(g=>g.albumId===a.id).length;
+          const cover = a.cover || (D.gallery.find(g=>g.albumId===a.id)||{}).url || '';
+          return `<div class="adm-row-item">
+            <div class="adm-row-thumb">${cover?`<img src="${cover}">`:'📁'}</div>
+            <div class="adm-row-text"><div class="t">${a.name}</div><div class="s" style="color:var(--gray)">${count} foto(s)</div></div>
+            <button class="adm-row-btn warn" onclick="openAlbumModal(${a.id})">✏</button>
+            <button class="adm-row-btn danger" onclick="deleteAlbum(${a.id})">✕</button>
+          </div>`;
+        }).join('') || '<div class="adm-empty" style="padding:18px"><div class="ic">📁</div><p>Aún no hay álbumes creados.</p></div>'}
+      </div>
+      <button class="ctrl-btn-sm green" onclick="openAlbumModal()">+ Crear Álbum</button>
+    `)}
+    ${card('🖼','Fotos de la Galería',`
+      <div class="adm-row-list" id="ctrl-gal-list">
+        ${D.gallery.map(g=>{
+          const album = D.albums.find(a=>a.id===g.albumId);
+          return `<div class="adm-row-item">
+            <div class="adm-row-thumb">${g.url?`<img src="${g.url}" onerror="this.parentElement.textContent='${g.emoji||'🖼'}'">`:(g.emoji||'🖼')}</div>
+            <div class="adm-row-text"><div class="t">${g.desc}</div>${album?`<div class="s">📁 ${album.name}</div>`:''}</div>
+            <button class="adm-row-btn danger" onclick="deleteGalPhoto(${g.id})">✕</button>
+          </div>`;
+        }).join('') || '<div class="adm-empty" style="padding:18px"><div class="ic">🖼</div><p>Aún no hay fotos.</p></div>'}
+      </div>
+      <button class="ctrl-btn-sm green" onclick="openGalModal()">+ Añadir Fotos</button>
+    `)}
+    </div>`;
+  } else if(k==='contacto'){
+    html=`<div class="adm-section-grid">
+    ${card('📞','Información de Contacto',`
+      <div class="ctrl"><label>Dirección / lugar de reunión</label><textarea id="ctrl-c-dir" rows="2">${D.contacto.dir}</textarea></div>
+      <div class="ctrl"><label>Teléfono (también se usa para WhatsApp)</label><input id="ctrl-c-tel" type="text" value="${D.contacto.tel}" placeholder="Ej: 4580-4910 o 502 4580-4910"></div>
+      <div class="ctrl"><label>Correo electrónico</label><input id="ctrl-c-email" type="email" value="${D.contacto.email}"></div>
+      <div class="ctrl"><label>Horario de reuniones</label><input id="ctrl-c-hor" type="text" value="${D.contacto.horario}"></div>
+    `)}
+    ${card('🗺','Configurar Mapa',`
+      <div class="ctrl"><label>URL del iframe de Google Maps</label>
+        <textarea id="ctrl-c-map" rows="3" placeholder="https://www.google.com/maps/embed?pb=...">${D.contacto.mapUrl||''}</textarea>
+        <div style="font-size:11px;color:var(--gray);margin-top:6px;line-height:1.6">Ve a Google Maps → Compartir → Incorporar mapa → copia el src del iframe</div>
+      </div>
+      <button class="ctrl-btn-sm" onclick="previewMapCtrl()">👁 Previsualizar Mapa</button>
+    `)}
+    </div>`;
+  } else if(k==='general'){
+    html=`<div class="adm-section-grid">
+    ${card('🏷','Logo del Grupo',`
+      <div class="ctrl"><label>Logo (imagen)</label>
+        <div class="ctrl-img-upload" onclick="document.getElementById('logo-file').click()" id="logo-preview-wrap">
+          ${D.logo.url?`<img src="${D.logo.url}">`:''}
+          <div class="upload-label"><span>🏷</span><br>Click para subir logo</div>
+        </div>
+        <input type="file" class="ctrl-img-input" id="logo-file" accept="image/*" onchange="handleImgFile(this,'logo')">
+        <input type="text" id="ctrl-logo-url" value="${D.logo.url}" placeholder="https://... URL del logo" style="margin-top:8px;background:var(--black);border:1px solid var(--border);border-radius:10px;padding:9px 11px;color:#fff;font-size:12.5px;width:100%">
+        <button class="ctrl-btn-sm" onclick="applyLogoUrl()">✓ Aplicar logo</button>
+      </div>
+      <div class="ctrl"><label>Nombre en Navegación</label><input id="ctrl-nav-text" type="text" value="${D.logo.navText}"></div>
+      <div class="ctrl"><label>Subtítulo en Navegación</label><input id="ctrl-nav-sub" type="text" value="${D.logo.navSub}"></div>
+    `)}
+    ${card('📄','Footer',`
+      <div class="ctrl"><label>Descripción del grupo</label><textarea id="ctrl-footer-desc" rows="4">${D.footer.desc}</textarea></div>
+      <div class="ctrl"><label>Texto de copyright</label><input id="ctrl-footer-copy" type="text" value="${D.footer.copy}"></div>
+    `)}
+    </div>`;
+  }
+  area.innerHTML=html;
+}
+
+function card(icon,title,body,hint){
+  return `<div class="adm-card">
+    <div class="adm-card-hd"><h3><span class="ic">${icon}</span>${title}</h3>${hint?`<span class="hint">${hint}</span>`:''}</div>
+    <div class="adm-card-bd">${body}</div>
+  </div>`;
+}
+
+function applyColors(){
+  document.documentElement.style.setProperty('--black',v('cfg-black-txt'));
+  document.documentElement.style.setProperty('--ruby',v('cfg-red-txt'));
+  document.documentElement.style.setProperty('--amber',v('cfg-amber-txt'));
+  toast('Colores principales aplicados');
+}
+function applySectionColors(){
+  document.documentElement.style.setProperty('--c-cubil',ge('cfg-cubil').value);
+  document.documentElement.style.setProperty('--c-manada',ge('cfg-manada').value);
+  document.documentElement.style.setProperty('--c-unidad',ge('cfg-unidad').value);
+  document.documentElement.style.setProperty('--c-caminantes',ge('cfg-caminantes').value);
+  document.documentElement.style.setProperty('--c-rovers',ge('cfg-rovers').value);
+  document.documentElement.style.setProperty('--c-dirigencia',ge('cfg-dirigencia').value);
+  toast('Colores de secciones aplicados');
+}
+
+// ── SAVE ALL ──
+function saveAll(){
+  const k=currentEditor;
+  if(k==='home'){
+    if(ge('ctrl-hero-body'))D.hero.body=v('ctrl-hero-body');
+    if(ge('ctrl-qt'))D.textos.quienesTitle=v('ctrl-qt');
+    if(ge('ctrl-qd'))D.textos.quienesDesc=v('ctrl-qd');
+    if(ge('ctrl-m'))D.textos.mision=v('ctrl-m');
+    if(ge('ctrl-v'))D.textos.vision=v('ctrl-v');
+    if(ge('ctrl-prom'))D.textos.promesa=v('ctrl-prom');
+    if(ge('ctrl-seg'))D.textos.seguro=v('ctrl-seg');
+  } else if(SECS[k]){
+    if(ge('ctrl-s-title'))SECS[k].title=v('ctrl-s-title');
+    if(ge('ctrl-s-age'))SECS[k].age=v('ctrl-s-age');
+    if(ge('ctrl-s-unidad'))SECS[k].unidadNombre=v('ctrl-s-unidad');
+    if(ge('ctrl-s-bienv'))SECS[k].bienvenida=v('ctrl-s-bienv');
+    if(ge('ctrl-s-oraciontitulo'))SECS[k].oracionTitulo=v('ctrl-s-oraciontitulo');
+    if(ge('ctrl-s-oracion'))SECS[k].oracion=v('ctrl-s-oracion');
+    if(ge('ctrl-s-lema'))SECS[k].lema=v('ctrl-s-lema');
+    if(ge('ctrl-s-marco'))SECS[k].marcoSimbolico=v('ctrl-s-marco');
+    if(ge('ctrl-s-desc'))SECS[k].desc=v('ctrl-s-desc');
+    if(ge('ctrl-s-prog'))SECS[k].progresionUrl=v('ctrl-s-prog');
+  } else if(k==='contacto'){
+    if(ge('ctrl-c-dir'))D.contacto.dir=v('ctrl-c-dir');
+    if(ge('ctrl-c-tel'))D.contacto.tel=v('ctrl-c-tel');
+    if(ge('ctrl-c-email'))D.contacto.email=v('ctrl-c-email');
+    if(ge('ctrl-c-hor'))D.contacto.horario=v('ctrl-c-hor');
+    if(ge('ctrl-c-map')&&v('ctrl-c-map'))D.contacto.mapUrl=v('ctrl-c-map');
+  } else if(k==='general'){
+    if(ge('ctrl-nav-text'))D.logo.navText=v('ctrl-nav-text');
+    if(ge('ctrl-nav-sub'))D.logo.navSub=v('ctrl-nav-sub');
+    if(ge('ctrl-logo-url')&&v('ctrl-logo-url'))D.logo.url=v('ctrl-logo-url');
+    if(ge('ctrl-footer-desc'))D.footer.desc=v('ctrl-footer-desc');
+    if(ge('ctrl-footer-copy'))D.footer.copy=v('ctrl-footer-copy');
+  }
+  applyAll();
+  if(SECS[k])renderSecPage(k);
+  toast('✓ Cambios guardados y aplicados al sitio');
+}
+function saveAndPreview(){ saveAll(); closeAdmin(); showPage(currentEditor==='general'?'home':currentEditor); }
+
+// ── IMAGE HANDLING ──
+function handleImgFile(input,target){
+  const file=input.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const url=e.target.result;
+    if(target==='logo'){
+      D.logo.url=url;
+      const w=document.getElementById('logo-preview-wrap');
+      if(w){const i=w.querySelector('img')||document.createElement('img');i.src=url;i.style.cssText='width:100%;height:100%;object-fit:cover;position:absolute;inset:0';w.appendChild(i);}
+      sv('ctrl-logo-url',url); applyAll();
+    }
+    toast('Imagen cargada');
+  };
+  reader.readAsDataURL(file);
+}
+function handleHeroImgFile(input){
+  const file=input.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const url=e.target.result;
+    sv('ctrl-hero-img',url);
+    previewHeroImg(url);
+    toast('Imagen lista — pulsa "Añadir al Carrusel"');
+  };
+  reader.readAsDataURL(file);
+}
+function previewHeroImg(url){
+  const w=document.getElementById('hero-img-preview-wrap');
+  if(!w||!url) return;
+  let img=w.querySelector('img');
+  if(!img){img=document.createElement('img');img.style.cssText='width:100%;height:100%;object-fit:cover;position:absolute;inset:0';w.appendChild(img);}
+  img.src=url;
+}
+function addHeroImage(){
+  const url=v('ctrl-hero-img');
+  if(!url){ toast('Sube una imagen o pega una URL primero',true); return; }
+  if(!D.hero.images) D.hero.images=[];
+  D.hero.images.push({url, desc:v('ctrl-hero-desc')||'', position:v('ctrl-hero-pos')||'center'});
+  sv('ctrl-hero-img',''); sv('ctrl-hero-desc',''); sv('ctrl-hero-pos','center');
+  const w=document.getElementById('hero-img-preview-wrap');
+  if(w){ const img=w.querySelector('img'); if(img) img.remove(); }
+  renderHeroCarousel();
+  buildControls('home');
+  toast('Foto añadida al carrusel');
+}
+function deleteHeroImage(i){
+  D.hero.images.splice(i,1);
+  renderHeroCarousel();
+  buildControls('home');
+  toast('Foto eliminada del carrusel');
+}
+function moveHeroImage(i,dir){
+  const arr=D.hero.images;
+  const j=i+dir;
+  if(j<0||j>=arr.length) return;
+  [arr[i],arr[j]]=[arr[j],arr[i]];
+  renderHeroCarousel();
+  buildControls('home');
+}
+function applyLogoUrl(){ const url=v('ctrl-logo-url'); if(url){D.logo.url=url;applyAll();toast('Logo actualizado');} }
+function handleSecLogoFile(input,sectionKey){
+  const file=input.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const url=e.target.result;
+    SECS[sectionKey].logo=url;
+    const w=document.getElementById('sec-logo-preview-wrap');
+    if(w){const i=w.querySelector('img')||document.createElement('img');i.src=url;i.style.cssText='width:100%;height:100%;object-fit:cover;position:absolute;inset:0';w.appendChild(i);}
+    sv('ctrl-s-logo',url);
+    renderSecPage(sectionKey); renderHomeSeccionesGrid(); if(currentEditor===sectionKey) buildControls(sectionKey);
+    toast('Logo de sección cargado');
+  };
+  reader.readAsDataURL(file);
+}
+function applySecLogo(sectionKey){
+  const url=v('ctrl-s-logo');
+  if(url){
+    SECS[sectionKey].logo=url;
+    renderSecPage(sectionKey); renderHomeSeccionesGrid(); if(currentEditor===sectionKey) buildControls(sectionKey);
+    toast('Logo de '+SECS[sectionKey].title+' actualizado');
+  }
+}
+function previewMapCtrl(){
+  const url=v('ctrl-c-map');
+  if(url){D.contacto.mapUrl=url;const mi=document.getElementById('map-iframe');if(mi)mi.src=url;toast('Mapa actualizado');}
+  else toast('Ingresa una URL de mapa',true);
+}
+
+// ── SECTION PHOTOS ──
+function openSecPhotoModal(s){
+  sv('spm-sec',s);
+  document.getElementById('sec-photo-modal-title').textContent=`Añadir Foto — ${SECS[s].title}`;
+  sv('spm-url','');sv('spm-desc','');sv('spm-position','center');
+  const w=document.getElementById('spm-preview-wrap');
+  if(w){ const img=w.querySelector('img'); if(img) img.remove(); }
+  openModal('sec-photo-modal');
+}
+function handleSecPhotoFile(input){
+  const file=input.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const url=e.target.result;
+    sv('spm-url',url);
+    previewSecPhoto(url);
+    toast('Foto lista — pulsa "Añadir"');
+  };
+  reader.readAsDataURL(file);
+}
+function previewSecPhoto(url){
+  const w=document.getElementById('spm-preview-wrap');
+  if(!w||!url) return;
+  let img=w.querySelector('img');
+  if(!img){img=document.createElement('img');img.style.cssText='width:100%;height:100%;object-fit:cover;position:absolute;inset:0';w.appendChild(img);}
+  img.src=url;
+}
+function saveSecPhoto(){
+  const s=v('spm-sec');
+  if(!v('spm-url')){ toast('Sube una foto o pega una URL primero',true); return; }
+  SECS[s].fotos.push({url:v('spm-url'),desc:v('spm-desc')||'Foto Scout',emoji:'📷',position:v('spm-position')||'center'});
+  closeModal('sec-photo-modal');
+  renderSecPage(s); buildControls(s);
+  toast('Foto añadida a '+SECS[s].title);
+}
+function deleteSecPhoto(s,idx){
+  SECS[s].fotos.splice(idx,1);
+  buildControls(s);
+  if(currentPage===s)renderSecPage(s);
+  toast('Foto eliminada');
+}
+
+// ══════════ INIT ══════════
+applyAll();
+renderGallery();
+renderGalleryFilters();
+renderHomeSeccionesGrid();
+['cachorros','manada','unidad','caminantes','rovers','dirigencia','comite'].forEach(s=>renderSecPage(s));
+initScrollReveal();
+</script>
+</body>
+</html>
