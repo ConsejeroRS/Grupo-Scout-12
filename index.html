@@ -258,6 +258,16 @@ nav{
 .gal-item:hover .gal-item-inner,.gal-item:hover img{transform:scale(1.06)}
 .gal-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,transparent 55%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:.9rem}
 .gal-overlay span{font-size:14px;font-weight:700;color:#fff}
+.albums-grid-public{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.album-cover-card{position:relative;border-radius:20px;overflow:hidden;cursor:pointer;aspect-ratio:4/3;background:var(--card);border:1px solid var(--border);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s}
+.album-cover-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px -10px rgba(0,0,0,.5)}
+.album-cover-card img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.album-cover-card:hover img{transform:scale(1.06)}
+.album-cover-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;opacity:.3}
+.album-cover-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.2) 55%,transparent 80%);display:flex;flex-direction:column;justify-content:flex-end;padding:16px}
+.album-cover-overlay .name{color:#fff;font-size:15px;font-weight:800;line-height:1.3}
+.album-cover-overlay .meta{color:rgba(255,255,255,.7);font-size:11.5px;font-weight:600;margin-top:3px}
+.album-cover-count{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);color:#fff;font-size:11px;font-weight:800;padding:4px 10px;border-radius:100px;backdrop-filter:blur(4px)}
 .album-chip{display:flex;align-items:center;gap:8px;padding:7px 16px 7px 7px;border-radius:100px;border:1.5px solid var(--border);background:rgba(255,255,255,.03);color:var(--gray-light);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Manrope',sans-serif}
 .album-chip:hover{border-color:rgba(255,255,255,.3);color:#fff}
 .album-chip.active{background:linear-gradient(135deg,var(--ruby),var(--ruby-dark));border-color:var(--ruby);color:#fff}
@@ -639,17 +649,30 @@ nav{
     </div>
   </div>
   <div class="sec">
-    <div class="fl-card"><div class="fl-card-pad">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.2rem">
+    <!-- VISTA 1: Portadas de álbumes -->
+    <div class="fl-card" id="albums-overview-card"><div class="fl-card-pad">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.4rem">
         <div class="sec-tag" style="margin-bottom:0">Álbumes</div>
         <button class="ctrl-btn-sm green" style="width:auto;margin:0;padding:8px 16px" onclick="openAlbumModal()">+ Nuevo Álbum</button>
       </div>
-      <div id="albums-row" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.8rem"></div>
+      <div class="albums-grid-public" id="albums-grid-public"></div>
+      <div id="sin-album-section" style="margin-top:2rem;display:none">
+        <div class="sec-tag" style="margin-bottom:1rem">Fotos sin álbum</div>
+        <div class="gallery-masonry" id="gallery-masonry-sinalbum"></div>
+      </div>
+    </div></div>
+
+    <!-- VISTA 2: Dentro de un álbum -->
+    <div class="fl-card" id="album-detail-card" style="display:none"><div class="fl-card-pad">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.4rem">
-        <div class="sec-tag" style="margin-bottom:0">Fotos</div>
+        <div>
+          <button class="ctrl-btn-sm" style="width:auto;margin:0 0 .8rem 0;padding:7px 14px" onclick="closeAlbumDetail()">← Volver a Álbumes</button>
+          <h2 class="sec-title" id="album-detail-title" style="margin-bottom:.3rem">Álbum</h2>
+          <p class="sec-lead" id="album-detail-desc" style="margin-bottom:0"></p>
+        </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
           <div id="gallery-filters" style="display:flex;gap:8px;flex-wrap:wrap"></div>
-          <button class="ctrl-btn-sm green" id="upload-to-album-btn" style="width:auto;margin:0;padding:8px 16px;display:none" onclick="openGalModal(galActiveAlbum)">+ Subir Fotos a este Álbum</button>
+          <button class="ctrl-btn-sm green" id="upload-to-album-btn" style="width:auto;margin:0;padding:8px 16px" onclick="openGalModal(galActiveAlbum)">+ Subir Fotos</button>
         </div>
       </div>
       <div class="gallery-masonry" id="gallery-masonry"></div>
@@ -803,7 +826,12 @@ nav{
         <input type="file" class="ctrl-img-input" id="spm-file" accept="image/*" multiple onchange="handleSecPhotoFiles(this)">
         <div id="spm-multi-preview" style="display:none;flex-wrap:wrap;gap:6px;margin-top:8px"></div>
       </div>
-      <div class="aform-full aform-group"><label>O pega una URL de imagen (solo si subes una sola foto)</label><input id="spm-url" type="text" placeholder="https://..." oninput="previewSecPhoto(this.value)"></div>
+      <div class="aform-full aform-group"><label>O pega una URL de imagen (si solo subes una)</label><input id="spm-url" type="text" placeholder="https://..." oninput="previewSecPhoto(this.value)"></div>
+      <div class="aform-full aform-group">
+        <label>O pega varias URLs juntas (una por línea)</label>
+        <textarea id="spm-multi-url" rows="4" placeholder="https://i.imgur.com/foto1.jpg&#10;https://i.imgur.com/foto2.jpg" oninput="previewSecMultiUrl()"></textarea>
+        <div id="spm-multi-url-count" style="font-size:11px;color:var(--amber);margin-top:4px;display:none"></div>
+      </div>
       <div class="aform-full aform-group"><label>Descripción ${'(se aplicará a todas si subes varias)'}</label><input id="spm-desc" type="text" placeholder="Ej: Campamento 2024"></div>
       <div class="aform-group"><label>Ajuste / recorte</label><select id="spm-position"><option value="center">Centrado</option><option value="top">Arriba</option><option value="bottom">Abajo</option><option value="left">Izquierda</option><option value="right">Derecha</option></select></div>
     </div>
@@ -824,7 +852,12 @@ nav{
         <input type="file" class="ctrl-img-input" id="g-file" accept="image/*" multiple onchange="handleGalPhotoFiles(this)">
         <div id="g-multi-preview" style="display:none;flex-wrap:wrap;gap:6px;margin-top:8px"></div>
       </div>
-      <div class="aform-full aform-group"><label>O pega una URL de imagen (solo si subes una sola foto)</label><input id="g-url" type="text" placeholder="https://..." oninput="previewGalPhoto(this.value)"></div>
+      <div class="aform-full aform-group"><label>O pega una URL de imagen (si solo subes una)</label><input id="g-url" type="text" placeholder="https://..." oninput="previewGalPhoto(this.value)"></div>
+      <div class="aform-full aform-group">
+        <label>O pega varias URLs juntas (una por línea, para subir muchas de golpe)</label>
+        <textarea id="g-multi-url" rows="4" placeholder="https://i.imgur.com/foto1.jpg&#10;https://i.imgur.com/foto2.jpg&#10;https://i.imgur.com/foto3.jpg" oninput="previewMultiUrl()"></textarea>
+        <div id="g-multi-url-count" style="font-size:11px;color:var(--amber);margin-top:4px;display:none"></div>
+      </div>
       <div class="aform-full aform-group"><label>Descripción ${'(se aplicará a todas si subes varias)'}</label><input id="g-desc" type="text" placeholder="Ej: Campamento 2024"></div>
       <div class="aform-full aform-group"><label>Álbum</label><select id="g-album"><option value="">Sin álbum</option></select></div>
       <div class="aform-group"><label>Mes</label><select id="g-month">
@@ -1060,7 +1093,11 @@ function showPage(p) {
   document.querySelectorAll('[data-page]').forEach(a=>a.classList.toggle('active',a.dataset.page===p));
   currentPage = p;
   window.scrollTo({top:0,behavior:'smooth'});
-  if(p==='galeria'){ renderAlbumsRow(); renderGalleryFilters(); renderGallery(); }
+  if(p==='galeria'){
+    document.getElementById('album-detail-card').style.display='none';
+    document.getElementById('albums-overview-card').style.display='block';
+    renderAlbumsOverview();
+  }
   if(SECS[p]) renderSecPage(p);
   initScrollReveal();
 }
@@ -1200,45 +1237,60 @@ function setGalFilter(type,val){
 }
 function clearGalFilter(){ galFilterMonth='all'; galFilterYear='all'; renderGalleryFilters(); renderGallery(); }
 
-function renderAlbumsRow(){
-  const wrap = document.getElementById('albums-row');
-  if(!wrap) return;
-  const countAll = D.gallery.length;
-  const sinAlbum = D.gallery.filter(g=>!g.albumId).length;
-  wrap.innerHTML = `
-    <button class="album-chip ${galActiveAlbum==='all'?'active':''}" onclick="selectAlbum('all')">📚 Todas las fotos <span class="album-count">${countAll}</span></button>
-    ${D.albums.map(a=>{
-      const photos = D.gallery.filter(g=>g.albumId===a.id);
-      const cover = a.cover || (photos[0]&&photos[0].url) || '';
-      return `<button class="album-chip ${galActiveAlbum==a.id?'active':''}" onclick="selectAlbum(${a.id})">
-        ${cover?`<img src="${cover}" class="album-chip-thumb">`:'<span class="album-chip-thumb-icon">📷</span>'}
-        ${a.name} <span class="album-count">${photos.length}</span>
-      </button>`;
-    }).join('')}
-    ${sinAlbum>0?`<button class="album-chip ${galActiveAlbum==='none'?'active':''}" onclick="selectAlbum('none')">🗂 Sin álbum <span class="album-count">${sinAlbum}</span></button>`:''}
-  `;
+function renderAlbumsOverview(){
+  const grid = document.getElementById('albums-grid-public');
+  if(!grid) return;
+  grid.innerHTML = D.albums.map(a=>{
+    const photos = D.gallery.filter(g=>g.albumId===a.id);
+    const cover = a.cover || (photos[0]&&photos[0].url) || '';
+    return `<div class="album-cover-card" onclick="openAlbumDetail(${a.id})">
+      ${cover?`<img src="${cover}" alt="${a.name}" loading="lazy" onerror="this.outerHTML='<div class=album-cover-placeholder>📁</div>'">`:'<div class="album-cover-placeholder">📁</div>'}
+      <div class="album-cover-count">${photos.length} foto${photos.length===1?'':'s'}</div>
+      <div class="album-cover-overlay">
+        <div class="name">${a.name}</div>
+        ${a.desc?`<div class="meta">${a.desc}</div>`:''}
+      </div>
+    </div>`;
+  }).join('') || '<p style="color:var(--gray);font-size:14px;grid-column:1/-1">Aún no hay álbumes. Crea el primero con el botón de arriba.</p>';
+
+  const sinAlbumFotos = D.gallery.filter(g=>!g.albumId);
+  const sinAlbumSection = document.getElementById('sin-album-section');
+  const sinAlbumGrid = document.getElementById('gallery-masonry-sinalbum');
+  if(sinAlbumFotos.length){
+    sinAlbumSection.style.display='block';
+    sinAlbumGrid.innerHTML = sinAlbumFotos.map(item=>galItemHtml(item,false,sinAlbumFotos,true)).join('');
+  } else {
+    sinAlbumSection.style.display='none';
+  }
 }
-function selectAlbum(id){
-  galActiveAlbum = id;
+function openAlbumDetail(albumId){
+  galActiveAlbum = albumId;
   galFilterMonth='all'; galFilterYear='all';
-  renderAlbumsRow();
+  document.getElementById('albums-overview-card').style.display='none';
+  document.getElementById('album-detail-card').style.display='block';
+  const alb = D.albums.find(a=>a.id===albumId);
+  document.getElementById('album-detail-title').textContent = alb ? alb.name : 'Álbum';
+  document.getElementById('album-detail-desc').textContent = alb ? (alb.desc||'') : '';
   renderGalleryFilters();
   renderGallery();
-  const uploadBtn=document.getElementById('upload-to-album-btn');
-  if(uploadBtn) uploadBtn.style.display = (id!=='all' && id!=='none') ? 'inline-flex' : 'none';
+}
+function closeAlbumDetail(){
+  galActiveAlbum='all';
+  document.getElementById('album-detail-card').style.display='none';
+  document.getElementById('albums-overview-card').style.display='block';
+  renderAlbumsOverview();
 }
 
 function renderGallery() {
   const g = document.getElementById('gallery-masonry');
   const hp = document.getElementById('home-gallery-preview');
-  if(g){
-    let filtered = D.gallery;
-    if(galActiveAlbum==='none') filtered = filtered.filter(it=>!it.albumId);
-    else if(galActiveAlbum!=='all') filtered = filtered.filter(it=>it.albumId==galActiveAlbum);
+  if(g && document.getElementById('album-detail-card').style.display!=='none'){
+    let filtered = D.gallery.filter(it=>it.albumId==galActiveAlbum);
     if(galFilterYear!=='all') filtered = filtered.filter(it=>it.year==galFilterYear);
     if(galFilterMonth!=='all') filtered = filtered.filter(it=>it.month==galFilterMonth);
-    g.innerHTML = filtered.length ? filtered.map(item=>galItemHtml(item)).join('') : `<p style="color:var(--gray);font-size:14px;padding:1rem">No hay fotos para este filtro.</p>`;
+    g.innerHTML = filtered.length ? filtered.map(item=>galItemHtml(item,false,filtered)).join('') : `<p style="color:var(--gray);font-size:14px;padding:1rem">No hay fotos para este filtro.</p>`;
   }
+  renderAlbumsOverview();
   if(hp){
     // Momentos Scout: solo fotos que pertenecen a un álbum, máximo 5
     const conAlbum = D.gallery.filter(it=>it.albumId);
@@ -1248,8 +1300,15 @@ function renderGallery() {
       : `<p style="color:var(--gray);font-size:14px;padding:1rem;grid-column:1/-1">Crea un álbum y sube fotos desde el panel admin para mostrarlas aquí.</p>`;
   }
 }
-function galItemHtml(item,linkToAlbum){
-  const clickAttr = (linkToAlbum && item.albumId) ? `onclick="goToAlbumFromHome(${item.albumId})" style="cursor:pointer"` : '';
+function galItemHtml(item,linkToAlbum,photoSet,sinAlbumMode){
+  let clickAttr = '';
+  if(linkToAlbum && item.albumId){
+    clickAttr = `onclick="goToAlbumFromHome(${item.albumId})" style="cursor:pointer"`;
+  } else if(photoSet){
+    const idx = photoSet.indexOf(item);
+    const fn = sinAlbumMode ? 'openGalleryLightboxSinAlbum' : 'openGalleryLightbox';
+    clickAttr = `onclick="${fn}(${idx})" style="cursor:pointer"`;
+  }
   const shineClass = linkToAlbum ? 'gal-item-shine' : '';
   return `
     <div class="gal-item ${item.size||''} ${shineClass}" ${clickAttr}>
@@ -1262,7 +1321,7 @@ function galItemHtml(item,linkToAlbum){
 }
 function goToAlbumFromHome(albumId){
   showPage('galeria');
-  setTimeout(()=>{ selectAlbum(albumId); }, 60);
+  openAlbumDetail(albumId);
 }
 
 // ══════════ LIGHTBOX ══════════
@@ -1270,6 +1329,24 @@ let lightboxFotos=[];
 let lightboxIndex=0;
 function openLightbox(sectionKey,index){
   lightboxFotos = SECS[sectionKey].fotos;
+  lightboxIndex = index;
+  renderLightbox();
+  document.getElementById('lightbox-backdrop').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function openGalleryLightbox(index){
+  // Reconstruye el mismo conjunto de fotos que se está mostrando actualmente en pantalla
+  let filtered = D.gallery.filter(it=>it.albumId==galActiveAlbum);
+  if(galFilterYear!=='all') filtered = filtered.filter(it=>it.year==galFilterYear);
+  if(galFilterMonth!=='all') filtered = filtered.filter(it=>it.month==galFilterMonth);
+  lightboxFotos = filtered;
+  lightboxIndex = index;
+  renderLightbox();
+  document.getElementById('lightbox-backdrop').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function openGalleryLightboxSinAlbum(index){
+  lightboxFotos = D.gallery.filter(it=>!it.albumId);
   lightboxIndex = index;
   renderLightbox();
   document.getElementById('lightbox-backdrop').classList.add('show');
@@ -1312,13 +1389,14 @@ function populateAlbumSelect(){
   if(current) sel.value = current;
 }
 function openGalModal(presetAlbumId){
-  ['g-url','g-desc','g-emoji'].forEach(id=>sv(id,''));sv('g-size','');sv('g-year','2025');sv('g-position','center');
+  ['g-url','g-desc','g-emoji'].forEach(id=>sv(id,''));sv('g-size','');sv('g-year','2025');sv('g-position','center');sv('g-multi-url','');
   pendingGalFiles = [];
   const w=document.getElementById('g-preview-wrap');
   if(w){ const img=w.querySelector('img'); if(img) img.remove(); }
   const mp=document.getElementById('g-multi-preview');
   if(mp){ mp.style.display='none'; mp.innerHTML=''; }
   document.getElementById('g-file').value='';
+  document.getElementById('g-multi-url-count').style.display='none';
   document.getElementById('gal-save-btn').textContent='Añadir →';
   document.getElementById('gal-modal-title').textContent='Añadir Fotos a la Galería';
   populateAlbumSelect();
@@ -1376,6 +1454,19 @@ function previewGalPhoto(url){
   if(!img){img=document.createElement('img');img.style.cssText='width:100%;height:100%;object-fit:cover;position:absolute;inset:0';w.appendChild(img);}
   img.src=url;
 }
+function previewMultiUrl(){
+  const raw = document.getElementById('g-multi-url').value;
+  const urls = raw.split('\n').map(u=>u.trim()).filter(Boolean);
+  const counter = document.getElementById('g-multi-url-count');
+  if(urls.length){
+    counter.style.display='block';
+    counter.textContent = `${urls.length} URL${urls.length===1?'':'s'} detectada${urls.length===1?'':'s'}`;
+    document.getElementById('gal-save-btn').textContent = urls.length>1 ? `Añadir ${urls.length} fotos →` : 'Añadir →';
+  } else {
+    counter.style.display='none';
+    if(pendingGalFiles.length<=1) document.getElementById('gal-save-btn').textContent='Añadir →';
+  }
+}
 function saveGalItem(){
   const desc = v('g-desc') || 'Foto Scout';
   const albumId = v('g-album') ? parseInt(v('g-album')) : null;
@@ -1384,27 +1475,35 @@ function saveGalItem(){
   const size = v('g-size');
   const position = v('g-position')||'center';
   const emoji = v('g-emoji')||'🖼';
+  const multiUrls = document.getElementById('g-multi-url').value.split('\n').map(u=>u.trim()).filter(Boolean);
 
-  if(pendingGalFiles.length > 1){
-    // Subida múltiple
+  if(multiUrls.length > 1){
+    multiUrls.forEach((url,i)=>{
+      D.gallery.push({id:Date.now()+i, url, desc: `${desc} (${i+1})`, emoji, size, month, year, position, albumId});
+    });
+    toast(`${multiUrls.length} fotos añadidas a la galería`);
+  } else if(multiUrls.length === 1){
+    D.gallery.push({id:Date.now(), url:multiUrls[0], desc, emoji, size, month, year, position, albumId});
+    toast('Foto añadida a la galería');
+  } else if(pendingGalFiles.length > 1){
     pendingGalFiles.forEach((f,i)=>{
-      D.gallery.push({id:Date.now()+i, url:f.url, desc: pendingGalFiles.length>1?`${desc} (${i+1})`:desc, emoji, size, month, year, position, albumId});
+      D.gallery.push({id:Date.now()+i, url:f.url, desc: `${desc} (${i+1})`, emoji, size, month, year, position, albumId});
     });
     toast(`${pendingGalFiles.length} fotos añadidas a la galería`);
   } else {
-    if(!v('g-url')){ toast('Sube una foto o pega una URL primero',true); return; }
+    if(!v('g-url')){ toast('Sube una foto, pega una URL o pega varias URLs primero',true); return; }
     D.gallery.push({id:Date.now(), url:v('g-url'), desc, emoji, size, month, year, position, albumId});
     toast('Foto añadida a la galería');
   }
   pendingGalFiles = [];
-  renderAlbumsRow(); renderGalleryFilters(); renderGallery(); closeModal('gal-modal');
-  ['g-url','g-desc','g-emoji'].forEach(id=>sv(id,''));sv('g-size','');sv('g-year','2025');sv('g-position','center');
+  renderAlbumsOverview(); renderGalleryFilters(); renderGallery(); closeModal('gal-modal');
+  ['g-url','g-desc','g-emoji'].forEach(id=>sv(id,''));sv('g-size','');sv('g-year','2025');sv('g-position','center');sv('g-multi-url','');
   if(currentEditor==='galeria') buildControls('galeria');
   renderHomeGalleryAdminList();
 }
 function deleteGalPhoto(id){
   D.gallery=D.gallery.filter(g=>g.id!==id);
-  renderAlbumsRow(); renderGallery(); if(currentEditor==='galeria') buildControls('galeria');
+  renderAlbumsOverview(); renderGallery(); if(currentEditor==='galeria') buildControls('galeria');
   renderHomeGalleryAdminList();
   toast('Foto eliminada');
 }
@@ -1435,15 +1534,19 @@ function saveAlbum(){
     toast('Álbum creado');
   }
   closeModal('album-modal');
-  renderAlbumsRow();
+  renderAlbumsOverview();
   if(currentEditor==='galeria') buildControls('galeria');
 }
 function deleteAlbum(id){
   if(!confirm('¿Eliminar este álbum? Las fotos no se borrarán, solo quedarán sin álbum.')) return;
   D.albums = D.albums.filter(a=>a.id!==id);
   D.gallery.forEach(g=>{ if(g.albumId===id) g.albumId=null; });
-  if(galActiveAlbum===id) galActiveAlbum='all';
-  renderAlbumsRow(); renderGallery();
+  if(galActiveAlbum===id){
+    galActiveAlbum='all';
+    document.getElementById('album-detail-card').style.display='none';
+    document.getElementById('albums-overview-card').style.display='block';
+  }
+  renderAlbumsOverview(); renderGallery();
   if(currentEditor==='galeria') buildControls('galeria');
   toast('Álbum eliminado');
 }
@@ -2120,13 +2223,14 @@ let pendingSecFiles = [];
 function openSecPhotoModal(s){
   sv('spm-sec',s);
   document.getElementById('sec-photo-modal-title').textContent=`Añadir Fotos — ${SECS[s].title}`;
-  sv('spm-url','');sv('spm-desc','');sv('spm-position','center');
+  sv('spm-url','');sv('spm-desc','');sv('spm-position','center');sv('spm-multi-url','');
   pendingSecFiles = [];
   const w=document.getElementById('spm-preview-wrap');
   if(w){ const img=w.querySelector('img'); if(img) img.remove(); }
   const mp=document.getElementById('spm-multi-preview');
   if(mp){ mp.style.display='none'; mp.innerHTML=''; }
   document.getElementById('spm-file').value='';
+  document.getElementById('spm-multi-url-count').style.display='none';
   document.getElementById('spm-save-btn').textContent='Añadir →';
   openModal('sec-photo-modal');
 }
@@ -2173,18 +2277,40 @@ function previewSecPhoto(url){
   if(!img){img=document.createElement('img');img.style.cssText='width:100%;height:100%;object-fit:cover;position:absolute;inset:0';w.appendChild(img);}
   img.src=url;
 }
+function previewSecMultiUrl(){
+  const raw = document.getElementById('spm-multi-url').value;
+  const urls = raw.split('\n').map(u=>u.trim()).filter(Boolean);
+  const counter = document.getElementById('spm-multi-url-count');
+  if(urls.length){
+    counter.style.display='block';
+    counter.textContent = `${urls.length} URL${urls.length===1?'':'s'} detectada${urls.length===1?'':'s'}`;
+    document.getElementById('spm-save-btn').textContent = urls.length>1 ? `Añadir ${urls.length} fotos →` : 'Añadir →';
+  } else {
+    counter.style.display='none';
+    if(pendingSecFiles.length<=1) document.getElementById('spm-save-btn').textContent='Añadir →';
+  }
+}
 function saveSecPhoto(){
   const s=v('spm-sec');
   const desc = v('spm-desc') || 'Foto Scout';
   const position = v('spm-position')||'center';
+  const multiUrls = document.getElementById('spm-multi-url').value.split('\n').map(u=>u.trim()).filter(Boolean);
 
-  if(pendingSecFiles.length > 1){
+  if(multiUrls.length > 1){
+    multiUrls.forEach((url,i)=>{
+      SECS[s].fotos.push({url, desc: `${desc} (${i+1})`, emoji:'📷', position});
+    });
+    toast(`${multiUrls.length} fotos añadidas a ${SECS[s].title}`);
+  } else if(multiUrls.length === 1){
+    SECS[s].fotos.push({url:multiUrls[0], desc, emoji:'📷', position});
+    toast('Foto añadida a '+SECS[s].title);
+  } else if(pendingSecFiles.length > 1){
     pendingSecFiles.forEach((f,i)=>{
       SECS[s].fotos.push({url:f.url, desc: `${desc} (${i+1})`, emoji:'📷', position});
     });
     toast(`${pendingSecFiles.length} fotos añadidas a ${SECS[s].title}`);
   } else {
-    if(!v('spm-url')){ toast('Sube una foto o pega una URL primero',true); return; }
+    if(!v('spm-url')){ toast('Sube una foto, pega una URL o pega varias URLs primero',true); return; }
     SECS[s].fotos.push({url:v('spm-url'), desc, emoji:'📷', position});
     toast('Foto añadida a '+SECS[s].title);
   }
