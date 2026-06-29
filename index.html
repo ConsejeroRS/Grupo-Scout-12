@@ -119,15 +119,15 @@ nav{
 .hero-right-placeholder{display:flex;flex-direction:column;align-items:center;gap:10px;opacity:.4;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fff;position:absolute;inset:0;z-index:1;justify-content:center;text-align:center;padding:2rem}
 .hero-right-placeholder span{font-size:3rem}
 .hero-content-overlay{position:relative;z-index:2;padding:3rem 3.5rem 2.6rem;width:100%}
-.hero-logo-row{display:flex;align-items:center;gap:14px;margin-bottom:1.3rem;flex-wrap:wrap}
+.hero-title-row{display:flex;align-items:center;gap:18px;margin-bottom:1.5rem;flex-wrap:wrap}
 .hero-logo-section{flex-shrink:0}
-.hero-logo-img{height:64px;width:64px;object-fit:contain;border-radius:50%;filter:drop-shadow(0 2px 14px rgba(0,0,0,.55));box-shadow:0 0 0 2px rgba(255,255,255,.15)}
-.hero-logo-hex{width:64px;height:64px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;backdrop-filter:blur(6px)}
+.hero-logo-img{height:78px;width:78px;object-fit:contain;border-radius:50%;filter:drop-shadow(0 2px 14px rgba(0,0,0,.55));box-shadow:0 0 0 2px rgba(255,255,255,.18)}
+.hero-logo-hex{width:78px;height:78px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800;backdrop-filter:blur(6px);flex-shrink:0}
+.hero-title-row .hero-title-fl{margin-bottom:0}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber);margin-bottom:0;text-shadow:0 2px 8px rgba(0,0,0,.6)}
 .hero-title-fl{font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:.98;letter-spacing:-1px;margin-bottom:1rem;text-shadow:0 4px 20px rgba(0,0,0,.45)}
 .hero-title-fl .line-red{color:var(--ruby)}
 .hero-title-fl .line-amber{color:var(--amber)}
-.hero-body{font-size:16px;color:rgba(255,255,255,.92);line-height:1.8;margin-bottom:1.8rem;max-width:520px;font-weight:600;text-shadow:0 2px 10px rgba(0,0,0,.5)}
 .hero-ctas{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .btn-red{background:linear-gradient(135deg,var(--ruby),var(--ruby-dark));color:#fff;padding:13px 28px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:.5px;transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.3);position:relative;overflow:hidden;isolation:isolate}
 .btn-red::before{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.25) 48%,transparent 66%);transform:translateX(-120%);transition:transform .6s ease;z-index:-1}
@@ -222,14 +222,35 @@ nav{
 .info-block-body p{font-size:14px;color:var(--gray-light);line-height:1.8;font-weight:500}
 .full-width-info{grid-column:1/-1}
 .oracion-block{font-style:italic;font-size:13px;line-height:2;white-space:pre-line;color:var(--gray-light)}
-.sec-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
-.sec-photo-item{aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:2.2rem;position:relative}
+.sec-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.sec-photo-item{aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:2.2rem;position:relative;cursor:pointer;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s}
+.sec-photo-item:hover{transform:translateY(-3px);box-shadow:0 12px 28px -6px rgba(0,0,0,.5)}
+.sec-photo-item .zoom-hint{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;opacity:0;transition:opacity .2s;backdrop-filter:blur(4px)}
+.sec-photo-item:hover .zoom-hint{opacity:1}
+
+/* ── LIGHTBOX ── */
+.lightbox-backdrop{display:none;position:fixed;inset:0;z-index:1050;background:rgba(0,0,0,.92);align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.lightbox-backdrop.show{display:flex}
+.lightbox-img-wrap{max-width:92vw;max-height:88vh;position:relative;display:flex;flex-direction:column;align-items:center}
+.lightbox-img-wrap img{max-width:92vw;max-height:78vh;object-fit:contain;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.lightbox-caption{color:#fff;font-size:14px;font-weight:600;margin-top:14px;text-align:center;max-width:80vw}
+.lightbox-close{position:absolute;top:-46px;right:0;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.lightbox-close:hover{background:rgba(246,34,23,.3)}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;backdrop-filter:blur(6px)}
+.lightbox-nav:hover{background:rgba(246,34,23,.5)}
+.lightbox-nav.prev{left:18px}
+.lightbox-nav.next{right:18px}
+@media(max-width:640px){.lightbox-nav{width:38px;height:38px;font-size:16px}.lightbox-nav.prev{left:6px}.lightbox-nav.next{right:6px}.lightbox-close{top:-40px}}
 .sec-photo-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.16,1,.3,1)}
 .sec-photo-item:hover img{transform:scale(1.06)}
 
 /* ── GALERÍA ── */
 .gallery-masonry{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;gap:8px}
 .gal-item{background:rgba(255,255,255,.04);overflow:hidden;position:relative;cursor:pointer;border-radius:18px}
+.gal-item-shine::before{content:'';position:absolute;inset:0;z-index:2;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-130%);transition:transform .7s ease;pointer-events:none}
+.gal-item-shine:hover::before{transform:translateX(130%)}
+.gal-item-shine{transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s}
+.gal-item-shine:hover{transform:translateY(-3px);box-shadow:0 12px 28px -6px rgba(0,0,0,.5)}
 .gal-item.tall{grid-row:span 2}
 .gal-item.wide{grid-column:span 2}
 .gal-item-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;transition:transform .4s ease}
@@ -295,7 +316,7 @@ nav{
 
 #adm-editor{display:none;position:fixed;inset:0;z-index:9999;background:var(--black);isolation:isolate}
 #adm-editor.show{display:flex}
-.adm-shell{display:flex;width:100%;height:100%;overflow:hidden}
+.adm-shell{display:flex;width:100%;height:100%;overflow:hidden;background:var(--black);position:relative;z-index:1}
 
 /* ── SIDEBAR ── */
 .adm-sidebar{width:264px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;transition:width .25s, padding .25s;isolation:isolate;position:relative}
@@ -509,12 +530,11 @@ nav{
       <button class="hero-arrow prev" onclick="heroCarouselPrev()" id="hero-arrow-prev" style="display:none">‹</button>
       <button class="hero-arrow next" onclick="heroCarouselNext()" id="hero-arrow-next" style="display:none">›</button>
       <div class="hero-content-overlay">
-        <div class="hero-logo-row">
+        <div class="hero-eyebrow">¡Siempre listo para servir!</div>
+        <div class="hero-title-row">
           <div class="hero-logo-section" id="hero-logo-section"><div class="hero-logo-hex" id="hero-logo-hex">⚜</div></div>
-          <div class="hero-eyebrow">¡Siempre listo para servir!</div>
+          <h1 class="hero-title-fl"><span>Grupo</span> <span class="line-red">Scout</span> <span class="line-amber">No. 12</span></h1>
         </div>
-        <h1 class="hero-title-fl"><span>Grupo</span> <span class="line-red">Scout</span> <span class="line-amber">No. 12</span></h1>
-        <p class="hero-body" id="txt-hero-body">Los scouts formamos parte de un movimiento mundial llamado escultismo, una propuesta educativa no formal donde jóvenes de todas las edades participan voluntariamente.</p>
         <div class="hero-ctas">
           <a class="btn-red" href="#" onclick="showPage('contacto');return false">Únete Ahora</a>
           <a class="btn-outline" href="#" onclick="document.getElementById('quienes-anch').scrollIntoView({behavior:'smooth'});return false">Conocer Más</a>
@@ -627,7 +647,10 @@ nav{
       <div id="albums-row" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.8rem"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.4rem">
         <div class="sec-tag" style="margin-bottom:0">Fotos</div>
-        <div id="gallery-filters" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <div id="gallery-filters" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+          <button class="ctrl-btn-sm green" id="upload-to-album-btn" style="width:auto;margin:0;padding:8px 16px;display:none" onclick="openGalModal(galActiveAlbum)">+ Subir Fotos a este Álbum</button>
+        </div>
       </div>
       <div class="gallery-masonry" id="gallery-masonry"></div>
     </div></div>
@@ -769,21 +792,22 @@ nav{
 <!-- Modal foto sección -->
 <div class="modal-backdrop" id="sec-photo-modal">
   <div class="modal-box">
-    <div class="modal-hd"><span class="modal-title" id="sec-photo-modal-title">Añadir Foto</span><button class="modal-close" onclick="closeModal('sec-photo-modal')">✕</button></div>
+    <div class="modal-hd"><span class="modal-title" id="sec-photo-modal-title">Añadir Fotos</span><button class="modal-close" onclick="closeModal('sec-photo-modal')">✕</button></div>
     <div class="aform-grid">
       <input type="hidden" id="spm-sec">
       <div class="aform-full aform-group">
-        <label>Subir desde tu computadora</label>
+        <label>Subir desde tu computadora (puedes elegir varias a la vez)</label>
         <div class="ctrl-img-upload" onclick="document.getElementById('spm-file').click()" id="spm-preview-wrap" style="aspect-ratio:16/7">
-          <div class="upload-label"><span>📁</span><br>Click para elegir una foto de tu PC</div>
+          <div class="upload-label"><span>📁</span><br>Click para elegir una o varias fotos de tu PC</div>
         </div>
-        <input type="file" class="ctrl-img-input" id="spm-file" accept="image/*" onchange="handleSecPhotoFile(this)">
+        <input type="file" class="ctrl-img-input" id="spm-file" accept="image/*" multiple onchange="handleSecPhotoFiles(this)">
+        <div id="spm-multi-preview" style="display:none;flex-wrap:wrap;gap:6px;margin-top:8px"></div>
       </div>
-      <div class="aform-full aform-group"><label>O pega una URL de imagen</label><input id="spm-url" type="text" placeholder="https://..." oninput="previewSecPhoto(this.value)"></div>
-      <div class="aform-full aform-group"><label>Descripción</label><input id="spm-desc" type="text" placeholder="Ej: Campamento 2024"></div>
+      <div class="aform-full aform-group"><label>O pega una URL de imagen (solo si subes una sola foto)</label><input id="spm-url" type="text" placeholder="https://..." oninput="previewSecPhoto(this.value)"></div>
+      <div class="aform-full aform-group"><label>Descripción ${'(se aplicará a todas si subes varias)'}</label><input id="spm-desc" type="text" placeholder="Ej: Campamento 2024"></div>
       <div class="aform-group"><label>Ajuste / recorte</label><select id="spm-position"><option value="center">Centrado</option><option value="top">Arriba</option><option value="bottom">Abajo</option><option value="left">Izquierda</option><option value="right">Derecha</option></select></div>
     </div>
-    <div class="modal-ft"><button class="elm-btn elm-btn-ghost" onclick="closeModal('sec-photo-modal')">Cancelar</button><button class="elm-btn elm-btn-red" onclick="saveSecPhoto()">Añadir →</button></div>
+    <div class="modal-ft"><button class="elm-btn elm-btn-ghost" onclick="closeModal('sec-photo-modal')">Cancelar</button><button class="elm-btn elm-btn-red" id="spm-save-btn" onclick="saveSecPhoto()">Añadir →</button></div>
   </div>
 </div>
 
@@ -831,11 +855,22 @@ nav{
   </div>
 </div>
 
+<!-- Lightbox para ampliar fotos -->
+<div class="lightbox-backdrop" id="lightbox-backdrop" onclick="if(event.target===this)closeLightbox()">
+  <div class="lightbox-img-wrap">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <button class="lightbox-nav prev" id="lightbox-prev" onclick="lightboxNav(-1)">‹</button>
+    <img id="lightbox-img" src="" alt="">
+    <button class="lightbox-nav next" id="lightbox-next" onclick="lightboxNav(1)">›</button>
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
+
 <div id="toast"></div>
 
 <script>
 // ══════════ DATA STORE ══════════
-const D = {
+let D = {
   logo:{url:'',navText:'Grupo Scout No.12',navSub:'San Pedro Apóstol'},
   hero:{images:[],body:'Los scouts formamos parte de un movimiento mundial llamado escultismo, una propuesta educativa no formal donde jóvenes de todas las edades participan voluntariamente.'},
   textos:{
@@ -865,7 +900,7 @@ const D = {
 };
 
 // ══════════ SECCIONES — CONTENIDO REAL ══════════
-const SECS={
+let SECS={
   cachorros:{
     logo:'',emoji:'🐾',colorVar:'--c-cubil',colorHex:'#38bdf8',bg:'#001824',
     title:'Cachorros',unidadNombre:'Cubil',age:'5 – 6 años',
@@ -952,6 +987,70 @@ const SECS={
   }
 };
 
+// ══════════ PERSISTENCIA (localStorage) ══════════
+const STORAGE_KEY = 'gs12_site_data_v1';
+let _persistTimer = null;
+function persistData(){
+  // Debounce: evita escribir en localStorage en cada tecla, agrupa cambios rápidos
+  clearTimeout(_persistTimer);
+  _persistTimer = setTimeout(()=>{
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({D, SECS}));
+    }catch(e){
+      console.warn('No se pudo guardar en localStorage:', e);
+      toast('Espacio de almacenamiento lleno. Usa fotos más livianas o pega URLs en vez de subir archivos.', true);
+    }
+  }, 250);
+}
+function loadPersistedData(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    const saved = JSON.parse(raw);
+    if(saved.D) Object.assign(D, saved.D);
+    if(saved.SECS){
+      Object.keys(saved.SECS).forEach(key=>{
+        if(SECS[key]) Object.assign(SECS[key], saved.SECS[key]);
+      });
+    }
+  }catch(e){
+    console.warn('No se pudo cargar el contenido guardado:', e);
+  }
+}
+loadPersistedData();
+
+// Envuelve D y SECS en Proxies para que CUALQUIER cambio (incluso anidado: arrays, push, splice, etc.)
+// dispare el guardado automático en localStorage, sin tener que llamar persistData() manualmente en cada función.
+function deepPersistProxy(obj){
+  if(obj===null || typeof obj!=='object') return obj;
+  if(obj.__isPersistProxy) return obj; // ya envuelto
+  Object.keys(obj).forEach(k=>{
+    if(obj[k] && typeof obj[k]==='object'){
+      obj[k] = deepPersistProxy(obj[k]);
+    }
+  });
+  const proxy = new Proxy(obj, {
+    get(target, prop){
+      if(prop==='__isPersistProxy') return true;
+      const val = target[prop];
+      return val;
+    },
+    set(target, prop, value){
+      target[prop] = (value && typeof value==='object') ? deepPersistProxy(value) : value;
+      persistData();
+      return true;
+    },
+    deleteProperty(target, prop){
+      delete target[prop];
+      persistData();
+      return true;
+    }
+  });
+  return proxy;
+}
+D = deepPersistProxy(D);
+Object.keys(SECS).forEach(k=>{ SECS[k] = deepPersistProxy(SECS[k]); });
+
 // ══════════ PAGE ROUTING ══════════
 let currentPage = 'home';
 function showPage(p) {
@@ -1034,10 +1133,11 @@ function renderSecPage(s) {
         <div class="info-block-body">
           ${sd.fotos.length===0?`<p style="color:var(--gray);font-size:13px">Aún no hay fotos en esta sección. Agrégalas desde el panel de administración.</p>`:''}
           <div class="sec-photos" id="sec-photos-${s}">
-            ${sd.fotos.map(f=>`
-              <div class="sec-photo-item">
+            ${sd.fotos.map((f,i)=>`
+              <div class="sec-photo-item" onclick="openLightbox('${s}',${i})">
                 ${f.url?`<img src="${f.url}" alt="${f.desc}" loading="lazy" style="object-position:${f.position||'center'}" onerror="this.style.display='none'">`:''}
                 ${!f.url?`<span>${f.emoji||'📷'}</span>`:''}
+                <span class="zoom-hint">⤢</span>
                 <div style="position:absolute;bottom:0;left:0;right:0;padding:6px 8px;background:rgba(0,0,0,.7);font-size:11px;color:#fff">${f.desc}</div>
               </div>
             `).join('')}
@@ -1124,6 +1224,8 @@ function selectAlbum(id){
   renderAlbumsRow();
   renderGalleryFilters();
   renderGallery();
+  const uploadBtn=document.getElementById('upload-to-album-btn');
+  if(uploadBtn) uploadBtn.style.display = (id!=='all' && id!=='none') ? 'inline-flex' : 'none';
 }
 
 function renderGallery() {
@@ -1138,12 +1240,19 @@ function renderGallery() {
     g.innerHTML = filtered.length ? filtered.map(item=>galItemHtml(item)).join('') : `<p style="color:var(--gray);font-size:14px;padding:1rem">No hay fotos para este filtro.</p>`;
   }
   if(hp){
-    hp.innerHTML = D.gallery.slice(0,6).map(item=>galItemHtml(item)).join('');
+    // Momentos Scout: solo fotos que pertenecen a un álbum, máximo 5
+    const conAlbum = D.gallery.filter(it=>it.albumId);
+    const destacadas = conAlbum.slice(0,5);
+    hp.innerHTML = destacadas.length
+      ? destacadas.map(item=>galItemHtml(item,true)).join('')
+      : `<p style="color:var(--gray);font-size:14px;padding:1rem;grid-column:1/-1">Crea un álbum y sube fotos desde el panel admin para mostrarlas aquí.</p>`;
   }
 }
-function galItemHtml(item){
+function galItemHtml(item,linkToAlbum){
+  const clickAttr = (linkToAlbum && item.albumId) ? `onclick="goToAlbumFromHome(${item.albumId})" style="cursor:pointer"` : '';
+  const shineClass = linkToAlbum ? 'gal-item-shine' : '';
   return `
-    <div class="gal-item ${item.size||''}">
+    <div class="gal-item ${item.size||''} ${shineClass}" ${clickAttr}>
       <div class="gal-item-inner">
         ${item.url?`<img src="${item.url}" alt="${item.desc}" loading="lazy" style="object-position:${item.position||'center'}" onerror="this.parentElement.innerHTML='<span style=font-size:3.5rem>${item.emoji||'🖼'}</span>'">`:`<span>${item.emoji||'🖼'}</span>`}
       </div>
@@ -1151,6 +1260,48 @@ function galItemHtml(item){
     </div>
   `;
 }
+function goToAlbumFromHome(albumId){
+  showPage('galeria');
+  setTimeout(()=>{ selectAlbum(albumId); }, 60);
+}
+
+// ══════════ LIGHTBOX ══════════
+let lightboxFotos=[];
+let lightboxIndex=0;
+function openLightbox(sectionKey,index){
+  lightboxFotos = SECS[sectionKey].fotos;
+  lightboxIndex = index;
+  renderLightbox();
+  document.getElementById('lightbox-backdrop').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function renderLightbox(){
+  const f=lightboxFotos[lightboxIndex];
+  if(!f) return;
+  const img=document.getElementById('lightbox-img');
+  img.src=f.url||'';
+  img.alt=f.desc||'';
+  document.getElementById('lightbox-caption').textContent=f.desc||'';
+  const multi=lightboxFotos.length>1;
+  document.getElementById('lightbox-prev').style.display=multi?'flex':'none';
+  document.getElementById('lightbox-next').style.display=multi?'flex':'none';
+}
+function lightboxNav(dir){
+  const n=lightboxFotos.length;
+  if(!n) return;
+  lightboxIndex=(lightboxIndex+dir+n)%n;
+  renderLightbox();
+}
+function closeLightbox(){
+  document.getElementById('lightbox-backdrop').classList.remove('show');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',(e)=>{
+  if(!document.getElementById('lightbox-backdrop').classList.contains('show')) return;
+  if(e.key==='Escape') closeLightbox();
+  if(e.key==='ArrowLeft') lightboxNav(-1);
+  if(e.key==='ArrowRight') lightboxNav(1);
+});
 let pendingGalFiles = []; // {url, name} cuando se suben varias fotos a la vez
 
 function populateAlbumSelect(){
@@ -1171,8 +1322,13 @@ function openGalModal(presetAlbumId){
   document.getElementById('gal-save-btn').textContent='Añadir →';
   document.getElementById('gal-modal-title').textContent='Añadir Fotos a la Galería';
   populateAlbumSelect();
-  if(presetAlbumId) sv('g-album', presetAlbumId);
-  else sv('g-album','');
+  if(presetAlbumId && presetAlbumId!=='all' && presetAlbumId!=='none'){
+    sv('g-album', presetAlbumId);
+    const alb=D.albums.find(a=>a.id==presetAlbumId);
+    document.getElementById('gal-modal-title').textContent = alb ? `Añadir Fotos — ${alb.name}` : 'Añadir Fotos a la Galería';
+  } else {
+    sv('g-album','');
+  }
   openModal('gal-modal');
 }
 function handleGalPhotoFiles(input){
@@ -1393,7 +1549,6 @@ function applyAll() {
   renderHeroCarousel();
   const hls=document.getElementById('hero-logo-section');
   if(logoUrl&&hls){hls.innerHTML=`<img src="${logoUrl}" class="hero-logo-img" onerror="this.parentElement.innerHTML='<div class=hero-logo-hex>⚜</div>'">`;}
-  st('txt-hero-body',D.hero.body);
   st('txt-quienes-title',D.textos.quienesTitle);
   st('txt-quienes-desc',D.textos.quienesDesc);
   st('txt-mision',D.textos.mision);
@@ -1427,6 +1582,7 @@ function doLogin(){
   if(u==='admin'&&p==='scout12'){
     closeLogin();
     document.getElementById('adm-editor').classList.add('show');
+    const fb=document.querySelector('.fluid-bg'); if(fb) fb.style.display='none';
     sv('l-user','');sv('l-pass','');
     initEditor();
   } else {
@@ -1434,7 +1590,10 @@ function doLogin(){
     sv('l-pass','');
   }
 }
-function closeAdmin(){document.getElementById('adm-editor').classList.remove('show')}
+function closeAdmin(){
+  document.getElementById('adm-editor').classList.remove('show');
+  const fb=document.querySelector('.fluid-bg'); if(fb) fb.style.display='block';
+}
 
 // ══════════ ADMIN DASHBOARD ══════════
 let currentEditor='dashboard';
@@ -1446,7 +1605,7 @@ const navGroups=[
   ]},
   {label:'Contenido', items:[
     {k:'home', label:'Inicio', icon:'🏠'},
-    {k:'secciones', label:'Secciones Scout', icon:'⚜️', badge:7},
+    {k:'secciones', label:'Secciones', icon:'⚜️'},
     {k:'galeria', label:'Galería', icon:'🖼'},
   ]},
   {label:'Configuración', items:[
@@ -1518,6 +1677,12 @@ function buildDashboardView(){
   const seccionesConLogo = Object.values(SECS).filter(s=>s.logo).length;
   const fotosHero = (D.hero.images||[]).length;
   return `
+    <div class="adm-card" style="border-left:3px solid #22c55e;margin-bottom:18px">
+      <div class="adm-card-bd" style="display:flex;align-items:center;gap:12px;padding:14px 20px">
+        <span style="font-size:20px">💾</span>
+        <div style="font-size:12.5px;color:var(--gray-light)"><strong style="color:#4ade80">Guardado automático activo:</strong> todos los cambios que hagas se guardan solos en este navegador. Si recargas la página o cierras y vuelves a entrar desde este mismo dispositivo, tu contenido sigue aquí.</div>
+      </div>
+    </div>
     <div class="adm-stats-grid">
       <div class="adm-stat-card"><div class="accent-bar" style="background:var(--ruby)"></div><span class="icon">🖼</span><div class="num">${totalFotos}</div><div class="lbl">Fotos en galería</div></div>
       <div class="adm-stat-card"><div class="accent-bar" style="background:var(--amber)"></div><span class="icon">📁</span><div class="num">${totalAlbumes}</div><div class="lbl">Álbumes creados</div></div>
@@ -1660,15 +1825,16 @@ function buildControls(k){
       </div>
     `)}
     ${card('🔤','Texto Descriptivo',`
-      <div class="ctrl"><label>Texto debajo del título</label><textarea id="ctrl-hero-body" rows="3">${D.hero.body}</textarea></div>
     `)}
     ${card('📷','Momentos Scout',`
-      <p style="font-size:12.5px;color:var(--gray);line-height:1.6;margin-bottom:12px">Esta sección de Inicio muestra automáticamente las primeras 6 fotos de tu galería general.</p>
+      <p style="font-size:12.5px;color:var(--gray);line-height:1.6;margin-bottom:12px">Esta sección de Inicio muestra automáticamente las primeras 5 fotos que pertenezcan a un álbum. Al hacer clic, el visitante va directo a ese álbum.</p>
       <div class="adm-row-list" style="margin-bottom:10px">
-        ${D.gallery.slice(0,6).map(g=>`<div class="adm-row-item"><div class="adm-row-thumb">${g.url?`<img src="${g.url}" onerror="this.parentElement.textContent='${g.emoji||'🖼'}'">`:(g.emoji||'🖼')}</div><div class="adm-row-text"><div class="t">${g.desc}</div></div></div>`).join('') || '<div class="adm-empty" style="padding:14px"><p>Aún no hay fotos en la galería.</p></div>'}
+        ${D.gallery.filter(g=>g.albumId).slice(0,5).map(g=>{
+          const alb=D.albums.find(a=>a.id===g.albumId);
+          return `<div class="adm-row-item"><div class="adm-row-thumb">${g.url?`<img src="${g.url}" onerror="this.parentElement.textContent='${g.emoji||'🖼'}'">`:(g.emoji||'🖼')}</div><div class="adm-row-text"><div class="t">${g.desc}</div>${alb?`<div class="s">📁 ${alb.name}</div>`:''}</div></div>`;
+        }).join('') || '<div class="adm-empty" style="padding:14px"><p>Aún no hay fotos asignadas a un álbum. Crea un álbum y sube fotos en la Galería.</p></div>'}
       </div>
-      <button class="ctrl-btn-sm green" onclick="openGalModal()">+ Añadir Fotos a la Galería</button>
-      <button class="ctrl-btn-sm" onclick="gotoEditorPage('galeria')">🖼 Gestionar Galería Completa</button>
+      <button class="ctrl-btn-sm" onclick="gotoEditorPage('galeria')">🖼 Gestionar Galería y Álbumes</button>
     `)}
     ${card('📖','Quiénes Somos',`
       <div class="ctrl"><label>Título sección</label><input id="ctrl-qt" type="text" value="${D.textos.quienesTitle}"></div>
@@ -1732,8 +1898,9 @@ function buildControls(k){
           return `<div class="adm-row-item">
             <div class="adm-row-thumb">${cover?`<img src="${cover}">`:'📁'}</div>
             <div class="adm-row-text"><div class="t">${a.name}</div><div class="s" style="color:var(--gray)">${count} foto(s)</div></div>
-            <button class="adm-row-btn warn" onclick="openAlbumModal(${a.id})">✏</button>
-            <button class="adm-row-btn danger" onclick="deleteAlbum(${a.id})">✕</button>
+            <button class="adm-row-btn" onclick="openGalModal(${a.id})" title="Subir fotos a este álbum">📁+</button>
+            <button class="adm-row-btn warn" onclick="openAlbumModal(${a.id})" title="Editar nombre">✏</button>
+            <button class="adm-row-btn danger" onclick="deleteAlbum(${a.id})" title="Eliminar álbum">✕</button>
           </div>`;
         }).join('') || '<div class="adm-empty" style="padding:18px"><div class="ic">📁</div><p>Aún no hay álbumes creados.</p></div>'}
       </div>
@@ -1820,7 +1987,6 @@ function applySectionColors(){
 function saveAll(){
   const k=currentEditor;
   if(k==='home'){
-    if(ge('ctrl-hero-body'))D.hero.body=v('ctrl-hero-body');
     if(ge('ctrl-qt'))D.textos.quienesTitle=v('ctrl-qt');
     if(ge('ctrl-qd'))D.textos.quienesDesc=v('ctrl-qd');
     if(ge('ctrl-m'))D.textos.mision=v('ctrl-m');
@@ -1950,25 +2116,55 @@ function previewMapCtrl(){
 }
 
 // ── SECTION PHOTOS ──
+let pendingSecFiles = [];
 function openSecPhotoModal(s){
   sv('spm-sec',s);
-  document.getElementById('sec-photo-modal-title').textContent=`Añadir Foto — ${SECS[s].title}`;
+  document.getElementById('sec-photo-modal-title').textContent=`Añadir Fotos — ${SECS[s].title}`;
   sv('spm-url','');sv('spm-desc','');sv('spm-position','center');
+  pendingSecFiles = [];
   const w=document.getElementById('spm-preview-wrap');
   if(w){ const img=w.querySelector('img'); if(img) img.remove(); }
+  const mp=document.getElementById('spm-multi-preview');
+  if(mp){ mp.style.display='none'; mp.innerHTML=''; }
+  document.getElementById('spm-file').value='';
+  document.getElementById('spm-save-btn').textContent='Añadir →';
   openModal('sec-photo-modal');
 }
-function handleSecPhotoFile(input){
-  const file=input.files[0];
-  if(!file) return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const url=e.target.result;
-    sv('spm-url',url);
-    previewSecPhoto(url);
-    toast('Foto lista — pulsa "Añadir"');
-  };
-  reader.readAsDataURL(file);
+function handleSecPhotoFiles(input){
+  const files = Array.from(input.files || []);
+  if(!files.length) return;
+  pendingSecFiles = [];
+  const mp = document.getElementById('spm-multi-preview');
+  const singleWrap = document.getElementById('spm-preview-wrap');
+  if(files.length === 1){
+    mp.style.display='none'; mp.innerHTML='';
+    const reader = new FileReader();
+    reader.onload = e => {
+      sv('spm-url', e.target.result);
+      previewSecPhoto(e.target.result);
+      toast('Foto lista — pulsa "Añadir"');
+    };
+    reader.readAsDataURL(files[0]);
+    return;
+  }
+  sv('spm-url','');
+  const singleImg = singleWrap.querySelector('img'); if(singleImg) singleImg.remove();
+  mp.style.display='flex'; mp.innerHTML='';
+  document.getElementById('spm-save-btn').textContent = `Añadir ${files.length} fotos →`;
+  let loaded = 0;
+  files.forEach((file,i)=>{
+    const reader = new FileReader();
+    reader.onload = e=>{
+      pendingSecFiles[i] = {url:e.target.result, name:file.name};
+      loaded++;
+      const thumb = document.createElement('div');
+      thumb.style.cssText = 'width:54px;height:54px;border-radius:8px;overflow:hidden;border:1px solid var(--border);background:var(--black)';
+      thumb.innerHTML = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover">`;
+      mp.appendChild(thumb);
+      if(loaded===files.length) toast(`${files.length} fotos listas — pulsa "Añadir"`);
+    };
+    reader.readAsDataURL(file);
+  });
 }
 function previewSecPhoto(url){
   const w=document.getElementById('spm-preview-wrap');
@@ -1979,11 +2175,22 @@ function previewSecPhoto(url){
 }
 function saveSecPhoto(){
   const s=v('spm-sec');
-  if(!v('spm-url')){ toast('Sube una foto o pega una URL primero',true); return; }
-  SECS[s].fotos.push({url:v('spm-url'),desc:v('spm-desc')||'Foto Scout',emoji:'📷',position:v('spm-position')||'center'});
+  const desc = v('spm-desc') || 'Foto Scout';
+  const position = v('spm-position')||'center';
+
+  if(pendingSecFiles.length > 1){
+    pendingSecFiles.forEach((f,i)=>{
+      SECS[s].fotos.push({url:f.url, desc: `${desc} (${i+1})`, emoji:'📷', position});
+    });
+    toast(`${pendingSecFiles.length} fotos añadidas a ${SECS[s].title}`);
+  } else {
+    if(!v('spm-url')){ toast('Sube una foto o pega una URL primero',true); return; }
+    SECS[s].fotos.push({url:v('spm-url'), desc, emoji:'📷', position});
+    toast('Foto añadida a '+SECS[s].title);
+  }
+  pendingSecFiles = [];
   closeModal('sec-photo-modal');
   renderSecPage(s); buildControls(s);
-  toast('Foto añadida a '+SECS[s].title);
 }
 function deleteSecPhoto(s,idx){
   SECS[s].fotos.splice(idx,1);
