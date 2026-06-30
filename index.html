@@ -23,6 +23,19 @@
   --c-caminantes:#2563eb;
   --c-rovers:#F62217;
   --c-dirigencia:#9333ea;
+
+  /* Escala semántica de z-index — nunca valores arbitrarios como 999/9999 */
+  --z-sticky:100;
+  --z-drawer:200;
+  --z-app-shell:300;
+  --z-overlay:400;
+  --z-modal:500;
+  --z-toast:600;
+
+  /* Curvas de easing con carácter — las nativas de CSS (ease, ease-out) son débiles */
+  --ease-out: cubic-bezier(.16,1,.3,1);
+  --ease-out-soft: cubic-bezier(.25,.46,.45,.94);
+  --ease-in-out: cubic-bezier(.77,0,.175,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -65,7 +78,7 @@ a,button{-webkit-tap-highlight-color:transparent}
 @media (prefers-reduced-motion: reduce){.blob{animation:none}}
 
 /* ══════════ HORIZONTAL PILL NAV ══════════ */
-.nav-wrap{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:1000;width:calc(100% - 36px);max-width:1440px;display:flex;justify-content:center}
+.nav-wrap{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:var(--z-sticky);width:calc(100% - 36px);max-width:1440px;display:flex;justify-content:center}
 nav{
   background:rgba(13,20,20,.7);backdrop-filter:blur(20px) saturate(140%);
   border:1px solid var(--border);border-radius:100px;
@@ -79,7 +92,7 @@ nav{
 .nav-name-sub{font-size:8.5px;color:var(--amber);letter-spacing:1.5px;text-transform:uppercase;margin-top:1px;font-weight:700}
 .nav-links{display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none;padding:0 6px}
 .nav-links::-webkit-scrollbar{display:none}
-.nav-links a{color:var(--gray);text-decoration:none;font-size:12.5px;font-weight:700;padding:9px 14px;border-radius:100px;letter-spacing:.3px;white-space:nowrap;transition:all .25s}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:12.5px;font-weight:700;padding:9px 14px;border-radius:100px;letter-spacing:.3px;white-space:nowrap;transition:color .2s ease,background-color .2s ease}
 .nav-links a:hover{color:#fff;background:rgba(255,255,255,.06)}
 .nav-links a.active{color:#fff;background:linear-gradient(135deg,var(--ruby),#a01510)}
 .nav-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
@@ -87,9 +100,9 @@ nav{
 .nav-admin-btn:hover{transform:scale(1.04)}
 .hamburger{display:none;background:rgba(255,255,255,.06);border:none;cursor:pointer;flex-direction:column;gap:4px;padding:10px;border-radius:50%;width:38px;height:38px;align-items:center;justify-content:center}
 .hamburger span{width:16px;height:2px;background:#fff;display:block;border-radius:1px}
-.mobile-drawer{display:none;position:fixed;top:90px;left:18px;right:18px;z-index:999;background:rgba(13,20,20,.96);backdrop-filter:blur(20px);border-radius:24px;border:1px solid var(--border);flex-direction:column;padding:14px;gap:2px;overflow-y:auto;max-height:calc(100vh - 110px);box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.mobile-drawer{display:none;position:fixed;top:90px;left:18px;right:18px;z-index:var(--z-drawer);background:rgba(13,20,20,.96);backdrop-filter:blur(20px);border-radius:24px;border:1px solid var(--border);flex-direction:column;padding:14px;gap:2px;overflow-y:auto;max-height:calc(100vh - 110px);box-shadow:0 8px 32px rgba(0,0,0,.5)}
 .mobile-drawer.open{display:flex}
-.mobile-drawer a{color:var(--gray-light);text-decoration:none;padding:13px 16px;font-size:15px;font-weight:700;border-radius:14px;transition:all .15s}
+.mobile-drawer a{color:var(--gray-light);text-decoration:none;padding:13px 16px;font-size:15px;font-weight:700;border-radius:14px;transition:color .15s ease,background-color .15s ease}
 .mobile-drawer a:hover{color:#fff;background:rgba(255,255,255,.06)}
 
 /* ══════════ MAIN STAGE ══════════ */
@@ -125,7 +138,7 @@ nav{
 .hero-logo-hex{width:78px;height:78px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800;backdrop-filter:blur(6px);flex-shrink:0}
 .hero-title-row .hero-title-fl{margin-bottom:0}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber);margin-bottom:0;text-shadow:0 2px 8px rgba(0,0,0,.6)}
-.hero-title-fl{font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:.98;letter-spacing:-1px;margin-bottom:1rem;text-shadow:0 4px 20px rgba(0,0,0,.45)}
+.hero-title-fl{font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:.98;letter-spacing:-1px;margin-bottom:1rem;text-shadow:0 4px 20px rgba(0,0,0,.45);text-wrap:balance}
 .hero-title-fl .line-red{color:var(--ruby)}
 .hero-title-fl .line-amber{color:var(--amber)}
 .hero-ctas{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
@@ -134,16 +147,16 @@ nav{
 .btn-red:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(246,34,23,.4)}
 .btn-red:hover::before{transform:translateX(120%)}
 .btn-red:active{transform:translateY(0) scale(.97)}
-.btn-outline{background:rgba(255,255,255,.1);color:#fff;padding:13px 28px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:.5px;border:1.5px solid rgba(255,255,255,.3);transition:all .25s cubic-bezier(.16,1,.3,1);cursor:pointer;backdrop-filter:blur(6px)}
+.btn-outline{background:rgba(255,255,255,.1);color:#fff;padding:13px 28px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:.5px;border:1.5px solid rgba(255,255,255,.3);transition:color .2s var(--ease-out),border-color .2s var(--ease-out),background-color .2s var(--ease-out),transform .2s var(--ease-out);cursor:pointer;backdrop-filter:blur(6px)}
 .btn-outline:hover{border-color:var(--amber);color:var(--amber);background:rgba(255,191,0,.1);transform:translateY(-2px)}
 .btn-outline:active{transform:translateY(0) scale(.97)}
 
 /* Carousel controls */
 .hero-dots{display:flex;gap:7px;margin-left:auto}
-.hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35);border:none;cursor:pointer;padding:0;transition:all .25s}
+.hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35);border:none;cursor:pointer;padding:0;transition:width .25s var(--ease-out),background-color .25s ease}
 .hero-dot.active{background:var(--amber);width:22px;border-radius:5px}
 .hero-dot:hover{background:rgba(255,255,255,.6)}
-.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:42px;height:42px;border-radius:50%;background:rgba(13,20,20,.55);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;backdrop-filter:blur(8px)}
+.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:42px;height:42px;border-radius:50%;background:rgba(13,20,20,.55);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background-color .2s ease,border-color .2s ease,transform .15s var(--ease-out);backdrop-filter:blur(8px)}
 .hero-arrow:hover{background:rgba(230,51,41,.7);border-color:var(--ruby)}
 .hero-arrow.prev{left:18px}
 .hero-arrow.next{right:18px}
@@ -153,7 +166,7 @@ nav{
 .sec{padding:0 18px;margin-bottom:24px}
 .sec-tag{font-size:10px;font-weight:800;letter-spacing:3.5px;text-transform:uppercase;color:var(--ruby);margin-bottom:.9rem;display:flex;align-items:center;gap:8px}
 .sec-tag::before{content:'';width:20px;height:2px;background:var(--ruby);flex-shrink:0}
-.sec-title{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:800;letter-spacing:-0.3px;line-height:1.05;margin-bottom:1.1rem}
+.sec-title{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:800;letter-spacing:-0.3px;line-height:1.05;margin-bottom:1.1rem;text-wrap:balance}
 .sec-title em{color:var(--amber);font-style:normal}
 .sec-lead{font-size:16px;color:var(--gray-light);line-height:1.85;max-width:640px;font-weight:500}
 
@@ -190,6 +203,7 @@ nav{
 .sec-tile:hover::after{opacity:1}
 .sec-tile:hover .sec-tile-logo-wrap{transform:scale(1.12)}
 .sec-tile:hover .tile-arrow{transform:translateX(4px)}
+.sec-tile:active{transform:translateY(-1px) scale(.99)}
 .tile-emoji{font-size:1.7rem;margin-bottom:.8rem;display:block}
 .tile-title{font-size:1.2rem;font-weight:800;letter-spacing:.2px;margin-bottom:3px}
 .tile-age{font-size:9.5px;color:var(--tc,var(--amber));font-weight:800;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:6px}
@@ -229,14 +243,14 @@ nav{
 .sec-photo-item:hover .zoom-hint{opacity:1}
 
 /* ── LIGHTBOX ── */
-.lightbox-backdrop{display:none;position:fixed;inset:0;z-index:1050;background:rgba(0,0,0,.92);align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.lightbox-backdrop{display:none;position:fixed;inset:0;z-index:var(--z-modal);background:rgba(0,0,0,.92);align-items:center;justify-content:center;backdrop-filter:blur(6px)}
 .lightbox-backdrop.show{display:flex}
 .lightbox-img-wrap{max-width:92vw;max-height:88vh;position:relative;display:flex;flex-direction:column;align-items:center}
 .lightbox-img-wrap img{max-width:92vw;max-height:78vh;object-fit:contain;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
 .lightbox-caption{color:#fff;font-size:14px;font-weight:600;margin-top:14px;text-align:center;max-width:80vw}
 .lightbox-close{position:absolute;top:-46px;right:0;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
 .lightbox-close:hover{background:rgba(246,34,23,.3)}
-.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;backdrop-filter:blur(6px)}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background-color .2s ease,border-color .2s ease,transform .15s var(--ease-out);backdrop-filter:blur(6px)}
 .lightbox-nav:hover{background:rgba(246,34,23,.5)}
 .lightbox-nav.prev{left:18px}
 .lightbox-nav.next{right:18px}
@@ -263,12 +277,13 @@ nav{
 .album-cover-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px -10px rgba(0,0,0,.5)}
 .album-cover-card img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
 .album-cover-card:hover img{transform:scale(1.06)}
+.album-cover-card:active{transform:translateY(-1px) scale(.99)}
 .album-cover-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;opacity:.3}
 .album-cover-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.2) 55%,transparent 80%);display:flex;flex-direction:column;justify-content:flex-end;padding:16px}
 .album-cover-overlay .name{color:#fff;font-size:15px;font-weight:800;line-height:1.3}
 .album-cover-overlay .meta{color:rgba(255,255,255,.7);font-size:11.5px;font-weight:600;margin-top:3px}
 .album-cover-count{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);color:#fff;font-size:11px;font-weight:800;padding:4px 10px;border-radius:100px;backdrop-filter:blur(4px)}
-.album-chip{display:flex;align-items:center;gap:8px;padding:7px 16px 7px 7px;border-radius:100px;border:1.5px solid var(--border);background:rgba(255,255,255,.03);color:var(--gray-light);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Manrope',sans-serif}
+.album-chip{display:flex;align-items:center;gap:8px;padding:7px 16px 7px 7px;border-radius:100px;border:1.5px solid var(--border);background:rgba(255,255,255,.03);color:var(--gray-light);font-size:13px;font-weight:700;cursor:pointer;transition:color .2s ease,background-color .2s ease,border-color .2s ease;font-family:'Manrope',sans-serif}
 .album-chip:hover{border-color:rgba(255,255,255,.3);color:#fff}
 .album-chip.active{background:linear-gradient(135deg,var(--ruby),var(--ruby-dark));border-color:var(--ruby);color:#fff}
 .album-chip-thumb{width:26px;height:26px;border-radius:50%;object-fit:cover;flex-shrink:0}
@@ -284,7 +299,7 @@ nav{
 .cinfo-item h4{font-size:9.5px;font-weight:800;color:var(--gray);text-transform:uppercase;letter-spacing:1.3px;margin-bottom:3px}
 .cinfo-item p{font-size:14.5px;color:#fff;font-weight:500}
 .social-row{display:flex;gap:9px;margin-top:1.3rem}
-.social-btn{display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:100px;text-decoration:none;font-size:11.5px;font-weight:800;transition:all .2s}
+.social-btn{display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:100px;text-decoration:none;font-size:11.5px;font-weight:800;transition:opacity .2s ease,transform .15s var(--ease-out)}
 .social-btn.fb{background:#1877f2;color:#fff}
 .social-btn.ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff}
 .social-btn.wa{background:#25D366;color:#062013}
@@ -317,14 +332,14 @@ nav{
 /* ════════════════════════
    ADMIN DASHBOARD — arquitectura profesional
 ════════════════════════ */
-#adm-login-screen{display:none;position:fixed;inset:0;z-index:10000;background:radial-gradient(circle at 30% 20%,rgba(246,34,23,.08),transparent 50%),rgba(6,13,13,.97);backdrop-filter:blur(12px);align-items:center;justify-content:center}
+#adm-login-screen{display:none;position:fixed;inset:0;z-index:var(--z-overlay);background:radial-gradient(circle at 30% 20%,rgba(246,34,23,.08),transparent 50%),rgba(6,13,13,.97);backdrop-filter:blur(12px);align-items:center;justify-content:center}
 #adm-login-screen.show{display:flex}
 .login-box{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:40px;width:380px;max-width:95vw;border-top:3px solid var(--ruby);box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
 .login-box h2{font-size:2rem;font-weight:800;letter-spacing:.3px;margin-bottom:4px}
 .login-box p{font-size:13px;color:var(--gray);margin-bottom:28px;font-weight:500}
 .login-err{font-size:12px;color:var(--ruby);margin-top:-10px;margin-bottom:12px;display:none;font-weight:600}
 
-#adm-editor{display:none;position:fixed;inset:0;z-index:9999;background:var(--black);isolation:isolate}
+#adm-editor{display:none;position:fixed;inset:0;z-index:var(--z-app-shell);background:var(--black);isolation:isolate}
 #adm-editor.show{display:flex}
 .adm-shell{display:flex;width:100%;height:100%;overflow:hidden;background:var(--black);position:relative;z-index:1}
 
@@ -354,19 +369,24 @@ nav{
 .adm-main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 .adm-topbar{height:64px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 22px;flex-shrink:0;gap:1rem}
 .adm-topbar-left{display:flex;align-items:center;gap:14px;min-width:0}
-.adm-collapse-btn{width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--gray-light);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;font-size:14px}
+.adm-collapse-btn{width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--gray-light);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background-color .15s ease,color .15s ease;font-size:14px}
 .adm-collapse-btn:hover{background:rgba(255,255,255,.1);color:#fff}
 .adm-breadcrumb{display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden}
 .adm-breadcrumb .crumb-icon{font-size:18px;flex-shrink:0}
 .adm-breadcrumb h1{font-size:16px;font-weight:800;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .adm-breadcrumb .crumb-sub{font-size:11.5px;color:var(--gray);white-space:nowrap}
 .adm-topbar-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.adm-btn{padding:9px 16px;border-radius:10px;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .15s;border:none;letter-spacing:.2px;display:inline-flex;align-items:center;gap:6px;font-family:'Manrope',sans-serif}
+.adm-btn{padding:9px 16px;border-radius:10px;font-size:12.5px;font-weight:700;cursor:pointer;transition:background-color .15s ease,color .15s ease,transform .15s var(--ease-out),box-shadow .15s ease;border:none;letter-spacing:.2px;display:inline-flex;align-items:center;gap:6px;font-family:'Manrope',sans-serif}
 .adm-btn-primary{background:linear-gradient(135deg,var(--ruby),var(--ruby-dark));color:#fff;box-shadow:0 4px 14px rgba(246,34,23,.3)}
 .adm-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(246,34,23,.4)}
+.adm-btn-primary:active{transform:translateY(0) scale(.97)}
 .adm-btn-ghost{background:rgba(255,255,255,.05);color:var(--gray-light);border:1px solid var(--border)}
 .adm-btn-ghost:hover{background:rgba(255,255,255,.1);color:#fff}
 .adm-btn-icon{width:36px;height:36px;padding:0;justify-content:center;border-radius:10px}
+#save-indicator{font-size:11.5px;font-weight:700;color:var(--gray);opacity:0;transition:opacity .3s;padding:6px 12px;border-radius:100px;background:rgba(255,255,255,.04)}
+#save-indicator.show{opacity:1}
+#save-indicator.ok{color:#4ade80;background:rgba(34,197,94,.1)}
+#save-indicator.err{color:var(--ruby);background:rgba(246,34,23,.1)}
 
 .adm-content{flex:1;overflow-y:auto;overflow-x:hidden;padding:24px 28px 60px;max-width:100%}
 .adm-view{display:none}
@@ -392,8 +412,9 @@ nav{
 .adm-card-hd .hint{font-size:11px;color:var(--gray);font-weight:500}
 .adm-card-bd{padding:18px 20px}
 .adm-quick-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:24px}
-.adm-quick-btn{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;cursor:pointer;transition:all .2s;text-align:left;font-family:'Manrope',sans-serif;color:#fff;min-width:0;width:100%}
+.adm-quick-btn{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;cursor:pointer;transition:border-color .2s ease,background-color .2s ease,transform .2s var(--ease-out);text-align:left;font-family:'Manrope',sans-serif;color:#fff;min-width:0;width:100%}
 .adm-quick-btn:hover{border-color:var(--ruby);background:rgba(246,34,23,.05);transform:translateY(-2px)}
+.adm-quick-btn:active{transform:translateY(0) scale(.98)}
 .adm-quick-btn .ic{font-size:22px}
 .adm-quick-btn .t{font-size:12.5px;font-weight:700}
 .adm-section-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
@@ -408,13 +429,13 @@ nav{
 .ctrl select option{background:var(--black)}
 .ctrl textarea{resize:vertical;min-height:76px}
 .ctrl-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.ctrl-img-upload{width:100%;aspect-ratio:16/9;background:var(--black);border:2px dashed var(--border);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:all .2s;overflow:hidden;position:relative}
+.ctrl-img-upload{width:100%;aspect-ratio:16/9;background:var(--black);border:2px dashed var(--border);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:border-color .2s ease;overflow:hidden;position:relative}
 .ctrl-img-upload:hover{border-color:var(--ruby)}
 .ctrl-img-upload img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
 .ctrl-img-upload .upload-label{font-size:12px;color:var(--gray);text-align:center;z-index:1;font-weight:600}
 .ctrl-img-upload span{font-size:24px;z-index:1}
 .ctrl-img-input{display:none}
-.ctrl-btn-sm{width:100%;padding:9px;border-radius:10px;background:rgba(246,34,23,.12);color:var(--ruby);border:1px solid rgba(246,34,23,.25);font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.2px;transition:all .15s;margin-top:8px;font-family:'Manrope',sans-serif}
+.ctrl-btn-sm{width:100%;padding:9px;border-radius:10px;background:rgba(246,34,23,.12);color:var(--ruby);border:1px solid rgba(246,34,23,.25);font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.2px;transition:background-color .15s ease;margin-top:8px;font-family:'Manrope',sans-serif}
 .ctrl-btn-sm:hover{background:rgba(246,34,23,.22)}
 .ctrl-btn-sm.green{background:rgba(34,197,94,.1);color:#4ade80;border-color:rgba(34,197,94,.2)}
 .ctrl-btn-sm.green:hover{background:rgba(34,197,94,.2)}
@@ -436,8 +457,9 @@ nav{
 
 /* Sections grid (cards for each scout section in nav) */
 .adm-secgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.adm-seccard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;cursor:pointer;transition:all .2s;text-align:left;font-family:'Manrope',sans-serif;color:#fff;position:relative;overflow:hidden;min-width:0;width:100%}
+.adm-seccard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;cursor:pointer;transition:transform .2s var(--ease-out),border-color .2s ease;text-align:left;font-family:'Manrope',sans-serif;color:#fff;position:relative;overflow:hidden;min-width:0;width:100%}
 .adm-seccard:hover{transform:translateY(-2px);border-color:var(--tc,var(--ruby))}
+.adm-seccard:active{transform:translateY(0) scale(.98)}
 .adm-seccard .top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .adm-seccard .logo{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;overflow:hidden}
 .adm-seccard .logo img{width:100%;height:100%;object-fit:cover}
@@ -451,10 +473,10 @@ nav{
 .adm-empty p{font-size:13px}
 
 /* Toast / Modal (shared with public site styles, kept) */
-#toast{position:fixed;bottom:20px;right:20px;z-index:99999;background:var(--surface);border:1px solid var(--border);border-left:3px solid #22c55e;color:#fff;padding:12px 20px;border-radius:14px;font-size:13px;font-weight:600;transform:translateY(80px);opacity:0;transition:all .3s;box-shadow:0 8px 30px rgba(0,0,0,.6)}
+#toast{position:fixed;bottom:20px;right:20px;z-index:var(--z-toast);background:var(--surface);border:1px solid var(--border);border-left:3px solid #22c55e;color:#fff;padding:12px 20px;border-radius:14px;font-size:13px;font-weight:600;transform:translateY(80px);opacity:0;transition:transform .3s var(--ease-out),opacity .3s ease;box-shadow:0 8px 30px rgba(0,0,0,.6)}
 #toast.show{transform:translateY(0);opacity:1}
 #toast.err{border-left-color:var(--ruby)}
-.modal-backdrop{display:none;position:fixed;inset:0;z-index:10002;background:rgba(0,0,0,.82);align-items:center;justify-content:center}
+.modal-backdrop{display:none;position:fixed;inset:0;z-index:var(--z-modal);background:rgba(0,0,0,.82);align-items:center;justify-content:center}
 .modal-backdrop.show{display:flex}
 .modal-box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:26px;width:520px;max-width:96vw;max-height:85vh;overflow-y:auto}
 .modal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
@@ -483,6 +505,33 @@ nav{
 @media(max-width:640px){.secciones-grid{grid-template-columns:repeat(2,1fr)}.gallery-masonry{grid-template-columns:repeat(2,1fr)}.frow{grid-template-columns:1fr}.aform-grid{grid-template-columns:1fr}.hero-fl-left{padding:2rem 1.5rem}.pillars{grid-template-columns:1fr}.sec{padding:0 12px}.nav-wrap{width:calc(100% - 16px);top:10px}nav{padding:6px 6px 6px 12px}.hero-eyebrow{font-size:9.5px}.modal-box{padding:20px}.hero-logo-img,.hero-logo-hex{width:48px;height:48px}.hero-logo-hex{font-size:18px}}
 @media(max-width:480px){.hero-title-fl{font-size:clamp(2.1rem,9vw,2.8rem)}.sec-title{font-size:clamp(1.5rem,6vw,2rem)}.fl-card-pad{padding:1.5rem 1.1rem}.ph-fl-inner{padding:1.8rem 1.2rem}.cform{padding:1.3rem}.footer-fl{padding:1.8rem 1.4rem}.pñ-card{flex-direction:column;text-align:center;align-items:center}.cinfo-item{flex-direction:column;align-items:flex-start;gap:.5rem}.cinfo-icon{margin-bottom:2px}}
 </style>
+
+<!-- ══════════ FIREBASE ══════════ -->
+<!-- IMPORTANTE: reemplaza estos valores con los de TU proyecto de Firebase.
+     Los obtienes en: Firebase Console → ⚙ Configuración del proyecto → tus apps → SDK setup and configuration -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDHzhdcJh6B_MjjqqSTOXYQ7Pn-YTSk5Yo",
+    authDomain: "gruposcout12.firebaseapp.com",
+    projectId: "gruposcout12",
+    storageBucket: "gruposcout12.firebasestorage.app",
+    messagingSenderId: "355623705972",
+    appId: "1:355623705972:web:5df99d86a76930924e2021"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  window.firebaseAuth = getAuth(app);
+  window.firebaseDb = getFirestore(app);
+  window.authFns = { onAuthStateChanged, signInWithEmailAndPassword, signOut };
+  window.firestoreFns = { doc, getDoc, setDoc, onSnapshot };
+
+  // Avisa al resto de la página (script clásico, no-módulo) que Firebase ya está listo
+  window.dispatchEvent(new Event('firebase-ready'));
+</script>
 </head>
 <body>
 <div class="fluid-bg"><div class="blob blob1"></div><div class="blob blob2"></div><div class="blob blob3"></div><div class="fluid-noise"></div></div>
@@ -765,12 +814,11 @@ nav{
     <div style="font-size:2rem;margin-bottom:10px">🔒</div>
     <h2>Admin Panel</h2>
     <p>Grupo Scout No.12 · Acceso restringido</p>
-    <div class="aform-group" style="margin-bottom:12px"><label>Usuario</label><input type="text" id="l-user" placeholder="admin"></div>
-    <div class="aform-group" style="margin-bottom:6px"><label>Contraseña</label><input type="password" id="l-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <div class="aform-group" style="margin-bottom:12px"><label>Correo electrónico</label><input type="email" id="l-user" placeholder="admin@gruposc12.gt" autocomplete="username"></div>
+    <div class="aform-group" style="margin-bottom:6px"><label>Contraseña</label><input type="password" id="l-pass" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <p class="login-err" id="l-err">Credenciales incorrectas</p>
-    <button class="btn-red" style="width:100%;padding:12px;margin-top:10px" onclick="doLogin()">Ingresar →</button>
+    <button class="btn-red" id="login-submit-btn" style="width:100%;padding:12px;margin-top:10px" onclick="doLogin()">Ingresar →</button>
     <button class="btn-outline" style="width:100%;padding:10px;margin-top:8px;font-size:11px" onclick="closeLogin()">Cancelar</button>
-    <p style="font-size:10px;color:var(--gray);margin-top:14px;text-align:center">Demo: <strong style="color:rgba(255,255,255,.4)">admin</strong> / <strong style="color:rgba(255,255,255,.4)">scout12</strong></p>
   </div>
 </div>
 
@@ -803,8 +851,10 @@ nav{
           </div>
         </div>
         <div class="adm-topbar-right">
+          <span id="save-indicator">💾 Guardado</span>
           <button class="adm-btn adm-btn-ghost" onclick="previewSiteNow()">👁 Ver sitio</button>
           <button class="adm-btn adm-btn-primary" id="adm-save-btn" onclick="saveAll()">💾 Guardar Cambios</button>
+          <button class="adm-btn adm-btn-ghost" onclick="doLogout()" title="Cerrar sesión">🚪</button>
         </div>
       </div>
       <div class="adm-content" id="adm-content"></div>
@@ -1021,39 +1071,105 @@ let SECS={
 };
 
 // ══════════ PERSISTENCIA (localStorage) ══════════
-const STORAGE_KEY = 'gs12_site_data_v1';
 let _persistTimer = null;
+let _firestoreReady = false;
+let _pendingFirstSave = false;
+let _persistPaused = false;
+
 function persistData(){
-  // Debounce: evita escribir en localStorage en cada tecla, agrupa cambios rápidos
+  if(_persistPaused) return; // pausado durante una operación de guardado masivo (ver pauseAndSave)
+  // Debounce: agrupa cambios rápidos en una sola escritura a Firestore
   clearTimeout(_persistTimer);
   _persistTimer = setTimeout(()=>{
-    try{
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({D, SECS}));
-    }catch(e){
-      console.warn('No se pudo guardar en localStorage:', e);
-      toast('Espacio de almacenamiento lleno. Usa fotos más livianas o pega URLs en vez de subir archivos.', true);
-    }
-  }, 250);
+    saveToFirestore();
+  }, 600);
 }
-function loadPersistedData(){
+
+// Pausa el guardado automático del Proxy mientras se hacen varios cambios seguidos
+// (evita ráfagas de escrituras a Firestore), y guarda UNA sola vez al terminar.
+function pauseAndSave(fn){
+  _persistPaused = true;
   try{
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if(!raw) return;
-    const saved = JSON.parse(raw);
-    if(saved.D) Object.assign(D, saved.D);
-    if(saved.SECS){
-      Object.keys(saved.SECS).forEach(key=>{
-        if(SECS[key]) Object.assign(SECS[key], saved.SECS[key]);
-      });
-    }
-  }catch(e){
-    console.warn('No se pudo cargar el contenido guardado:', e);
+    fn();
+  } finally {
+    _persistPaused = false;
+    clearTimeout(_persistTimer);
+    saveToFirestore();
   }
 }
-loadPersistedData();
+
+async function saveToFirestore(){
+  if(!window.firebaseDb){
+    console.warn('Firestore aún no está listo, reintentando...');
+    _pendingFirstSave = true;
+    return;
+  }
+  try{
+    const { doc, setDoc } = window.firestoreFns;
+    const plainD = JSON.parse(JSON.stringify(D));
+    const plainSECS = JSON.parse(JSON.stringify(SECS));
+    await setDoc(doc(window.firebaseDb, 'site', 'content'), { D: plainD, SECS: plainSECS, updatedAt: Date.now() });
+    showSaveIndicator('ok');
+  }catch(e){
+    console.error('Error guardando en Firestore:', e);
+    showSaveIndicator('err');
+    toast('No se pudo guardar en la nube. Revisa tu conexión a internet.', true);
+  }
+}
+
+function showSaveIndicator(state){
+  const el = document.getElementById('save-indicator');
+  if(!el) return;
+  el.className = 'save-indicator show ' + state;
+  clearTimeout(el._hideTimer);
+  el._hideTimer = setTimeout(()=>{ el.classList.remove('show'); }, 2200);
+}
+
+async function loadFromFirestore(){
+  try{
+    const { doc, getDoc } = window.firestoreFns;
+    const snap = await getDoc(doc(window.firebaseDb, 'site', 'content'));
+    if(snap.exists()){
+      const saved = snap.data();
+      if(saved.D) Object.assign(D, saved.D);
+      if(saved.SECS){
+        Object.keys(saved.SECS).forEach(key=>{
+          if(SECS[key]) Object.assign(SECS[key], saved.SECS[key]);
+        });
+      }
+    }
+  }catch(e){
+    console.warn('No se pudo cargar el contenido desde Firestore:', e);
+  }
+}
+
+function listenToFirestoreChanges(){
+  // Mantiene el sitio sincronizado en vivo si alguien más edita desde otro dispositivo
+  try{
+    const { doc, onSnapshot } = window.firestoreFns;
+    onSnapshot(doc(window.firebaseDb, 'site', 'content'), (snap)=>{
+      if(!snap.exists()) return;
+      const saved = snap.data();
+      if(saved.updatedAt && saved.updatedAt === window._lastLocalWrite) return; // evita re-render de nuestro propio guardado
+      if(saved.D) Object.assign(D, saved.D);
+      if(saved.SECS){
+        Object.keys(saved.SECS).forEach(key=>{
+          if(SECS[key]) Object.assign(SECS[key], saved.SECS[key]);
+        });
+      }
+      applyAll();
+      renderGallery();
+      renderGalleryFilters();
+      renderHomeSeccionesGrid();
+      ['cachorros','manada','unidad','caminantes','rovers','dirigencia','comite'].forEach(s=>renderSecPage(s));
+    });
+  }catch(e){
+    console.warn('No se pudo activar la sincronización en vivo:', e);
+  }
+}
 
 // Envuelve D y SECS en Proxies para que CUALQUIER cambio (incluso anidado: arrays, push, splice, etc.)
-// dispare el guardado automático en localStorage, sin tener que llamar persistData() manualmente en cada función.
+// dispare el guardado automático en Firestore, sin tener que llamar persistData() manualmente en cada función.
 function deepPersistProxy(obj){
   if(obj===null || typeof obj!=='object') return obj;
   if(obj.__isPersistProxy) return obj; // ya envuelto
@@ -1083,6 +1199,8 @@ function deepPersistProxy(obj){
 }
 D = deepPersistProxy(D);
 Object.keys(SECS).forEach(k=>{ SECS[k] = deepPersistProxy(SECS[k]); });
+
+// Inicializa Firebase y carga el contenido guardado (definido en initFirebaseAndLoad, llamado al final del archivo)
 
 // ══════════ PAGE ROUTING ══════════
 let currentPage = 'home';
@@ -1467,6 +1585,7 @@ function previewMultiUrl(){
     if(pendingGalFiles.length<=1) document.getElementById('gal-save-btn').textContent='Añadir →';
   }
 }
+function isBase64Url(url){ return typeof url==='string' && url.startsWith('data:'); }
 function saveGalItem(){
   const desc = v('g-desc') || 'Foto Scout';
   const albumId = v('g-album') ? parseInt(v('g-album')) : null;
@@ -1485,11 +1604,16 @@ function saveGalItem(){
   } else if(multiUrls.length === 1){
     D.gallery.push({id:Date.now(), url:multiUrls[0], desc, emoji, size, month, year, position, albumId});
     toast('Foto añadida a la galería');
-  } else if(pendingGalFiles.length > 1){
+  } else if(pendingGalFiles.length >= 1){
+    const hasBase64 = pendingGalFiles.some(f=>isBase64Url(f.url));
+    if(hasBase64){
+      toast('Sube tus fotos a Imgur y pega los links — subir el archivo directo no se puede guardar en la nube', true);
+      return;
+    }
     pendingGalFiles.forEach((f,i)=>{
-      D.gallery.push({id:Date.now()+i, url:f.url, desc: `${desc} (${i+1})`, emoji, size, month, year, position, albumId});
+      D.gallery.push({id:Date.now()+i, url:f.url, desc: pendingGalFiles.length>1?`${desc} (${i+1})`:desc, emoji, size, month, year, position, albumId});
     });
-    toast(`${pendingGalFiles.length} fotos añadidas a la galería`);
+    toast(`${pendingGalFiles.length} foto(s) añadida(s) a la galería`);
   } else {
     if(!v('g-url')){ toast('Sube una foto, pega una URL o pega varias URLs primero',true); return; }
     D.gallery.push({id:Date.now(), url:v('g-url'), desc, emoji, size, month, year, position, albumId});
@@ -1677,21 +1801,56 @@ function applyAll() {
   st('footer-copy',D.footer.copy);
 }
 
-// ══════════ LOGIN ══════════
-function openLogin(){document.getElementById('adm-login-screen').classList.add('show');document.getElementById('l-err').style.display='none';setTimeout(()=>document.getElementById('l-user').focus(),80);}
+// ══════════ LOGIN (Firebase Authentication) ══════════
+function openLogin(){
+  // Si ya hay una sesión de Firebase activa, entra directo al panel sin pedir credenciales otra vez
+  if(window.firebaseAuth && window.firebaseAuth.currentUser){
+    document.getElementById('adm-editor').classList.add('show');
+    const fb=document.querySelector('.fluid-bg'); if(fb) fb.style.display='none';
+    initEditor();
+    return;
+  }
+  document.getElementById('adm-login-screen').classList.add('show');document.getElementById('l-err').style.display='none';setTimeout(()=>document.getElementById('l-user').focus(),80);
+}
 function closeLogin(){document.getElementById('adm-login-screen').classList.remove('show')}
-function doLogin(){
-  const u=v('l-user'),p=document.getElementById('l-pass').value;
-  if(u==='admin'&&p==='scout12'){
+async function doLogin(){
+  const email=v('l-user'), pass=document.getElementById('l-pass').value;
+  if(!email || !pass){
+    document.getElementById('l-err').textContent='Ingresa tu correo y contraseña';
+    document.getElementById('l-err').style.display='block';
+    return;
+  }
+  const btn=document.getElementById('login-submit-btn');
+  btn.textContent='Ingresando...'; btn.disabled=true;
+  try{
+    const { signInWithEmailAndPassword } = window.authFns;
+    await signInWithEmailAndPassword(window.firebaseAuth, email, pass);
     closeLogin();
     document.getElementById('adm-editor').classList.add('show');
     const fb=document.querySelector('.fluid-bg'); if(fb) fb.style.display='none';
     sv('l-user','');sv('l-pass','');
     initEditor();
-  } else {
+  }catch(e){
+    console.warn('Error de login:', e.code);
+    const msgs={
+      'auth/invalid-credential':'Correo o contraseña incorrectos',
+      'auth/user-not-found':'No existe un usuario con ese correo',
+      'auth/wrong-password':'Contraseña incorrecta',
+      'auth/invalid-email':'Correo electrónico no válido',
+      'auth/too-many-requests':'Demasiados intentos. Espera un momento e inténtalo de nuevo.',
+    };
+    document.getElementById('l-err').textContent = msgs[e.code] || 'No se pudo iniciar sesión. Verifica tu conexión.';
     document.getElementById('l-err').style.display='block';
-    sv('l-pass','');
+  }finally{
+    btn.textContent='Ingresar →'; btn.disabled=false;
   }
+}
+async function doLogout(){
+  try{
+    const { signOut } = window.authFns;
+    await signOut(window.firebaseAuth);
+  }catch(e){ console.warn(e); }
+  closeAdmin();
 }
 function closeAdmin(){
   document.getElementById('adm-editor').classList.remove('show');
@@ -2045,9 +2204,10 @@ function buildControls(k){
       <div class="ctrl"><label>Logo (imagen)</label>
         <div class="ctrl-img-upload" onclick="document.getElementById('logo-file').click()" id="logo-preview-wrap">
           ${D.logo.url?`<img src="${D.logo.url}">`:''}
-          <div class="upload-label"><span>🏷</span><br>Click para subir logo</div>
+          <div class="upload-label"><span>🏷</span><br>Click para vista previa (no se guarda hasta pegar la URL)</div>
         </div>
         <input type="file" class="ctrl-img-input" id="logo-file" accept="image/*" onchange="handleImgFile(this,'logo')">
+        <p style="font-size:11px;color:var(--amber);margin-top:6px;line-height:1.5">⚠ Sube esta imagen a <a href="https://imgur.com/upload" target="_blank" style="color:var(--amber)">Imgur</a> u otro hosting y pega aquí el link — subir el archivo directo no se guardará permanentemente.</p>
         <input type="text" id="ctrl-logo-url" value="${D.logo.url}" placeholder="https://... URL del logo" style="margin-top:8px;background:var(--black);border:1px solid var(--border);border-radius:10px;padding:9px 11px;color:#fff;font-size:12.5px;width:100%">
         <button class="ctrl-btn-sm" onclick="applyLogoUrl()">✓ Aplicar logo</button>
       </div>
@@ -2089,37 +2249,39 @@ function applySectionColors(){
 // ── SAVE ALL ──
 function saveAll(){
   const k=currentEditor;
-  if(k==='home'){
-    if(ge('ctrl-qt'))D.textos.quienesTitle=v('ctrl-qt');
-    if(ge('ctrl-qd'))D.textos.quienesDesc=v('ctrl-qd');
-    if(ge('ctrl-m'))D.textos.mision=v('ctrl-m');
-    if(ge('ctrl-v'))D.textos.vision=v('ctrl-v');
-    if(ge('ctrl-prom'))D.textos.promesa=v('ctrl-prom');
-    if(ge('ctrl-seg'))D.textos.seguro=v('ctrl-seg');
-  } else if(SECS[k]){
-    if(ge('ctrl-s-title'))SECS[k].title=v('ctrl-s-title');
-    if(ge('ctrl-s-age'))SECS[k].age=v('ctrl-s-age');
-    if(ge('ctrl-s-unidad'))SECS[k].unidadNombre=v('ctrl-s-unidad');
-    if(ge('ctrl-s-bienv'))SECS[k].bienvenida=v('ctrl-s-bienv');
-    if(ge('ctrl-s-oraciontitulo'))SECS[k].oracionTitulo=v('ctrl-s-oraciontitulo');
-    if(ge('ctrl-s-oracion'))SECS[k].oracion=v('ctrl-s-oracion');
-    if(ge('ctrl-s-lema'))SECS[k].lema=v('ctrl-s-lema');
-    if(ge('ctrl-s-marco'))SECS[k].marcoSimbolico=v('ctrl-s-marco');
-    if(ge('ctrl-s-desc'))SECS[k].desc=v('ctrl-s-desc');
-    if(ge('ctrl-s-prog'))SECS[k].progresionUrl=v('ctrl-s-prog');
-  } else if(k==='contacto'){
-    if(ge('ctrl-c-dir'))D.contacto.dir=v('ctrl-c-dir');
-    if(ge('ctrl-c-tel'))D.contacto.tel=v('ctrl-c-tel');
-    if(ge('ctrl-c-email'))D.contacto.email=v('ctrl-c-email');
-    if(ge('ctrl-c-hor'))D.contacto.horario=v('ctrl-c-hor');
-    if(ge('ctrl-c-map')&&v('ctrl-c-map'))D.contacto.mapUrl=v('ctrl-c-map');
-  } else if(k==='general'){
-    if(ge('ctrl-nav-text'))D.logo.navText=v('ctrl-nav-text');
-    if(ge('ctrl-nav-sub'))D.logo.navSub=v('ctrl-nav-sub');
-    if(ge('ctrl-logo-url')&&v('ctrl-logo-url'))D.logo.url=v('ctrl-logo-url');
-    if(ge('ctrl-footer-desc'))D.footer.desc=v('ctrl-footer-desc');
-    if(ge('ctrl-footer-copy'))D.footer.copy=v('ctrl-footer-copy');
-  }
+  pauseAndSave(()=>{
+    if(k==='home'){
+      if(ge('ctrl-qt'))D.textos.quienesTitle=v('ctrl-qt');
+      if(ge('ctrl-qd'))D.textos.quienesDesc=v('ctrl-qd');
+      if(ge('ctrl-m'))D.textos.mision=v('ctrl-m');
+      if(ge('ctrl-v'))D.textos.vision=v('ctrl-v');
+      if(ge('ctrl-prom'))D.textos.promesa=v('ctrl-prom');
+      if(ge('ctrl-seg'))D.textos.seguro=v('ctrl-seg');
+    } else if(SECS[k]){
+      if(ge('ctrl-s-title'))SECS[k].title=v('ctrl-s-title');
+      if(ge('ctrl-s-age'))SECS[k].age=v('ctrl-s-age');
+      if(ge('ctrl-s-unidad'))SECS[k].unidadNombre=v('ctrl-s-unidad');
+      if(ge('ctrl-s-bienv'))SECS[k].bienvenida=v('ctrl-s-bienv');
+      if(ge('ctrl-s-oraciontitulo'))SECS[k].oracionTitulo=v('ctrl-s-oraciontitulo');
+      if(ge('ctrl-s-oracion'))SECS[k].oracion=v('ctrl-s-oracion');
+      if(ge('ctrl-s-lema'))SECS[k].lema=v('ctrl-s-lema');
+      if(ge('ctrl-s-marco'))SECS[k].marcoSimbolico=v('ctrl-s-marco');
+      if(ge('ctrl-s-desc'))SECS[k].desc=v('ctrl-s-desc');
+      if(ge('ctrl-s-prog'))SECS[k].progresionUrl=v('ctrl-s-prog');
+    } else if(k==='contacto'){
+      if(ge('ctrl-c-dir'))D.contacto.dir=v('ctrl-c-dir');
+      if(ge('ctrl-c-tel'))D.contacto.tel=v('ctrl-c-tel');
+      if(ge('ctrl-c-email'))D.contacto.email=v('ctrl-c-email');
+      if(ge('ctrl-c-hor'))D.contacto.horario=v('ctrl-c-hor');
+      if(ge('ctrl-c-map')&&v('ctrl-c-map'))D.contacto.mapUrl=v('ctrl-c-map');
+    } else if(k==='general'){
+      if(ge('ctrl-nav-text'))D.logo.navText=v('ctrl-nav-text');
+      if(ge('ctrl-nav-sub'))D.logo.navSub=v('ctrl-nav-sub');
+      if(ge('ctrl-logo-url')&&v('ctrl-logo-url'))D.logo.url=v('ctrl-logo-url');
+      if(ge('ctrl-footer-desc'))D.footer.desc=v('ctrl-footer-desc');
+      if(ge('ctrl-footer-copy'))D.footer.copy=v('ctrl-footer-copy');
+    }
+  });
   applyAll();
   if(SECS[k])renderSecPage(k);
   toast('✓ Cambios guardados y aplicados al sitio');
@@ -2134,12 +2296,12 @@ function handleImgFile(input,target){
   reader.onload=e=>{
     const url=e.target.result;
     if(target==='logo'){
-      D.logo.url=url;
+      // Solo vista previa visual — NO se asigna a D.logo.url para evitar guardar
+      // imágenes base64 gigantes en Firestore (límite de 1MB por documento).
       const w=document.getElementById('logo-preview-wrap');
       if(w){const i=w.querySelector('img')||document.createElement('img');i.src=url;i.style.cssText='width:100%;height:100%;object-fit:cover;position:absolute;inset:0';w.appendChild(i);}
-      sv('ctrl-logo-url',url); applyAll();
+      toast('Vista previa lista — sube esta imagen a Imgur y pega el link para guardarla', true);
     }
-    toast('Imagen cargada');
   };
   reader.readAsDataURL(file);
 }
@@ -2165,6 +2327,10 @@ function previewHeroImg(url){
 function addHeroImage(){
   const url=v('ctrl-hero-img');
   if(!url){ toast('Sube una imagen o pega una URL primero',true); return; }
+  if(isBase64Url(url)){
+    toast('Sube esta foto a Imgur y pega el link — subir el archivo directo no se puede guardar en la nube', true);
+    return;
+  }
   if(!D.hero.images) D.hero.images=[];
   D.hero.images.push({url, desc:v('ctrl-hero-desc')||'', position:v('ctrl-hero-pos')||'center'});
   sv('ctrl-hero-img',''); sv('ctrl-hero-desc',''); sv('ctrl-hero-pos','center');
@@ -2188,29 +2354,33 @@ function moveHeroImage(i,dir){
   renderHeroCarousel();
   buildControls('home');
 }
-function applyLogoUrl(){ const url=v('ctrl-logo-url'); if(url){D.logo.url=url;applyAll();toast('Logo actualizado');} }
+function applyLogoUrl(){
+  const url=v('ctrl-logo-url');
+  if(!url) return;
+  if(isBase64Url(url)){ toast('Pega una URL real (Imgur, etc.), no un archivo local', true); return; }
+  D.logo.url=url;applyAll();toast('Logo actualizado');
+}
 function handleSecLogoFile(input,sectionKey){
   const file=input.files[0];
   if(!file) return;
   const reader=new FileReader();
   reader.onload=e=>{
     const url=e.target.result;
-    SECS[sectionKey].logo=url;
+    // Solo vista previa visual — NO se asigna a SECS[sectionKey].logo para evitar
+    // guardar imágenes base64 gigantes en Firestore (límite de 1MB por documento).
     const w=document.getElementById('sec-logo-preview-wrap');
     if(w){const i=w.querySelector('img')||document.createElement('img');i.src=url;i.style.cssText='width:100%;height:100%;object-fit:cover;position:absolute;inset:0';w.appendChild(i);}
-    sv('ctrl-s-logo',url);
-    renderSecPage(sectionKey); renderHomeSeccionesGrid(); if(currentEditor===sectionKey) buildControls(sectionKey);
-    toast('Logo de sección cargado');
+    toast('Vista previa lista — sube esta imagen a Imgur y pega el link para guardarla', true);
   };
   reader.readAsDataURL(file);
 }
 function applySecLogo(sectionKey){
   const url=v('ctrl-s-logo');
-  if(url){
-    SECS[sectionKey].logo=url;
-    renderSecPage(sectionKey); renderHomeSeccionesGrid(); if(currentEditor===sectionKey) buildControls(sectionKey);
-    toast('Logo de '+SECS[sectionKey].title+' actualizado');
-  }
+  if(!url) return;
+  if(isBase64Url(url)){ toast('Pega una URL real (Imgur, etc.), no un archivo local', true); return; }
+  SECS[sectionKey].logo=url;
+  renderSecPage(sectionKey); renderHomeSeccionesGrid(); if(currentEditor===sectionKey) buildControls(sectionKey);
+  toast('Logo de '+SECS[sectionKey].title+' actualizado');
 }
 function previewMapCtrl(){
   const url=v('ctrl-c-map');
@@ -2304,11 +2474,16 @@ function saveSecPhoto(){
   } else if(multiUrls.length === 1){
     SECS[s].fotos.push({url:multiUrls[0], desc, emoji:'📷', position});
     toast('Foto añadida a '+SECS[s].title);
-  } else if(pendingSecFiles.length > 1){
+  } else if(pendingSecFiles.length >= 1){
+    const hasBase64 = pendingSecFiles.some(f=>isBase64Url(f.url));
+    if(hasBase64){
+      toast('Sube tus fotos a Imgur y pega los links — subir el archivo directo no se puede guardar en la nube', true);
+      return;
+    }
     pendingSecFiles.forEach((f,i)=>{
-      SECS[s].fotos.push({url:f.url, desc: `${desc} (${i+1})`, emoji:'📷', position});
+      SECS[s].fotos.push({url:f.url, desc: pendingSecFiles.length>1?`${desc} (${i+1})`:desc, emoji:'📷', position});
     });
-    toast(`${pendingSecFiles.length} fotos añadidas a ${SECS[s].title}`);
+    toast(`${pendingSecFiles.length} foto(s) añadida(s) a ${SECS[s].title}`);
   } else {
     if(!v('spm-url')){ toast('Sube una foto, pega una URL o pega varias URLs primero',true); return; }
     SECS[s].fotos.push({url:v('spm-url'), desc, emoji:'📷', position});
@@ -2326,12 +2501,42 @@ function deleteSecPhoto(s,idx){
 }
 
 // ══════════ INIT ══════════
-applyAll();
-renderGallery();
-renderGalleryFilters();
-renderHomeSeccionesGrid();
-['cachorros','manada','unidad','caminantes','rovers','dirigencia','comite'].forEach(s=>renderSecPage(s));
+function renderEverything(){
+  applyAll();
+  renderGallery();
+  renderGalleryFilters();
+  renderHomeSeccionesGrid();
+  ['cachorros','manada','unidad','caminantes','rovers','dirigencia','comite'].forEach(s=>renderSecPage(s));
+}
+
+// Primer render inmediato con los valores por defecto, para que el sitio no se vea vacío mientras carga la red
+renderEverything();
 initScrollReveal();
+
+// Cuando Firebase esté listo: cargar contenido real, activar sincronización en vivo y manejar sesión de admin
+function initFirebaseAndLoad(){
+  loadFromFirestore().then(()=>{
+    renderEverything();
+    listenToFirestoreChanges();
+  });
+
+  const { onAuthStateChanged } = window.authFns;
+  onAuthStateChanged(window.firebaseAuth, (user)=>{
+    if(user){
+      // Sesión activa: si el modal de login estaba abierto, lo cerramos y mostramos el panel directo
+      const loginScreen = document.getElementById('adm-login-screen');
+      if(loginScreen.classList.contains('show')){
+        loginScreen.classList.remove('show');
+      }
+    }
+  });
+}
+
+if(window.firebaseDb){
+  initFirebaseAndLoad();
+} else {
+  window.addEventListener('firebase-ready', initFirebaseAndLoad, {once:true});
+}
 </script>
 </body>
 </html>
