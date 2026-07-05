@@ -23,16 +23,12 @@
   --c-caminantes:#2563eb;
   --c-rovers:#F62217;
   --c-dirigencia:#9333ea;
-
-  /* Escala semántica de z-index — nunca valores arbitrarios como 999/9999 */
   --z-sticky:100;
   --z-drawer:200;
   --z-app-shell:300;
   --z-overlay:400;
   --z-modal:500;
   --z-toast:600;
-
-  /* Curvas de easing con carácter — las nativas de CSS (ease, ease-out) son débiles */
   --ease-out: cubic-bezier(.16,1,.3,1);
   --ease-out-soft: cubic-bezier(.25,.46,.45,.94);
   --ease-in-out: cubic-bezier(.77,0,.175,1);
@@ -51,13 +47,9 @@ a,button{-webkit-tap-highlight-color:transparent}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
 }
-
-/* ══════════ SCROLL REVEAL ══════════ */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
 .reveal.in-view{opacity:1;transform:translateY(0)}
 @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
-
-/* ══════════ FLUID ANIMATED BACKGROUND ══════════ */
 .fluid-bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--black);isolation:isolate}
 .blob{position:absolute;border-radius:42% 58% 65% 35% / 45% 40% 60% 55%;filter:blur(2px);opacity:.55;animation:morph 18s ease-in-out infinite, drift 26s ease-in-out infinite;mix-blend-mode:screen}
 .blob1{width:55vmax;height:55vmax;top:-20%;left:-15%;background:radial-gradient(circle at 30% 30%,var(--ruby),transparent 70%);animation-delay:0s}
@@ -76,8 +68,6 @@ a,button{-webkit-tap-highlight-color:transparent}
 }
 .fluid-noise{position:absolute;inset:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 @media (prefers-reduced-motion: reduce){.blob{animation:none}}
-
-/* ══════════ HORIZONTAL PILL NAV ══════════ */
 .nav-wrap{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:var(--z-sticky);width:calc(100% - 36px);max-width:1440px;display:flex;justify-content:center}
 nav{
   background:rgba(13,20,20,.7);backdrop-filter:blur(20px) saturate(140%);
@@ -104,14 +94,10 @@ nav{
 .mobile-drawer.open{display:flex}
 .mobile-drawer a{color:var(--gray-light);text-decoration:none;padding:13px 16px;font-size:15px;font-weight:700;border-radius:14px;transition:color .15s ease,background-color .15s ease}
 .mobile-drawer a:hover{color:#fff;background:rgba(255,255,255,.06)}
-
-/* ══════════ MAIN STAGE ══════════ */
 .stage{position:relative;z-index:1;min-height:100vh;padding-top:108px}
 .page-section{display:none;animation:fadeUp .5s ease}
 .page-section.active{display:block}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-
-/* Floating card container */
 .fl-card{
   max-width:1440px;margin:0 auto 24px;background:rgba(13,20,20,.55);
   backdrop-filter:blur(16px) saturate(140%);border:1px solid var(--border);
@@ -119,8 +105,6 @@ nav{
 }
 .fl-card-pad{padding:3.5rem}
 @media(max-width:900px){.fl-card-pad{padding:2rem 1.5rem}}
-
-/* ── HERO CARRUSEL ── */
 .hero-fl{padding:0 18px;margin-bottom:0}
 .hero-fl-inner{max-width:1440px;margin:0 auto;position:relative;border-radius:32px;overflow:hidden;background:#0d1414;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.35);min-height:640px;display:flex;align-items:flex-end}
 .hero-carousel{position:absolute;inset:0;z-index:0}
@@ -150,8 +134,6 @@ nav{
 .btn-outline{background:rgba(255,255,255,.1);color:#fff;padding:13px 28px;border-radius:100px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:.5px;border:1.5px solid rgba(255,255,255,.3);transition:color .2s var(--ease-out),border-color .2s var(--ease-out),background-color .2s var(--ease-out),transform .2s var(--ease-out);cursor:pointer;backdrop-filter:blur(6px)}
 .btn-outline:hover{border-color:var(--amber);color:var(--amber);background:rgba(255,191,0,.1);transform:translateY(-2px)}
 .btn-outline:active{transform:translateY(0) scale(.97)}
-
-/* Carousel controls */
 .hero-dots{display:flex;gap:7px;margin-left:auto}
 .hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.35);border:none;cursor:pointer;padding:0;transition:width .25s var(--ease-out),background-color .25s ease}
 .hero-dot.active{background:var(--amber);width:22px;border-radius:5px}
@@ -160,16 +142,12 @@ nav{
 .hero-arrow:hover{background:rgba(230,51,41,.7);border-color:var(--ruby)}
 .hero-arrow.prev{left:18px}
 .hero-arrow.next{right:18px}
-
-
-/* ── SECTIONS within stage ── */
 .sec{padding:0 18px;margin-bottom:24px}
 .sec-tag{font-size:10px;font-weight:800;letter-spacing:3.5px;text-transform:uppercase;color:var(--ruby);margin-bottom:.9rem;display:flex;align-items:center;gap:8px}
 .sec-tag::before{content:'';width:20px;height:2px;background:var(--ruby);flex-shrink:0}
 .sec-title{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:800;letter-spacing:-0.3px;line-height:1.05;margin-bottom:1.1rem;text-wrap:balance}
 .sec-title em{color:var(--amber);font-style:normal}
 .sec-lead{font-size:16px;color:var(--gray-light);line-height:1.85;max-width:640px;font-weight:500}
-
 .quienes-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:3.5rem;align-items:start;margin-top:2.5rem}
 .pillars{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:1.6rem}
 .pillar{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:18px;padding:1.1rem;transition:transform .3s cubic-bezier(.16,1,.3,1),border-color .3s,background .3s}
@@ -184,7 +162,6 @@ nav{
 .mv-item.y::before{background:var(--amber)}
 .mv-item h3{font-size:1.15rem;font-weight:800;letter-spacing:.2px;margin-bottom:7px}
 .mv-item p{font-size:14px;color:var(--gray-light);line-height:1.75;font-weight:500}
-
 .promesa-quote{font-size:clamp(1rem,1.8vw,1.3rem);font-weight:600;line-height:1.65;color:#fff;padding:1.8rem 2.2rem;background:rgba(255,255,255,.03);border-radius:20px;border:1px solid var(--border);margin:1.6rem 0 2.2rem;position:relative}
 .promesa-quote::before{content:'"';font-size:90px;font-weight:800;color:var(--ruby);position:absolute;top:-18px;left:18px;line-height:1;opacity:.35}
 .pañoleta-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem}
@@ -192,7 +169,6 @@ nav{
 .pñ-swatch{width:38px;height:38px;border-radius:50%;flex-shrink:0}
 .pñ-card h4{font-size:12px;font-weight:800;letter-spacing:.3px;margin-bottom:3px}
 .pñ-card p{font-size:13px;color:var(--gray);line-height:1.6;font-weight:500}
-
 .secciones-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:2.2rem}
 .sec-tile{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:22px;padding:1.5rem 1.2rem;cursor:pointer;text-decoration:none;color:#fff;transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s,box-shadow .35s;position:relative;overflow:hidden;display:flex;flex-direction:column}
 .sec-tile-logo-wrap{width:42px;height:42px;display:flex;align-items:center;justify-content:center;margin-bottom:.7rem;flex-shrink:0;transition:transform .35s cubic-bezier(.16,1,.3,1)}
@@ -209,7 +185,6 @@ nav{
 .tile-age{font-size:9.5px;color:var(--tc,var(--amber));font-weight:800;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:6px}
 .tile-desc{font-size:13px;color:var(--gray);line-height:1.6;margin-bottom:9px;font-weight:500}
 .tile-arrow{font-size:15px;color:var(--gray);transition:transform .25s cubic-bezier(.16,1,.3,1);display:inline-block}
-
 .seguro-strip{background:linear-gradient(120deg,var(--ruby),#8a0f0a);border-radius:24px;padding:2.2rem 2.4rem;max-width:1440px;margin:0 auto}
 .seguro-inner{display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
 .seguro-inner>div:first-child{flex:1;min-width:260px}
@@ -219,14 +194,10 @@ nav{
 .seguro-inner>a:hover{opacity:.9}
 .seguro-docs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .seguro-doc-link{font-size:11px;color:rgba(255,255,255,.75);text-decoration:underline;font-weight:600}
-
-/* ── PAGE HERO (inner pages) ── */
 .ph-fl{padding:0 18px;margin-bottom:0}
 .ph-fl-inner{max-width:1440px;margin:0 auto;border-radius:32px;overflow:hidden;position:relative;background:rgba(255,255,255,.03);border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.35);padding:3rem 3rem 2.5rem}
 .ph-fl-accent{position:absolute;right:-10%;top:-30%;width:50%;height:160%;opacity:.18;border-radius:50%;filter:blur(40px)}
 .ph-fl-content{position:relative;z-index:1;max-width:760px}
-
-/* ── INFO BLOCKS ── */
 .sec-info-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;align-items:start}
 .info-block{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s}
 .info-block:hover{border-color:rgba(255,255,255,.18)}
@@ -241,8 +212,6 @@ nav{
 .sec-photo-item:hover{transform:translateY(-3px);box-shadow:0 12px 28px -6px rgba(0,0,0,.5)}
 .sec-photo-item .zoom-hint{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;opacity:0;transition:opacity .2s;backdrop-filter:blur(4px)}
 .sec-photo-item:hover .zoom-hint{opacity:1}
-
-/* ── LIGHTBOX ── */
 .lightbox-backdrop{display:none;position:fixed;inset:0;z-index:var(--z-modal);background:rgba(0,0,0,.92);align-items:center;justify-content:center;backdrop-filter:blur(6px)}
 .lightbox-backdrop.show{display:flex}
 .lightbox-img-wrap{max-width:92vw;max-height:88vh;position:relative;display:flex;flex-direction:column;align-items:center}
@@ -257,8 +226,6 @@ nav{
 @media(max-width:640px){.lightbox-nav{width:38px;height:38px;font-size:16px}.lightbox-nav.prev{left:6px}.lightbox-nav.next{right:6px}.lightbox-close{top:-40px}}
 .sec-photo-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.16,1,.3,1)}
 .sec-photo-item:hover img{transform:scale(1.06)}
-
-/* ── GALERÍA ── */
 .gallery-masonry{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;gap:8px}
 .gal-item{background:rgba(255,255,255,.04);overflow:hidden;position:relative;cursor:pointer;border-radius:18px}
 .gal-item-shine::before{content:'';position:absolute;inset:0;z-index:2;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-130%);transition:transform .7s ease;pointer-events:none}
@@ -291,8 +258,6 @@ nav{
 .album-count{background:rgba(255,255,255,.15);padding:1px 8px;border-radius:10px;font-size:11px;font-weight:800}
 .album-chip.active .album-count{background:rgba(255,255,255,.25)}
 .gal-item:hover .gal-overlay{opacity:1}
-
-/* ── CONTACTO ── */
 .contact-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:2.2rem}
 .cinfo-item{display:flex;gap:.9rem;align-items:flex-start;margin-bottom:1.3rem}
 .cinfo-icon{width:38px;height:38px;background:rgba(246,34,23,.12);border:1px solid rgba(246,34,23,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
@@ -315,8 +280,6 @@ nav{
 .fgroup select option{background:var(--surface)}
 .fgroup textarea{resize:vertical;min-height:95px}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-
-/* ── FOOTER ── */
 .footer-fl{padding:2.4rem 3rem}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem}
 .footer-logo-img{max-height:42px;object-fit:contain;margin-bottom:.9rem}
@@ -328,51 +291,46 @@ nav{
 .footer-col a:hover{color:#fff}
 .footer-bottom{margin-top:1.6rem;padding-top:1.3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:10.5px;color:var(--gray);flex-wrap:wrap;gap:.7rem;font-weight:500}
 .footer-dot{color:var(--ruby)}
-
-/* ════════════════════════
-   ADMIN DASHBOARD — arquitectura profesional
-════════════════════════ */
 #adm-login-screen{display:none;position:fixed;inset:0;z-index:var(--z-overlay);background:radial-gradient(circle at 30% 20%,rgba(246,34,23,.08),transparent 50%),rgba(6,13,13,.97);backdrop-filter:blur(12px);align-items:center;justify-content:center}
 #adm-login-screen.show{display:flex}
 .login-box{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:40px;width:380px;max-width:95vw;border-top:3px solid var(--ruby);box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
 .login-box h2{font-size:2rem;font-weight:800;letter-spacing:.3px;margin-bottom:4px}
 .login-box p{font-size:13px;color:var(--gray);margin-bottom:28px;font-weight:500}
 .login-err{font-size:12px;color:var(--ruby);margin-top:-10px;margin-bottom:12px;display:none;font-weight:600}
-
 #adm-editor{display:none;position:fixed;inset:0;z-index:var(--z-app-shell);background:var(--black);isolation:isolate}
 #adm-editor.show{display:flex}
 .adm-shell{display:flex;width:100%;height:100%;overflow:hidden;background:var(--black);position:relative;z-index:1}
-
-/* ── SIDEBAR ── */
-.adm-sidebar{width:264px;min-width:264px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;transition:width .25s var(--ease-out),min-width .25s var(--ease-out);isolation:isolate;position:relative;overflow:hidden}
-.adm-sidebar.collapsed{width:72px;min-width:72px}
-.adm-sidebar-brand{display:flex;align-items:center;gap:10px;padding:18px 16px;border-bottom:1px solid var(--border);flex-shrink:0;min-height:64px}
-.adm-sidebar-brand .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--ruby),var(--ruby-dark));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0}
-.adm-sidebar-brand .label{overflow:hidden;white-space:nowrap}
-.adm-sidebar-brand .label .t1{font-size:13px;font-weight:800;letter-spacing:.3px}
-.adm-sidebar-brand .label .t2{font-size:9.5px;color:var(--gray);letter-spacing:1px;text-transform:uppercase}
-.adm-sidebar.collapsed .label{display:none}
-.adm-nav{flex:1;overflow-y:auto;overflow-x:hidden;padding:14px 10px}
-.adm-nav-group{margin-bottom:18px}
-.adm-nav-group-label{font-size:9.5px;font-weight:800;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.5px;padding:0 10px;margin-bottom:6px;white-space:nowrap}
-.adm-sidebar.collapsed .adm-nav-group-label{display:none}
-.adm-navlink{display:flex;align-items:center;gap:11px;width:100%;padding:9px 10px;border-radius:10px;background:none;border:none;color:var(--gray-light);font-size:12.5px;font-weight:600;cursor:pointer;text-align:left;transition:background .15s,color .15s;margin-bottom:2px;font-family:'Manrope',sans-serif;white-space:nowrap;overflow:hidden}
-.adm-navlink span:not(.ic):not(.badge){overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;transition:opacity .2s ease,width .2s ease}
-.adm-navlink .ic{font-size:16px;width:20px;text-align:center;flex-shrink:0}
-.adm-navlink:hover{background:rgba(255,255,255,.05);color:#fff}
-.adm-navlink.active{background:linear-gradient(135deg,rgba(246,34,23,.18),rgba(246,34,23,.06));color:#fff;box-shadow:inset 0 0 0 1px rgba(246,34,23,.3)}
-.adm-navlink .badge{margin-left:auto;font-size:10px;font-weight:800;background:rgba(255,255,255,.08);padding:1px 7px;border-radius:100px;color:var(--gray-light)}
-.adm-sidebar.collapsed .adm-navlink .badge{display:none}
-.adm-sidebar.collapsed .adm-navlink span:not(.ic){display:none}
-.adm-sidebar.collapsed .adm-navlink{justify-content:center;padding:9px 0;gap:0}
-.adm-sidebar.collapsed .adm-nav{padding:14px 6px}
-.adm-sidebar.collapsed .adm-nav-group{margin-bottom:8px}
-.adm-sidebar-foot{padding:12px 10px;border-top:1px solid var(--border);flex-shrink:0;overflow:hidden}
-.adm-sidebar.collapsed .adm-sidebar-foot{padding:8px 6px}
-.adm-sidebar.collapsed .adm-sidebar-foot .adm-btn{font-size:0;padding:8px;width:100%;justify-content:center}
-.adm-sidebar.collapsed .adm-sidebar-foot .adm-btn::before{content:'↩';font-size:16px}
-
-/* ── MAIN AREA ── */
+.adm-rail{width:56px;min-width:56px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;flex-shrink:0;padding:14px 0;gap:4px}
+.adm-rail-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--ruby),var(--ruby-dark));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0;margin-bottom:14px}
+.adm-rail-nav{display:flex;flex-direction:column;gap:4px;align-items:center;flex:1;overflow-y:auto;overflow-x:hidden;width:100%;padding:0 8px}
+.adm-rail-btn{position:relative;width:38px;height:38px;border-radius:11px;background:none;border:none;color:var(--gray-light);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background-color .15s ease,color .15s ease;flex-shrink:0}
+.adm-rail-btn:hover{background:rgba(255,255,255,.06);color:#fff}
+.adm-rail-btn.active{background:linear-gradient(135deg,rgba(246,34,23,.22),rgba(246,34,23,.08));color:#fff;box-shadow:inset 0 0 0 1px rgba(246,34,23,.35)}
+.adm-rail-btn .tip{position:absolute;left:calc(100% + 10px);top:50%;transform:translateY(-50%) translateX(-4px);background:var(--card);border:1px solid var(--border);color:#fff;font-size:11.5px;font-weight:700;padding:6px 11px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease;box-shadow:0 8px 20px rgba(0,0,0,.4);z-index:var(--z-drawer)}
+.adm-rail-btn:hover .tip{opacity:1;transform:translateY(-50%) translateX(0)}
+.adm-rail-foot{padding-top:10px;border-top:1px solid var(--border);width:100%;display:flex;justify-content:center}
+.adm-aside{width:260px;min-width:260px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;transition:width .22s var(--ease-out),min-width .22s var(--ease-out),opacity .18s ease;overflow:hidden}
+.adm-aside.collapsed{width:0;min-width:0;opacity:0;border-right:none}
+.adm-aside-hd{padding:16px 16px 12px;border-bottom:1px solid var(--border);flex-shrink:0}
+.adm-aside-hd h2{font-size:12.5px;font-weight:800;letter-spacing:.3px}
+.adm-aside-hd p{font-size:11px;color:var(--gray);margin-top:2px;font-weight:500}
+.adm-aside-search{margin:12px 16px 0}
+.adm-aside-search input{width:100%;padding:8px 12px;background:var(--black);border:1px solid var(--border);border-radius:10px;color:#fff;font-size:12.5px;font-family:'Manrope',sans-serif}
+.adm-aside-search input:focus{outline:none;border-color:var(--ruby)}
+.adm-aside-body{flex:1;overflow-y:auto;padding:12px}
+.adm-aside-empty{padding:24px 12px;text-align:center;color:var(--gray);font-size:12px}
+.adm-aside-item{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;border-radius:12px;background:none;border:none;color:var(--gray-light);cursor:pointer;text-align:left;transition:background-color .15s ease,color .15s ease;margin-bottom:3px;font-family:'Manrope',sans-serif}
+.adm-aside-item:hover{background:rgba(255,255,255,.05);color:#fff}
+.adm-aside-item.active{background:linear-gradient(135deg,rgba(246,34,23,.18),rgba(246,34,23,.06));color:#fff;box-shadow:inset 0 0 0 1px rgba(246,34,23,.3)}
+.adm-aside-item .thumb{width:32px;height:32px;border-radius:9px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;overflow:hidden}
+.adm-aside-item .thumb img{width:100%;height:100%;object-fit:cover}
+.adm-aside-item .txt{flex:1;min-width:0}
+.adm-aside-item .txt .t{font-size:12.5px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.adm-aside-item .txt .s{font-size:10.5px;color:var(--gray)}
+.adm-aside-item.active .txt .s{color:rgba(255,255,255,.7)}
+.adm-aside-count{font-size:10px;font-weight:800;background:rgba(255,255,255,.08);padding:2px 7px;border-radius:100px;color:var(--gray-light);flex-shrink:0}
+.adm-aside-item.active .adm-aside-count{background:rgba(255,255,255,.22);color:#fff}
+.adm-btn-dirty{background:linear-gradient(135deg,var(--amber),#d9a300)!important;color:#1a1400!important}
 .adm-main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 .adm-topbar{height:64px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 22px;flex-shrink:0;gap:1rem}
 .adm-topbar-left{display:flex;align-items:center;gap:14px;min-width:0}
@@ -394,13 +352,10 @@ nav{
 #save-indicator.show{opacity:1}
 #save-indicator.ok{color:#4ade80;background:rgba(34,197,94,.1)}
 #save-indicator.err{color:var(--ruby);background:rgba(246,34,23,.1)}
-
 .adm-content{flex:1;overflow-y:auto;overflow-x:hidden;padding:24px 28px 60px;max-width:100%}
 .adm-view{display:none}
 .adm-view.active{display:block;animation:admFadeIn .35s ease}
 @keyframes admFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-/* ── DASHBOARD STAT CARDS ── */
 .adm-stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:26px}
 .adm-stat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden;transition:border-color .2s;min-width:0}
 .adm-stat-card:hover{border-color:rgba(255,255,255,.18)}
@@ -408,8 +363,6 @@ nav{
 .adm-stat-card .num{font-size:2rem;font-weight:800;line-height:1}
 .adm-stat-card .lbl{font-size:11.5px;color:var(--gray);font-weight:600;margin-top:4px}
 .adm-stat-card .accent-bar{position:absolute;left:0;top:0;bottom:0;width:3px}
-
-/* ── CARD-BASED FORM SECTIONS (reemplaza el acordeón) ── */
 .adm-section-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start;min-width:0}
 .adm-section-grid.single{grid-template-columns:1fr}
 .adm-card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:18px;min-width:0}
@@ -426,8 +379,6 @@ nav{
 .adm-quick-btn .t{font-size:12.5px;font-weight:700}
 .adm-section-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .adm-section-title-row h2{font-size:17px;font-weight:800}
-
-/* Form controls reused inside cards */
 .ctrl{margin-bottom:14px}
 .ctrl:last-child{margin-bottom:0}
 .ctrl label{display:block;font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
@@ -446,8 +397,6 @@ nav{
 .ctrl-btn-sm:hover{background:rgba(246,34,23,.22)}
 .ctrl-btn-sm.green{background:rgba(34,197,94,.1);color:#4ade80;border-color:rgba(34,197,94,.2)}
 .ctrl-btn-sm.green:hover{background:rgba(34,197,94,.2)}
-
-/* List rows used inside cards (photos, albums, etc.) */
 .adm-row-list{display:flex;flex-direction:column;gap:7px}
 .adm-row-item{display:flex;gap:9px;align-items:center;background:var(--black);border-radius:10px;padding:8px 10px;border:1px solid var(--border)}
 .adm-row-thumb{width:40px;height:32px;background:var(--surface);border-radius:6px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
@@ -461,8 +410,6 @@ nav{
 .adm-row-btn.danger:hover{background:rgba(246,34,23,.2)}
 .adm-row-btn.warn{background:rgba(245,191,0,.12);color:var(--amber)}
 .adm-row-btn.warn:hover{background:rgba(245,191,0,.22)}
-
-/* Sections grid (cards for each scout section in nav) */
 .adm-secgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .adm-seccard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;cursor:pointer;transition:transform .2s var(--ease-out),border-color .2s ease;text-align:left;font-family:'Manrope',sans-serif;color:#fff;position:relative;overflow:hidden;min-width:0;width:100%}
 .adm-seccard:hover{transform:translateY(-2px);border-color:var(--tc,var(--ruby))}
@@ -473,13 +420,9 @@ nav{
 .adm-seccard .name{font-size:13.5px;font-weight:800}
 .adm-seccard .age{font-size:10px;color:var(--tc,var(--amber));font-weight:700}
 .adm-seccard .accent{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--tc,var(--ruby))}
-
-/* ── EMPTY STATE ── */
 .adm-empty{text-align:center;padding:40px 20px;color:var(--gray)}
 .adm-empty .ic{font-size:2.4rem;opacity:.4;margin-bottom:10px}
 .adm-empty p{font-size:13px}
-
-/* Toast / Modal (shared with public site styles, kept) */
 #toast{position:fixed;bottom:20px;right:20px;z-index:var(--z-toast);background:var(--surface);border:1px solid var(--border);border-left:3px solid #22c55e;color:#fff;padding:12px 20px;border-radius:14px;font-size:13px;font-weight:600;transform:translateY(80px);opacity:0;transition:transform .3s var(--ease-out),opacity .3s ease;box-shadow:0 8px 30px rgba(0,0,0,.6)}
 #toast.show{transform:translateY(0);opacity:1}
 #toast.err{border-left-color:var(--ruby)}
@@ -499,14 +442,11 @@ nav{
 .aform-group input:focus,.aform-group textarea:focus{outline:none;border-color:var(--ruby)}
 .aform-group select option{background:var(--surface)}
 .aform-group textarea{resize:vertical;min-height:80px}
-
-/* Responsive admin */
 @media(max-width:1100px){.adm-stats-grid{grid-template-columns:repeat(2,1fr)}.adm-quick-actions{grid-template-columns:repeat(2,1fr)}.adm-section-grid{grid-template-columns:1fr}.adm-secgrid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:900px){
-  .adm-sidebar{position:fixed;inset:0 auto 0 0;z-index:var(--z-drawer);width:280px;min-width:280px;transform:translateX(-100%);transition:transform .3s var(--ease-out);box-shadow:4px 0 24px rgba(0,0,0,.5)}
-  .adm-sidebar.mobile-open{transform:translateX(0)}
-  .adm-sidebar.collapsed{width:280px;min-width:280px;transform:translateX(-100%)}
-  .adm-sidebar.collapsed.mobile-open{transform:translateX(0)}
+  .adm-aside{position:fixed;inset:0 auto 0 56px;z-index:var(--z-drawer);width:280px;min-width:280px;transform:translateX(-100%);transition:transform .3s var(--ease-out);box-shadow:4px 0 24px rgba(0,0,0,.5);opacity:1}
+  .adm-aside.mobile-open{transform:translateX(0)}
+  .adm-aside.collapsed{width:280px;min-width:280px}
   .adm-main{width:100%;min-width:0}
   .adm-topbar{padding:0 14px}
   .adm-content{padding:16px 14px 60px}
@@ -515,7 +455,6 @@ nav{
   .adm-secgrid{grid-template-columns:1fr 1fr}
   .adm-section-grid{grid-template-columns:1fr}
   .adm-breadcrumb h1{font-size:14px}
-  /* Overlay oscuro detrás del drawer cuando está abierto */
   .adm-overlay{display:block;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:calc(var(--z-drawer) - 1);backdrop-filter:blur(2px)}
 }
 @media(max-width:480px){
@@ -524,8 +463,6 @@ nav{
   .adm-secgrid{grid-template-columns:1fr}
   .adm-content{padding:12px 10px 60px}
 }
-
-/* Responsive */
 @media(max-width:1280px){.fl-card,.hero-fl-inner,.ph-fl-inner{max-width:calc(100% - 0px)}.secciones-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:1024px){.secciones-grid{grid-template-columns:repeat(3,1fr)}.gallery-masonry{grid-template-columns:repeat(3,1fr)}.hero-fl-inner{grid-template-columns:1fr}.hero-fl-right{min-height:240px;order:-1}.hero-fl-right::after{background:linear-gradient(180deg,transparent 0%,transparent 55%,rgba(13,20,20,.5) 80%,rgba(13,20,20,.95) 100%)}}
 @media(max-width:900px){.nav-links{display:none}.hamburger{display:flex}.quienes-layout,.contact-layout,.sec-info-layout{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr;gap:1.6rem}.pañoleta-row{grid-template-columns:1fr}.fl-card-pad{padding:2rem 1.4rem}.ph-fl-inner{padding:2.2rem 1.6rem}.nav-wrap{top:12px;width:calc(100% - 20px)}.pillars{grid-template-columns:1fr 1fr}.nav-name-sub{display:none}}
@@ -533,10 +470,6 @@ nav{
 @media(max-width:640px){.secciones-grid{grid-template-columns:repeat(2,1fr)}.gallery-masonry{grid-template-columns:repeat(2,1fr)}.frow{grid-template-columns:1fr}.aform-grid{grid-template-columns:1fr}.hero-fl-left{padding:2rem 1.5rem}.pillars{grid-template-columns:1fr}.sec{padding:0 12px}.nav-wrap{width:calc(100% - 16px);top:10px}nav{padding:6px 6px 6px 12px}.hero-eyebrow{font-size:9.5px}.modal-box{padding:20px}.hero-logo-img,.hero-logo-hex{width:48px;height:48px}.hero-logo-hex{font-size:18px}}
 @media(max-width:480px){.hero-title-fl{font-size:clamp(2.1rem,9vw,2.8rem)}.sec-title{font-size:clamp(1.5rem,6vw,2rem)}.fl-card-pad{padding:1.5rem 1.1rem}.ph-fl-inner{padding:1.8rem 1.2rem}.cform{padding:1.3rem}.footer-fl{padding:1.8rem 1.4rem}.pñ-card{flex-direction:column;text-align:center;align-items:center}.cinfo-item{flex-direction:column;align-items:flex-start;gap:.5rem}.cinfo-icon{margin-bottom:2px}}
 </style>
-
-<!-- ══════════ FIREBASE ══════════ -->
-<!-- IMPORTANTE: reemplaza estos valores con los de TU proyecto de Firebase.
-     Los obtienes en: Firebase Console → ⚙ Configuración del proyecto → tus apps → SDK setup and configuration -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
   import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
@@ -556,8 +489,6 @@ nav{
   window.firebaseDb = getFirestore(app);
   window.authFns = { onAuthStateChanged, signInWithEmailAndPassword, signOut };
   window.firestoreFns = { doc, getDoc, setDoc, onSnapshot };
-
-  // Avisa al resto de la página (script clásico, no-módulo) que Firebase ya está listo
   window.dispatchEvent(new Event('firebase-ready'));
 </script>
 </head>
@@ -590,7 +521,6 @@ nav{
     </div>
   </nav>
 </div>
-
 <div class="mobile-drawer" id="mobile-drawer">
   <a href="#" onclick="showPage('home');closeMobile()">Inicio</a>
   <a href="#" onclick="showPage('cachorros');closeMobile()">Cachorros</a>
@@ -603,12 +533,8 @@ nav{
   <a href="#" onclick="showPage('galeria');closeMobile()">Galería</a>
   <a href="#" onclick="showPage('contacto');closeMobile()">Contacto</a>
 </div>
-
 <div class="stage">
-
-<!-- ══════════ HOME ══════════ -->
 <div id="page-home" class="page-section active">
-
   <div class="hero-fl">
     <div class="hero-fl-inner" id="hero-fl-inner">
       <div class="hero-carousel" id="hero-carousel">
@@ -630,7 +556,6 @@ nav{
       </div>
     </div>
   </div>
-
   <div class="sec">
     <div class="fl-card"><div class="fl-card-pad">
       <div class="sec-tag">Nuestro Grupo</div>
@@ -642,7 +567,6 @@ nav{
       </div>
     </div></div>
   </div>
-
   <div id="quienes-anch"></div>
   <div class="sec">
     <div class="fl-card"><div class="fl-card-pad">
@@ -665,7 +589,6 @@ nav{
       </div>
     </div></div>
   </div>
-
   <div class="sec">
     <div class="fl-card"><div class="fl-card-pad">
       <div class="sec-tag">La Promesa</div>
@@ -679,7 +602,6 @@ nav{
       </div>
     </div></div>
   </div>
-
   <div class="sec">
     <div class="fl-card"><div class="fl-card-pad">
       <div class="sec-tag">Organización</div>
@@ -687,7 +609,6 @@ nav{
       <div class="secciones-grid" id="home-secciones-grid"></div>
     </div></div>
   </div>
-
   <div class="sec">
     <div class="seguro-strip">
       <div class="seguro-inner">
@@ -695,18 +616,15 @@ nav{
           <h3>🛡 Seguro Scout Guatemala</h3>
           <p id="txt-seguro">Una de las prioridades de la Asociación de Scouts de Guatemala es la salud y seguridad de todos sus miembros, por esta razón cuando te inscribes obtienes un seguro de accidentes personales.</p>
           <div class="seguro-docs">
-            <a class="seguro-doc-link" href="#" onclick="toast('Documento disponible próximamente');return false">📄 Código de Conducta</a>
-            <a class="seguro-doc-link" href="#" onclick="toast('Documento disponible próximamente');return false">📄 Política A Salvo del Peligro</a>
+            <a class="seguro-doc-link" href="https://drive.google.com/file/d/10DYalLpVY7-BHhMANp07wPd860Hy_N9E/view" target="_blank">📄 Código de Conducta</a>
+            <a class="seguro-doc-link" href="https://drive.google.com/file/d/1l_2vATf1wG6hX139_e6YQNYBAG4tTZr7/view" target="_blank">📄 Política A Salvo del Peligro</a>
           </div>
         </div>
-        <a href="https://scouts.net.gt/articulos/el-seguro-scout-de-la-asociacion-de-scouts-de-guatemala/" target="_blank">Más información →</a>
+        <a href="https://scouts.org.gt/articulos/el-seguro-scout-de-la-asociacion-de-scouts-de-guatemala/" target="_blank">Más información →</a>
       </div>
     </div>
   </div>
-
-</div><!-- /page-home -->
-
-<!-- Section pages generated by JS -->
+</div>
 <div id="page-cachorros" class="page-section"></div>
 <div id="page-manada" class="page-section"></div>
 <div id="page-unidad" class="page-section"></div>
@@ -714,8 +632,6 @@ nav{
 <div id="page-rovers" class="page-section"></div>
 <div id="page-dirigencia" class="page-section"></div>
 <div id="page-comite" class="page-section"></div>
-
-<!-- ══════════ GALERÍA ══════════ -->
 <div id="page-galeria" class="page-section">
   <div class="ph-fl">
     <div class="ph-fl-inner">
@@ -726,7 +642,6 @@ nav{
     </div>
   </div>
   <div class="sec">
-    <!-- VISTA 1: Portadas de álbumes -->
     <div class="fl-card" id="albums-overview-card"><div class="fl-card-pad">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.4rem">
         <div class="sec-tag" style="margin-bottom:0">Álbumes</div>
@@ -738,8 +653,6 @@ nav{
         <div class="gallery-masonry" id="gallery-masonry-sinalbum"></div>
       </div>
     </div></div>
-
-    <!-- VISTA 2: Dentro de un álbum -->
     <div class="fl-card" id="album-detail-card" style="display:none"><div class="fl-card-pad">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.4rem">
         <div>
@@ -756,8 +669,6 @@ nav{
     </div></div>
   </div>
 </div>
-
-<!-- ══════════ CONTACTO ══════════ -->
 <div id="page-contacto" class="page-section">
   <div class="ph-fl">
     <div class="ph-fl-inner">
@@ -799,7 +710,6 @@ nav{
     </div></div>
   </div>
 </div>
-
 <div class="sec">
   <footer class="fl-card footer-fl">
     <div class="footer-grid">
@@ -833,10 +743,7 @@ nav{
     </div>
   </footer>
 </div>
-
-</div><!-- /stage -->
-
-<!-- ADMIN LOGIN -->
+</div>
 <div id="adm-login-screen">
   <div class="login-box">
     <div style="font-size:2rem;margin-bottom:10px">🔒</div>
@@ -849,23 +756,20 @@ nav{
     <button class="btn-outline" style="width:100%;padding:10px;margin-top:8px;font-size:11px" onclick="closeLogin()">Cancelar</button>
   </div>
 </div>
-
-<!-- ADMIN DASHBOARD -->
 <div id="adm-editor">
   <div class="adm-shell">
-    <!-- SIDEBAR -->
-    <aside class="adm-sidebar" id="adm-sidebar">
-      <div class="adm-sidebar-brand">
-        <div class="mark">⚜</div>
-        <div class="label"><div class="t1">Panel Admin</div><div class="t2">Grupo Scout 12</div></div>
+    <nav class="adm-rail" id="adm-rail">
+      <div class="adm-rail-mark">⚜</div>
+      <div class="adm-rail-nav" id="adm-rail-nav"></div>
+      <div class="adm-rail-foot">
+        <button class="adm-rail-btn" onclick="closeAdmin()"><span>↩</span><span class="tip">Salir del panel</span></button>
       </div>
-      <nav class="adm-nav" id="adm-nav"></nav>
-      <div class="adm-sidebar-foot">
-        <button class="adm-btn adm-btn-ghost" style="width:100%;justify-content:center" onclick="closeAdmin()">↩ Salir del panel</button>
-      </div>
+    </nav>
+    <aside class="adm-aside" id="adm-aside">
+      <div class="adm-aside-hd"><h2 id="adm-aside-title">Dashboard</h2><p id="adm-aside-sub"></p></div>
+      <div class="adm-aside-search" id="adm-aside-search-wrap" style="display:none"><input type="text" id="adm-aside-search" placeholder="Buscar..." oninput="handleAsideSearch(this.value)"></div>
+      <div class="adm-aside-body" id="adm-aside-body"></div>
     </aside>
-
-    <!-- MAIN -->
     <div class="adm-main">
       <div class="adm-topbar">
         <div class="adm-topbar-left">
@@ -889,8 +793,6 @@ nav{
     </div>
   </div>
 </div>
-
-<!-- Modal foto sección -->
 <div class="modal-backdrop" id="sec-photo-modal">
   <div class="modal-box">
     <div class="modal-hd"><span class="modal-title" id="sec-photo-modal-title">Añadir Fotos</span><button class="modal-close" onclick="closeModal('sec-photo-modal')">✕</button></div>
@@ -910,14 +812,12 @@ nav{
         <textarea id="spm-multi-url" rows="4" placeholder="https://i.imgur.com/foto1.jpg&#10;https://i.imgur.com/foto2.jpg" oninput="previewSecMultiUrl()"></textarea>
         <div id="spm-multi-url-count" style="font-size:11px;color:var(--amber);margin-top:4px;display:none"></div>
       </div>
-      <div class="aform-full aform-group"><label>Descripción ${'(se aplicará a todas si subes varias)'}</label><input id="spm-desc" type="text" placeholder="Ej: Campamento 2024"></div>
+      <div class="aform-full aform-group"><label>Descripción (se aplicará a todas si subes varias)</label><input id="spm-desc" type="text" placeholder="Ej: Campamento 2024"></div>
       <div class="aform-group"><label>Ajuste / recorte</label><select id="spm-position"><option value="center">Centrado</option><option value="top">Arriba</option><option value="bottom">Abajo</option><option value="left">Izquierda</option><option value="right">Derecha</option></select></div>
     </div>
     <div class="modal-ft"><button class="elm-btn elm-btn-ghost" onclick="closeModal('sec-photo-modal')">Cancelar</button><button class="elm-btn elm-btn-red" id="spm-save-btn" onclick="saveSecPhoto()">Añadir →</button></div>
   </div>
 </div>
-
-<!-- Modal galería principal -->
 <div class="modal-backdrop" id="gal-modal">
   <div class="modal-box">
     <div class="modal-hd"><span class="modal-title" id="gal-modal-title">Añadir Fotos a la Galería</span><button class="modal-close" onclick="closeModal('gal-modal')">✕</button></div>
@@ -936,7 +836,7 @@ nav{
         <textarea id="g-multi-url" rows="4" placeholder="https://i.imgur.com/foto1.jpg&#10;https://i.imgur.com/foto2.jpg&#10;https://i.imgur.com/foto3.jpg" oninput="previewMultiUrl()"></textarea>
         <div id="g-multi-url-count" style="font-size:11px;color:var(--amber);margin-top:4px;display:none"></div>
       </div>
-      <div class="aform-full aform-group"><label>Descripción ${'(se aplicará a todas si subes varias)'}</label><input id="g-desc" type="text" placeholder="Ej: Campamento 2024"></div>
+      <div class="aform-full aform-group"><label>Descripción (se aplicará a todas si subes varias)</label><input id="g-desc" type="text" placeholder="Ej: Campamento 2024"></div>
       <div class="aform-full aform-group"><label>Álbum</label><select id="g-album"><option value="">Sin álbum</option></select></div>
       <div class="aform-group"><label>Mes</label><select id="g-month">
         <option value="1">Enero</option><option value="2">Febrero</option><option value="3">Marzo</option><option value="4">Abril</option><option value="5">Mayo</option><option value="6">Junio</option><option value="7">Julio</option><option value="8">Agosto</option><option value="9">Septiembre</option><option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option>
@@ -949,8 +849,6 @@ nav{
     <div class="modal-ft"><button class="elm-btn elm-btn-ghost" onclick="closeModal('gal-modal')">Cancelar</button><button class="elm-btn elm-btn-red" id="gal-save-btn" onclick="saveGalItem()">Añadir →</button></div>
   </div>
 </div>
-
-<!-- Modal álbumes -->
 <div class="modal-backdrop" id="album-modal">
   <div class="modal-box">
     <div class="modal-hd"><span class="modal-title" id="album-modal-title">Nuevo Álbum</span><button class="modal-close" onclick="closeModal('album-modal')">✕</button></div>
@@ -965,8 +863,6 @@ nav{
     </div>
   </div>
 </div>
-
-<!-- Lightbox para ampliar fotos -->
 <div class="lightbox-backdrop" id="lightbox-backdrop" onclick="if(event.target===this)closeLightbox()">
   <div class="lightbox-img-wrap">
     <button class="lightbox-close" onclick="closeLightbox()">✕</button>
@@ -976,11 +872,8 @@ nav{
     <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>
 </div>
-
 <div id="toast"></div>
-
 <script>
-// ══════════ DATA STORE ══════════
 let D = {
   logo:{url:'',navText:'Grupo Scout No.12',navSub:'San Pedro Apóstol'},
   hero:{images:[],body:'Los scouts formamos parte de un movimiento mundial llamado escultismo, una propuesta educativa no formal donde jóvenes de todas las edades participan voluntariamente.'},
@@ -1009,8 +902,6 @@ let D = {
     {id:6,url:'',desc:'Aniversario de Grupo — Local',emoji:'🎉',size:'wide',month:12,year:2025,position:'center',albumId:4},
   ]
 };
-
-// ══════════ SECCIONES — CONTENIDO REAL ══════════
 let SECS={
   cachorros:{
     logo:'',emoji:'🐾',colorVar:'--c-cubil',colorHex:'#38bdf8',bg:'#001824',
@@ -1097,24 +988,17 @@ let SECS={
     fotos:[]
   }
 };
-
-// ══════════ PERSISTENCIA (localStorage) ══════════
 let _persistTimer = null;
 let _firestoreReady = false;
 let _pendingFirstSave = false;
 let _persistPaused = false;
-
 function persistData(){
-  if(_persistPaused) return; // pausado durante una operación de guardado masivo (ver pauseAndSave)
-  // Debounce: agrupa cambios rápidos en una sola escritura a Firestore
+  if(_persistPaused) return;
   clearTimeout(_persistTimer);
   _persistTimer = setTimeout(()=>{
     saveToFirestore();
   }, 600);
 }
-
-// Pausa el guardado automático del Proxy mientras se hacen varios cambios seguidos
-// (evita ráfagas de escrituras a Firestore), y guarda UNA sola vez al terminar.
 function pauseAndSave(fn){
   _persistPaused = true;
   try{
@@ -1125,7 +1009,6 @@ function pauseAndSave(fn){
     saveToFirestore();
   }
 }
-
 async function saveToFirestore(){
   if(!window.firebaseDb){
     console.warn('Firestore aún no está listo, reintentando...');
@@ -1144,7 +1027,6 @@ async function saveToFirestore(){
     toast('No se pudo guardar en la nube. Revisa tu conexión a internet.', true);
   }
 }
-
 function showSaveIndicator(state){
   const el = document.getElementById('save-indicator');
   if(!el) return;
@@ -1152,7 +1034,6 @@ function showSaveIndicator(state){
   clearTimeout(el._hideTimer);
   el._hideTimer = setTimeout(()=>{ el.classList.remove('show'); }, 2200);
 }
-
 async function loadFromFirestore(){
   try{
     const { doc, getDoc } = window.firestoreFns;
@@ -1170,15 +1051,13 @@ async function loadFromFirestore(){
     console.warn('No se pudo cargar el contenido desde Firestore:', e);
   }
 }
-
 function listenToFirestoreChanges(){
-  // Mantiene el sitio sincronizado en vivo si alguien más edita desde otro dispositivo
   try{
     const { doc, onSnapshot } = window.firestoreFns;
     onSnapshot(doc(window.firebaseDb, 'site', 'content'), (snap)=>{
       if(!snap.exists()) return;
       const saved = snap.data();
-      if(saved.updatedAt && saved.updatedAt === window._lastLocalWrite) return; // evita re-render de nuestro propio guardado
+      if(saved.updatedAt && saved.updatedAt === window._lastLocalWrite) return;
       if(saved.D) Object.assign(D, saved.D);
       if(saved.SECS){
         Object.keys(saved.SECS).forEach(key=>{
@@ -1195,12 +1074,9 @@ function listenToFirestoreChanges(){
     console.warn('No se pudo activar la sincronización en vivo:', e);
   }
 }
-
-// Envuelve D y SECS en Proxies para que CUALQUIER cambio (incluso anidado: arrays, push, splice, etc.)
-// dispare el guardado automático en Firestore, sin tener que llamar persistData() manualmente en cada función.
 function deepPersistProxy(obj){
   if(obj===null || typeof obj!=='object') return obj;
-  if(obj.__isPersistProxy) return obj; // ya envuelto
+  if(obj.__isPersistProxy) return obj;
   Object.keys(obj).forEach(k=>{
     if(obj[k] && typeof obj[k]==='object'){
       obj[k] = deepPersistProxy(obj[k]);
@@ -1227,10 +1103,6 @@ function deepPersistProxy(obj){
 }
 D = deepPersistProxy(D);
 Object.keys(SECS).forEach(k=>{ SECS[k] = deepPersistProxy(SECS[k]); });
-
-// Inicializa Firebase y carga el contenido guardado (definido en initFirebaseAndLoad, llamado al final del archivo)
-
-// ══════════ PAGE ROUTING ══════════
 let currentPage = 'home';
 function showPage(p) {
   document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
@@ -1247,8 +1119,6 @@ function showPage(p) {
   if(SECS[p]) renderSecPage(p);
   initScrollReveal();
 }
-
-// ══════════ SCROLL REVEAL (IntersectionObserver) ══════════
 let revealObserver = null;
 function initScrollReveal(){
   if(!('IntersectionObserver' in window)) return;
@@ -1270,8 +1140,6 @@ function initScrollReveal(){
     revealObserver.observe(el);
   });
 }
-
-// ══════════ SECTION PAGE RENDER ══════════
 function renderSecPage(s) {
   const sd = SECS[s];
   const el = document.getElementById('page-'+s);
@@ -1332,9 +1200,6 @@ function renderSecPage(s) {
     </div>
   `;
 }
-
-
-// ══════════ HOME SECCIONES GRID (dinámico, con logos) ══════════
 function renderHomeSeccionesGrid(){
   const grid = document.getElementById('home-secciones-grid');
   if(!grid) return;
@@ -1352,11 +1217,8 @@ function renderHomeSeccionesGrid(){
     </a>`;
   }).join('');
 }
-
-// ══════════ GALLERY & ALBUMS ══════════
 const MESES_NOMBRE=['','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 let galFilterMonth='all', galFilterYear='all', galActiveAlbum='all';
-
 function renderGalleryFilters(){
   const wrap = document.getElementById('gallery-filters');
   if(!wrap) return;
@@ -1382,7 +1244,6 @@ function setGalFilter(type,val){
   renderGallery();
 }
 function clearGalFilter(){ galFilterMonth='all'; galFilterYear='all'; renderGalleryFilters(); renderGallery(); }
-
 function renderAlbumsOverview(){
   const grid = document.getElementById('albums-grid-public');
   if(!grid) return;
@@ -1398,7 +1259,6 @@ function renderAlbumsOverview(){
       </div>
     </div>`;
   }).join('') || '<p style="color:var(--gray);font-size:14px;grid-column:1/-1">Aún no hay álbumes. Crea el primero con el botón de arriba.</p>';
-
   const sinAlbumFotos = D.gallery.filter(g=>!g.albumId);
   const sinAlbumSection = document.getElementById('sin-album-section');
   const sinAlbumGrid = document.getElementById('gallery-masonry-sinalbum');
@@ -1426,7 +1286,6 @@ function closeAlbumDetail(){
   document.getElementById('albums-overview-card').style.display='block';
   renderAlbumsOverview();
 }
-
 function renderGallery() {
   const g = document.getElementById('gallery-masonry');
   const hp = document.getElementById('home-gallery-preview');
@@ -1438,7 +1297,6 @@ function renderGallery() {
   }
   renderAlbumsOverview();
   if(hp){
-    // Momentos Scout: solo fotos que pertenecen a un álbum, máximo 5
     const conAlbum = D.gallery.filter(it=>it.albumId);
     const destacadas = conAlbum.slice(0,5);
     hp.innerHTML = destacadas.length
@@ -1469,8 +1327,6 @@ function goToAlbumFromHome(albumId){
   showPage('galeria');
   openAlbumDetail(albumId);
 }
-
-// ══════════ LIGHTBOX ══════════
 let lightboxFotos=[];
 let lightboxIndex=0;
 function openLightbox(sectionKey,index){
@@ -1481,7 +1337,6 @@ function openLightbox(sectionKey,index){
   document.body.style.overflow='hidden';
 }
 function openGalleryLightbox(index){
-  // Reconstruye el mismo conjunto de fotos que se está mostrando actualmente en pantalla
   let filtered = D.gallery.filter(it=>it.albumId==galActiveAlbum);
   if(galFilterYear!=='all') filtered = filtered.filter(it=>it.year==galFilterYear);
   if(galFilterMonth!=='all') filtered = filtered.filter(it=>it.month==galFilterMonth);
@@ -1525,8 +1380,7 @@ document.addEventListener('keydown',(e)=>{
   if(e.key==='ArrowLeft') lightboxNav(-1);
   if(e.key==='ArrowRight') lightboxNav(1);
 });
-let pendingGalFiles = []; // {url, name} cuando se suben varias fotos a la vez
-
+let pendingGalFiles = [];
 function populateAlbumSelect(){
   const sel = document.getElementById('g-album');
   if(!sel) return;
@@ -1562,7 +1416,6 @@ function handleGalPhotoFiles(input){
   const mp = document.getElementById('g-multi-preview');
   const singleWrap = document.getElementById('g-preview-wrap');
   if(files.length === 1){
-    // Una sola foto: comportamiento simple con preview grande
     mp.style.display='none'; mp.innerHTML='';
     const reader = new FileReader();
     reader.onload = e => {
@@ -1573,7 +1426,6 @@ function handleGalPhotoFiles(input){
     reader.readAsDataURL(files[0]);
     return;
   }
-  // Varias fotos: preview en miniaturas, se ignora g-url
   sv('g-url','');
   const singleImg = singleWrap.querySelector('img'); if(singleImg) singleImg.remove();
   mp.style.display='flex'; mp.innerHTML='';
@@ -1623,7 +1475,6 @@ function saveGalItem(){
   const position = v('g-position')||'center';
   const emoji = v('g-emoji')||'🖼';
   const multiUrls = document.getElementById('g-multi-url').value.split('\n').map(u=>u.trim()).filter(Boolean);
-
   if(multiUrls.length > 1){
     multiUrls.forEach((url,i)=>{
       D.gallery.push({id:Date.now()+i, url, desc: `${desc} (${i+1})`, emoji, size, month, year, position, albumId});
@@ -1659,8 +1510,6 @@ function deleteGalPhoto(id){
   renderHomeGalleryAdminList();
   toast('Foto eliminada');
 }
-
-// ── ÁLBUMES ──
 function openAlbumModal(editId){
   sv('am-id', editId||'');
   if(editId){
@@ -1703,25 +1552,18 @@ function deleteAlbum(id){
   toast('Álbum eliminado');
 }
 function renderHomeGalleryAdminList(){
-  // Refresca el acordeón "Momentos Scout" si el editor de Inicio está abierto
   if(currentEditor==='home'){ buildControls('home'); }
   if(currentEditor==='dashboard'){ buildAdmView('dashboard'); }
 }
-
-
-// ══════════ TOAST / HELPERS ══════════
 function toast(msg,err){
   const t=document.getElementById('toast');
   t.textContent=(err?'✕ ':'✓ ')+msg;
   t.className='show'+(err?' err':'');
   clearTimeout(t._t); t._t=setTimeout(()=>t.className='',3000);
 }
-
-// ══════════ CONTACT FORM ══════════
 function getWhatsAppNumber(){
-  // Limpia el número guardado en D.contacto.tel y le agrega código de país si falta
   let digits = (D.contacto.tel||'').replace(/\D/g,'');
-  if(digits.length===8) digits = '502'+digits; // número local de Guatemala sin código
+  if(digits.length===8) digits = '502'+digits;
   return digits;
 }
 function submitContactForm(){
@@ -1731,16 +1573,13 @@ function submitContactForm(){
   const email=v('cf-email');
   const subject=document.getElementById('cf-subject').value;
   const message=v('cf-message');
-
   const number=getWhatsAppNumber();
   if(!number){ toast('No hay un número de WhatsApp configurado',true); return; }
-
   let text = `Hola, soy *${name}*.\n`;
   text += `Asunto: ${subject}\n`;
   if(phone) text += `Mi teléfono: ${phone}\n`;
   if(email) text += `Mi correo: ${email}\n`;
   if(message) text += `\nMensaje:\n${message}`;
-
   const url = `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
   window.open(url, '_blank');
   toast('Abriendo WhatsApp con tu mensaje...');
@@ -1753,12 +1592,8 @@ function ge(id){return document.getElementById(id)}
 function openModal(id){document.getElementById(id).classList.add('show')}
 function closeModal(id){document.getElementById(id).classList.remove('show')}
 document.addEventListener('click',e=>{if(e.target.classList.contains('modal-backdrop'))closeModal(e.target.id)});
-
-// ══════════ MOBILE ══════════
 function toggleMobile(){document.getElementById('mobile-drawer').classList.toggle('open')}
 function closeMobile(){document.getElementById('mobile-drawer').classList.remove('open')}
-
-// ══════════ HERO CAROUSEL ══════════
 let heroSlideIndex = 0;
 let heroAutoplayTimer = null;
 function renderHeroCarousel(){
@@ -1792,8 +1627,6 @@ function startHeroAutoplay(){
   clearInterval(heroAutoplayTimer);
   heroAutoplayTimer = setInterval(()=>{ heroCarouselNext(); }, 5500);
 }
-
-// ══════════ APPLY DATA ══════════
 function applyAll() {
   const logoUrl = D.logo.url;
   if(logoUrl){
@@ -1828,10 +1661,7 @@ function applyAll() {
   if(fd)fd.innerHTML=D.footer.desc.replace(/\n/g,'<br>');
   st('footer-copy',D.footer.copy);
 }
-
-// ══════════ LOGIN (Firebase Authentication) ══════════
 function openLogin(){
-  // Si ya hay una sesión de Firebase activa, entra directo al panel sin pedir credenciales otra vez
   if(window.firebaseAuth && window.firebaseAuth.currentUser){
     document.getElementById('adm-editor').classList.add('show');
     const fb=document.querySelector('.fluid-bg'); if(fb) fb.style.display='none';
@@ -1884,27 +1714,19 @@ function closeAdmin(){
   document.getElementById('adm-editor').classList.remove('show');
   const fb=document.querySelector('.fluid-bg'); if(fb) fb.style.display='block';
 }
-
-// ══════════ ADMIN DASHBOARD ══════════
 let currentEditor='dashboard';
-let admSidebarCollapsed=false;
-
-const navGroups=[
-  {label:'General', items:[
-    {k:'dashboard', label:'Dashboard', icon:'📊'},
-  ]},
-  {label:'Contenido', items:[
-    {k:'home', label:'Inicio', icon:'🏠'},
-    {k:'secciones', label:'Secciones', icon:'⚜️'},
-    {k:'galeria', label:'Galería', icon:'🖼'},
-  ]},
-  {label:'Configuración', items:[
-    {k:'contacto', label:'Contacto', icon:'📞'},
-    {k:'general', label:'General y Logo', icon:'🏷'},
-    {k:'apariencia', label:'Apariencia', icon:'🎨'},
-  ]},
+let asideCollapsed=false;
+let asideSearchTerm='';
+let hasUnsavedChanges=false;
+const railItems=[
+  {k:'dashboard', label:'Dashboard', icon:'📊'},
+  {k:'home', label:'Inicio', icon:'🏠'},
+  {k:'secciones', label:'Secciones', icon:'⚜️'},
+  {k:'galeria', label:'Galería', icon:'🖼'},
+  {k:'contacto', label:'Contacto', icon:'📞'},
+  {k:'general', label:'General y Logo', icon:'🏷'},
+  {k:'apariencia', label:'Apariencia', icon:'🎨'},
 ];
-// Mapa plano de metadatos por vista (para breadcrumb e ícono)
 const viewMeta={
   dashboard:{label:'Dashboard', icon:'📊', sub:'Resumen general del sitio'},
   home:{label:'Inicio', icon:'🏠', sub:'Hero, Quiénes Somos, Promesa y Seguro'},
@@ -1917,60 +1739,54 @@ const viewMeta={
 Object.keys(SECS).forEach(k=>{
   viewMeta[k]={label:SECS[k].title, icon:SECS[k].emoji, sub:'Editando sección · '+SECS[k].age};
 });
-
+const SEC_ORDER=['cachorros','manada','unidad','caminantes','rovers','dirigencia','comite'];
 function initEditor(){
-  renderAdmSidebar();
+  renderRail();
   goToView('dashboard');
 }
-function renderAdmSidebar(){
-  const nav=document.getElementById('adm-nav');
-  nav.innerHTML=navGroups.map(g=>`
-    <div class="adm-nav-group">
-      <div class="adm-nav-group-label">${g.label}</div>
-      ${g.items.map(it=>`
-        <button class="adm-navlink ${currentEditor===it.k?'active':''}" onclick="goToView('${it.k}')">
-          <span class="ic">${it.icon}</span><span>${it.label}</span>
-          ${it.badge?`<span class="badge">${it.badge}</span>`:''}
-        </button>
-      `).join('')}
-    </div>
+function renderRail(){
+  const nav=document.getElementById('adm-rail-nav');
+  const activeTop = SECS[currentEditor] ? 'secciones' : currentEditor;
+  nav.innerHTML=railItems.map(it=>`
+    <button class="adm-rail-btn ${activeTop===it.k?'active':''}" onclick="goToView('${it.k==='secciones'&&SECS[currentEditor]?currentEditor:it.k}')">
+      <span class="ic">${it.icon}</span><span class="tip">${it.label}</span>
+    </button>
   `).join('');
 }
 function isMobile(){ return window.innerWidth <= 900; }
 function toggleAdmSidebar(){
-  const sidebar = document.getElementById('adm-sidebar');
+  const aside = document.getElementById('adm-aside');
   if(isMobile()){
-    const isOpen = sidebar.classList.contains('mobile-open');
-    sidebar.classList.toggle('mobile-open', !isOpen);
-    // Overlay
+    const isOpen = aside.classList.contains('mobile-open');
+    aside.classList.toggle('mobile-open', !isOpen);
     let overlay = document.getElementById('adm-mobile-overlay');
     if(!isOpen){
       if(!overlay){ overlay=document.createElement('div'); overlay.id='adm-mobile-overlay'; overlay.className='adm-overlay'; overlay.onclick=toggleAdmSidebar; document.getElementById('adm-editor').appendChild(overlay); }
       overlay.style.display='block';
-    } else {
-      if(overlay) overlay.style.display='none';
-    }
+    } else if(overlay) overlay.style.display='none';
   } else {
-    admSidebarCollapsed=!admSidebarCollapsed;
-    document.getElementById('adm-sidebar').classList.toggle('collapsed',admSidebarCollapsed);
+    asideCollapsed=!asideCollapsed;
+    document.getElementById('adm-aside').classList.toggle('collapsed',asideCollapsed);
   }
 }
 function goToView(k){
   currentEditor=k;
-  // En móvil, cerrar el drawer al seleccionar una vista
+  asideSearchTerm='';
+  markSaved();
   if(isMobile()){
-    const sidebar=document.getElementById('adm-sidebar');
-    sidebar.classList.remove('mobile-open');
+    const aside=document.getElementById('adm-aside');
+    aside.classList.remove('mobile-open');
     const overlay=document.getElementById('adm-mobile-overlay');
     if(overlay) overlay.style.display='none';
   }
-  renderAdmSidebar();
+  renderRail();
   const meta=viewMeta[k]||{label:k,icon:'📄',sub:''};
   document.getElementById('adm-crumb-icon').textContent=meta.icon;
   document.getElementById('adm-crumb-title').textContent=meta.label;
   const saveBtn=document.getElementById('adm-save-btn');
   saveBtn.style.display = (k==='dashboard'||k==='secciones'||k==='galeria'||k==='apariencia') ? 'none' : 'inline-flex';
-  document.getElementById('adm-back-btn').style.display = SECS[k] ? 'flex' : 'none';
+  document.getElementById('adm-back-btn').style.display = 'none';
+  renderAside(k);
   buildAdmView(k);
   document.getElementById('adm-content').scrollTop=0;
 }
@@ -1981,8 +1797,91 @@ function previewSiteNow(){
   showPage(SECS[currentEditor]?currentEditor: (currentEditor==='galeria'?'galeria':'home'));
 }
 function saveAndPreview(){ previewSiteNow(); }
-
-// ── DASHBOARD VIEW ──
+function renderAside(k){
+  const titleEl=document.getElementById('adm-aside-title');
+  const subEl=document.getElementById('adm-aside-sub');
+  const searchWrap=document.getElementById('adm-aside-search-wrap');
+  const body=document.getElementById('adm-aside-body');
+  const aside=document.getElementById('adm-aside');
+  if(k==='dashboard' || k==='apariencia'){
+    aside.classList.add('collapsed');
+    body.innerHTML=''; searchWrap.style.display='none';
+    return;
+  }
+  aside.classList.remove('collapsed');
+  if(k==='home'){
+    titleEl.textContent='Inicio'; subEl.textContent='Saltar a una sección'; searchWrap.style.display='none';
+    const jumps=[['hero-carousel-list','🖼','Carrusel'],['','📷','Momentos Scout'],['ctrl-qt','📖','Quiénes Somos'],['ctrl-prom','⚜️','Promesa Scout'],['ctrl-seg','🛡','Seguro Scout']];
+    body.innerHTML=jumps.map(([id,ic,label])=>`
+      <button class="adm-aside-item" onclick="${id?`document.getElementById('${id}').closest('.adm-card').scrollIntoView({behavior:'smooth',block:'start'})`:`document.querySelectorAll('.adm-card')[1].scrollIntoView({behavior:'smooth',block:'start'})`}">
+        <div class="thumb">${ic}</div><div class="txt"><div class="t">${label}</div></div>
+      </button>`).join('');
+    return;
+  }
+  if(SECS[k] || k==='secciones'){
+    const activeSec = SECS[k] ? k : SEC_ORDER[0];
+    if(!SECS[k]){ goToView(activeSec); return; }
+    titleEl.textContent='Secciones Scout'; subEl.textContent='Cambia sin perder tu lugar'; searchWrap.style.display='none';
+    body.innerHTML=SEC_ORDER.map(sk=>{
+      const sd=SECS[sk];
+      return `<button class="adm-aside-item ${sk===currentEditor?'active':''}" onclick="goToView('${sk}')">
+        <div class="thumb">${sd.logo?`<img src="${sd.logo}">`:sd.emoji}</div>
+        <div class="txt"><div class="t">${sd.title}</div><div class="s">${sd.age}</div></div>
+        <span class="adm-aside-count">${sd.fotos.length}📷</span>
+      </button>`;
+    }).join('');
+    return;
+  }
+  if(k==='galeria'){
+    titleEl.textContent='Álbumes'; subEl.textContent='Filtra o crea uno nuevo'; searchWrap.style.display='block';
+    document.getElementById('adm-aside-search').placeholder='Buscar foto o álbum...';
+    renderGaleriaAsideList();
+    return;
+  }
+  titleEl.textContent=viewMeta[k].label; subEl.textContent=viewMeta[k].sub; searchWrap.style.display='none';
+  body.innerHTML=`<div class="adm-aside-empty">Sin sub-secciones aquí — todo está en el panel principal →</div>`;
+}
+function renderGaleriaAsideList(){
+  const body=document.getElementById('adm-aside-body');
+  const term=asideSearchTerm.toLowerCase();
+  let albumsHtml = D.albums
+    .filter(a=>!term || a.name.toLowerCase().includes(term))
+    .map(a=>{
+      const count=D.gallery.filter(g=>g.albumId===a.id).length;
+      const cover=a.cover||(D.gallery.find(g=>g.albumId===a.id)||{}).url||'';
+      return `<button class="adm-aside-item" onclick="openGalModal(${a.id})">
+        <div class="thumb">${cover?`<img src="${cover}">`:'📁'}</div>
+        <div class="txt"><div class="t">${a.name}</div><div class="s">${count} foto(s)</div></div>
+      </button>`;
+    }).join('');
+  let photosHtml='';
+  if(term){
+    const matches=D.gallery.filter(g=>g.desc.toLowerCase().includes(term));
+    if(matches.length){
+      photosHtml = `<div class="adm-aside-jump" style="pointer-events:none;color:var(--gray);font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:800;margin-top:8px">Fotos (${matches.length})</div>` +
+        matches.slice(0,20).map(g=>`<button class="adm-aside-item" onclick="document.getElementById('ctrl-gal-list').scrollIntoView({behavior:'smooth'})">
+          <div class="thumb">${g.url?`<img src="${g.url}">`:(g.emoji||'🖼')}</div>
+          <div class="txt"><div class="t">${g.desc}</div></div>
+        </button>`).join('');
+    }
+  }
+  body.innerHTML = (albumsHtml+photosHtml) || `<div class="adm-aside-empty">Sin resultados para "${asideSearchTerm}"</div>`;
+}
+function handleAsideSearch(val){
+  asideSearchTerm=val;
+  if(currentEditor==='galeria') renderGaleriaAsideList();
+}
+function markDirty(){
+  if(hasUnsavedChanges) return;
+  hasUnsavedChanges=true;
+  const btn=document.getElementById('adm-save-btn');
+  if(btn && btn.style.display!=='none'){ btn.classList.add('adm-btn-dirty'); btn.textContent='● Cambios sin guardar'; }
+}
+function markSaved(){
+  hasUnsavedChanges=false;
+  const btn=document.getElementById('adm-save-btn');
+  if(btn){ btn.classList.remove('adm-btn-dirty'); btn.textContent='💾 Guardar Cambios'; }
+}
 function buildDashboardView(){
   const totalFotos = D.gallery.length;
   const totalAlbumes = D.albums.length;
@@ -2020,8 +1919,6 @@ function buildDashboardView(){
     </div>
   `;
 }
-
-// ── SECCIONES OVERVIEW (cuadrícula para elegir sección) ──
 function buildSeccionesOverview(){
   const order=['cachorros','manada','unidad','caminantes','rovers','dirigencia','comite'];
   return `
@@ -2041,8 +1938,6 @@ function buildSeccionesOverview(){
     </div>
   `;
 }
-
-// ── APARIENCIA (colores) ──
 function buildApariencaView(){
   return `
     <div class="adm-section-grid">
@@ -2078,17 +1973,20 @@ function buildApariencaView(){
     </div>
   `;
 }
-
 function buildAdmView(k){
   const content=document.getElementById('adm-content');
   let html='';
   if(k==='dashboard') html=buildDashboardView();
-  else if(k==='secciones') html=buildSeccionesOverview();
+  else if(k==='secciones') html='';
   else if(k==='apariencia') html=buildApariencaView();
   else html=`<div id="elm-controls-area"></div>`;
   content.innerHTML=html;
   if(['home','contacto','general'].includes(k) || SECS[k] || k==='galeria'){
     buildControls(k);
+    content.querySelectorAll('input,textarea,select').forEach(el=>{
+      el.addEventListener('input', markDirty);
+      el.addEventListener('change', markDirty);
+    });
   }
   if(k==='apariencia') bindColorPickers();
 }
@@ -2098,8 +1996,6 @@ function bindColorPickers(){
     if(picker) picker.addEventListener('input',function(){ const txt=document.getElementById('cfg-'+c+'-txt'); if(txt) txt.value=this.value; });
   });
 }
-
-// ── CONTROLS ──
 function buildControls(k){
   const area=document.getElementById('elm-controls-area');
   if(!area) return;
@@ -2136,8 +2032,7 @@ function buildControls(k){
         <button class="ctrl-btn-sm green" onclick="addHeroImage()">+ Añadir al Carrusel</button>
       </div>
     `)}
-    ${card('🔤','Texto Descriptivo',`
-    `)}
+    ${card('🔤','Texto Descriptivo',``)}
     ${card('📷','Momentos Scout',`
       <p style="font-size:12.5px;color:var(--gray);line-height:1.6;margin-bottom:12px">Esta sección de Inicio muestra automáticamente las primeras 5 fotos que pertenezcan a un álbum. Al hacer clic, el visitante va directo a ese álbum.</p>
       <div class="adm-row-list" style="margin-bottom:10px">
@@ -2272,14 +2167,12 @@ function buildControls(k){
   }
   area.innerHTML=html;
 }
-
 function card(icon,title,body,hint){
   return `<div class="adm-card">
     <div class="adm-card-hd"><h3><span class="ic">${icon}</span>${title}</h3>${hint?`<span class="hint">${hint}</span>`:''}</div>
     <div class="adm-card-bd">${body}</div>
   </div>`;
 }
-
 function applyColors(){
   document.documentElement.style.setProperty('--black',v('cfg-black-txt'));
   document.documentElement.style.setProperty('--ruby',v('cfg-red-txt'));
@@ -2295,8 +2188,6 @@ function applySectionColors(){
   document.documentElement.style.setProperty('--c-dirigencia',ge('cfg-dirigencia').value);
   toast('Colores de secciones aplicados');
 }
-
-// ── SAVE ALL ──
 function saveAll(){
   const k=currentEditor;
   pauseAndSave(()=>{
@@ -2334,11 +2225,10 @@ function saveAll(){
   });
   applyAll();
   if(SECS[k])renderSecPage(k);
+  markSaved();
   toast('✓ Cambios guardados y aplicados al sitio');
 }
 function saveAndPreview(){ saveAll(); closeAdmin(); showPage(currentEditor==='general'?'home':currentEditor); }
-
-// ── IMAGE HANDLING ──
 function handleImgFile(input,target){
   const file=input.files[0];
   if(!file) return;
@@ -2346,8 +2236,6 @@ function handleImgFile(input,target){
   reader.onload=e=>{
     const url=e.target.result;
     if(target==='logo'){
-      // Solo vista previa visual — NO se asigna a D.logo.url para evitar guardar
-      // imágenes base64 gigantes en Firestore (límite de 1MB por documento).
       const w=document.getElementById('logo-preview-wrap');
       if(w){const i=w.querySelector('img')||document.createElement('img');i.src=url;i.style.cssText='width:100%;height:100%;object-fit:cover;position:absolute;inset:0';w.appendChild(i);}
       toast('Vista previa lista — sube esta imagen a Imgur y pega el link para guardarla', true);
@@ -2416,8 +2304,6 @@ function handleSecLogoFile(input,sectionKey){
   const reader=new FileReader();
   reader.onload=e=>{
     const url=e.target.result;
-    // Solo vista previa visual — NO se asigna a SECS[sectionKey].logo para evitar
-    // guardar imágenes base64 gigantes en Firestore (límite de 1MB por documento).
     const w=document.getElementById('sec-logo-preview-wrap');
     if(w){const i=w.querySelector('img')||document.createElement('img');i.src=url;i.style.cssText='width:100%;height:100%;object-fit:cover;position:absolute;inset:0';w.appendChild(i);}
     toast('Vista previa lista — sube esta imagen a Imgur y pega el link para guardarla', true);
@@ -2437,8 +2323,6 @@ function previewMapCtrl(){
   if(url){D.contacto.mapUrl=url;const mi=document.getElementById('map-iframe');if(mi)mi.src=url;toast('Mapa actualizado');}
   else toast('Ingresa una URL de mapa',true);
 }
-
-// ── SECTION PHOTOS ──
 let pendingSecFiles = [];
 function openSecPhotoModal(s){
   sv('spm-sec',s);
@@ -2515,7 +2399,6 @@ function saveSecPhoto(){
   const desc = v('spm-desc') || 'Foto Scout';
   const position = v('spm-position')||'center';
   const multiUrls = document.getElementById('spm-multi-url').value.split('\n').map(u=>u.trim()).filter(Boolean);
-
   if(multiUrls.length > 1){
     multiUrls.forEach((url,i)=>{
       SECS[s].fotos.push({url, desc: `${desc} (${i+1})`, emoji:'📷', position});
@@ -2549,8 +2432,6 @@ function deleteSecPhoto(s,idx){
   if(currentPage===s)renderSecPage(s);
   toast('Foto eliminada');
 }
-
-// ══════════ INIT ══════════
 function renderEverything(){
   applyAll();
   renderGallery();
@@ -2558,22 +2439,16 @@ function renderEverything(){
   renderHomeSeccionesGrid();
   ['cachorros','manada','unidad','caminantes','rovers','dirigencia','comite'].forEach(s=>renderSecPage(s));
 }
-
-// Primer render inmediato con los valores por defecto, para que el sitio no se vea vacío mientras carga la red
 renderEverything();
 initScrollReveal();
-
-// Cuando Firebase esté listo: cargar contenido real, activar sincronización en vivo y manejar sesión de admin
 function initFirebaseAndLoad(){
   loadFromFirestore().then(()=>{
     renderEverything();
     listenToFirestoreChanges();
   });
-
   const { onAuthStateChanged } = window.authFns;
   onAuthStateChanged(window.firebaseAuth, (user)=>{
     if(user){
-      // Sesión activa: si el modal de login estaba abierto, lo cerramos y mostramos el panel directo
       const loginScreen = document.getElementById('adm-login-screen');
       if(loginScreen.classList.contains('show')){
         loginScreen.classList.remove('show');
@@ -2581,7 +2456,6 @@ function initFirebaseAndLoad(){
     }
   });
 }
-
 if(window.firebaseDb){
   initFirebaseAndLoad();
 } else {
