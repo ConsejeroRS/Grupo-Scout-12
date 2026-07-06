@@ -997,7 +997,7 @@ function persistData(){
   clearTimeout(_persistTimer);
   _persistTimer = setTimeout(()=>{
     saveToFirestore();
-  }, 600);
+  }, 2000);
 }
 function pauseAndSave(fn){
   _persistPaused = true;
@@ -1019,7 +1019,9 @@ async function saveToFirestore(){
     const { doc, setDoc } = window.firestoreFns;
     const plainD = JSON.parse(JSON.stringify(D));
     const plainSECS = JSON.parse(JSON.stringify(SECS));
-    await setDoc(doc(window.firebaseDb, 'site', 'content'), { D: plainD, SECS: plainSECS, updatedAt: Date.now() });
+    const ts = Date.now();
+    window._lastLocalWrite = ts; // marcar ANTES de guardar para que el listener lo ignore
+    await setDoc(doc(window.firebaseDb, 'site', 'content'), { D: plainD, SECS: plainSECS, updatedAt: ts });
     showSaveIndicator('ok');
   }catch(e){
     console.error('Error guardando en Firestore:', e);
@@ -1040,11 +1042,16 @@ async function loadFromFirestore(){
     const snap = await getDoc(doc(window.firebaseDb, 'site', 'content'));
     if(snap.exists()){
       const saved = snap.data();
-      if(saved.D) Object.assign(D, saved.D);
-      if(saved.SECS){
-        Object.keys(saved.SECS).forEach(key=>{
-          if(SECS[key]) Object.assign(SECS[key], saved.SECS[key]);
-        });
+      _persistPaused = true;
+      try{
+        if(saved.D) Object.assign(D, saved.D);
+        if(saved.SECS){
+          Object.keys(saved.SECS).forEach(key=>{
+            if(SECS[key]) Object.assign(SECS[key], saved.SECS[key]);
+          });
+        }
+      } finally {
+        _persistPaused = false;
       }
     }
   }catch(e){
@@ -1057,12 +1064,19 @@ function listenToFirestoreChanges(){
     onSnapshot(doc(window.firebaseDb, 'site', 'content'), (snap)=>{
       if(!snap.exists()) return;
       const saved = snap.data();
+      // Si este snapshot es de nuestra propia escritura, ignorar
       if(saved.updatedAt && saved.updatedAt === window._lastLocalWrite) return;
-      if(saved.D) Object.assign(D, saved.D);
-      if(saved.SECS){
-        Object.keys(saved.SECS).forEach(key=>{
-          if(SECS[key]) Object.assign(SECS[key], saved.SECS[key]);
-        });
+      // Pausar el Proxy para que Object.assign no dispare persistData()
+      _persistPaused = true;
+      try{
+        if(saved.D) Object.assign(D, saved.D);
+        if(saved.SECS){
+          Object.keys(saved.SECS).forEach(key=>{
+            if(SECS[key]) Object.assign(SECS[key], saved.SECS[key]);
+          });
+        }
+      } finally {
+        _persistPaused = false; // reactivar sin disparar guardado
       }
       applyAll();
       renderGallery();
