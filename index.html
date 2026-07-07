@@ -658,6 +658,9 @@ nav{
           <button class="ctrl-btn-sm" style="width:auto;margin:0 0 .8rem 0;padding:7px 14px" onclick="closeAlbumDetail()">← Volver a Álbumes</button>
           <h2 class="sec-title" id="album-detail-title" style="margin-bottom:.3rem">Álbum</h2>
           <p class="sec-lead" id="album-detail-desc" style="margin-bottom:0"></p>
+          <a id="album-drive-btn" href="#" target="_blank" rel="noopener" style="display:none;margin-top:.7rem;display:none;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--amber);text-decoration:none;border:1px solid rgba(245,191,0,.25);padding:6px 14px;border-radius:100px;width:fit-content;transition:background .15s ease" onmouseover="this.style.background='rgba(245,191,0,.1)'" onmouseout="this.style.background='transparent'">
+            <span>📁</span> Ver todas las fotos en Drive →
+          </a>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
           <div id="gallery-filters" style="display:flex;gap:8px;flex-wrap:wrap"></div>
@@ -857,6 +860,11 @@ nav{
       <input type="hidden" id="am-id">
       <div class="aform-full aform-group"><label>Nombre del álbum</label><input id="am-name" type="text" placeholder="Ej: Campamento Anual 2025"></div>
       <div class="aform-full aform-group"><label>Descripción / lugar</label><input id="am-desc" type="text" placeholder="Ej: Bosque Los Aposentos"></div>
+      <div class="aform-full aform-group">
+        <label>Enlace Google Drive (álbum completo)</label>
+        <input id="am-drive" type="url" placeholder="https://drive.google.com/drive/folders/...">
+        <small style="color:var(--gray);font-size:10.5px;margin-top:4px;display:block">Drive → clic derecho carpeta → Compartir → Copiar enlace</small>
+      </div>
     </div>
     <div class="modal-ft">
       <button class="elm-btn elm-btn-ghost" onclick="closeModal('album-modal')">Cancelar</button>
@@ -1292,6 +1300,15 @@ function openAlbumDetail(albumId){
   const alb = D.albums.find(a=>a.id===albumId);
   document.getElementById('album-detail-title').textContent = alb ? alb.name : 'Álbum';
   document.getElementById('album-detail-desc').textContent = alb ? (alb.desc||'') : '';
+  const driveBtn = document.getElementById('album-drive-btn');
+  if(driveBtn){
+    if(alb && alb.driveUrl){
+      driveBtn.href = alb.driveUrl;
+      driveBtn.style.display = 'inline-flex';
+    } else {
+      driveBtn.style.display = 'none';
+    }
+  }
   renderGalleryFilters();
   renderGallery();
 }
@@ -1540,10 +1557,10 @@ function openAlbumModal(editId){
   if(editId){
     const a = D.albums.find(x=>x.id===editId);
     document.getElementById('album-modal-title').textContent = 'Editar Álbum';
-    sv('am-name', a.name); sv('am-desc', a.desc||'');
+    sv('am-name', a.name); sv('am-desc', a.desc||''); sv('am-drive', a.driveUrl||'');
   } else {
     document.getElementById('album-modal-title').textContent = 'Nuevo Álbum';
-    sv('am-name',''); sv('am-desc','');
+    sv('am-name',''); sv('am-desc',''); sv('am-drive','');
   }
   openModal('album-modal');
 }
@@ -1551,12 +1568,13 @@ function saveAlbum(){
   const name = v('am-name');
   if(!name){ toast('Ingresa un nombre para el álbum',true); return; }
   const editId = v('am-id');
+  const driveUrl = v('am-drive');
   if(editId){
     const a = D.albums.find(x=>x.id===parseInt(editId));
-    a.name = name; a.desc = v('am-desc');
+    a.name = name; a.desc = v('am-desc'); a.driveUrl = driveUrl;
     toast('Álbum actualizado');
   } else {
-    D.albums.push({id:Date.now(), name, desc:v('am-desc'), cover:''});
+    D.albums.push({id:Date.now(), name, desc:v('am-desc'), cover:'', driveUrl});
     toast('Álbum creado');
   }
   closeModal('album-modal');
