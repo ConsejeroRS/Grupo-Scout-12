@@ -645,10 +645,9 @@ nav{
     <div class="fl-card" id="albums-overview-card"><div class="fl-card-pad">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.4rem">
         <div class="sec-tag" style="margin-bottom:0">Álbumes</div>
-        <button class="ctrl-btn-sm green" style="width:auto;margin:0;padding:8px 16px" onclick="openAlbumModal()">+ Nuevo Álbum</button>
       </div>
       <div class="albums-grid-public" id="albums-grid-public"></div>
-      <div id="sin-album-section" style="margin-top:2rem;display:none">
+      <div id="sin-album-section" style="display:none!important;visibility:hidden">
         <div class="sec-tag" style="margin-bottom:1rem">Fotos sin álbum</div>
         <div class="gallery-masonry" id="gallery-masonry-sinalbum"></div>
       </div>
@@ -1267,7 +1266,7 @@ function renderAlbumsOverview(){
     const photos = D.gallery.filter(g=>g.albumId===a.id);
     const cover = a.cover || (photos[0]&&photos[0].url) || '';
     return `<div class="album-cover-card" onclick="openAlbumDetail(${a.id})">
-      ${cover?`<img src="${cover}" alt="${a.name}" loading="lazy" onerror="this.outerHTML='<div class=album-cover-placeholder>📁</div>'">`:'<div class="album-cover-placeholder">📁</div>'}
+      ${cover?`<img src="${cover}" alt="${a.name}" loading="lazy" onerror="this.style.display='none'">`:'<div style="width:100%;height:100%;background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center"><span style="font-size:2rem;opacity:.15">📷</span></div>'}
       <div class="album-cover-count">${photos.length} foto${photos.length===1?'':'s'}</div>
       <div class="album-cover-overlay">
         <div class="name">${a.name}</div>
@@ -1313,11 +1312,21 @@ function renderGallery() {
   }
   renderAlbumsOverview();
   if(hp){
-    const conAlbum = D.gallery.filter(it=>it.albumId);
-    const destacadas = conAlbum.slice(0,5);
-    hp.innerHTML = destacadas.length
-      ? destacadas.map(item=>galItemHtml(item,true)).join('')
-      : `<p style="color:var(--gray);font-size:14px;padding:1rem;grid-column:1/-1">Crea un álbum y sube fotos desde el panel admin para mostrarlas aquí.</p>`;
+    if(D.albums.length===0){
+      hp.innerHTML=`<p style="color:var(--gray);font-size:14px;padding:1rem;grid-column:1/-1">Pronto habrá álbumes aquí.</p>`;
+    } else {
+      hp.innerHTML = D.albums.slice(0,5).map(a=>{
+        const photos=D.gallery.filter(g=>g.albumId===a.id);
+        const cover=a.cover||(photos[0]&&photos[0].url)||'';
+        const count=photos.length;
+        return `<div class="gal-item gal-item-shine" onclick="goToAlbumFromHome(${a.id})" style="cursor:pointer">
+          <div class="gal-item-inner">
+            ${cover?`<img src="${cover}" alt="${a.name}" loading="lazy" style="object-position:center">`:`<span style="font-size:2.5rem;opacity:.2">📷</span>`}
+          </div>
+          <div class="gal-overlay"><span>${a.name}${count?` · ${count} foto${count===1?'':'s'}`:''}</span></div>
+        </div>`;
+      }).join('');
+    }
   }
 }
 function galItemHtml(item,linkToAlbum,photoSet,sinAlbumMode){
