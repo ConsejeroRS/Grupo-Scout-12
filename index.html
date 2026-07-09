@@ -216,7 +216,7 @@ nav{
 .lightbox-backdrop.show{display:flex}
 .lightbox-img-wrap{max-width:92vw;max-height:88vh;position:relative;display:flex;flex-direction:column;align-items:center}
 .lightbox-img-wrap img{max-width:92vw;max-height:78vh;object-fit:contain;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
-.lightbox-caption{color:#fff;font-size:14px;font-weight:600;margin-top:14px;text-align:center;max-width:80vw}
+.lightbox-caption{display:none}
 .lightbox-close{position:absolute;top:-46px;right:0;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
 .lightbox-close:hover{background:rgba(246,34,23,.3)}
 .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background-color .2s ease,border-color .2s ease,transform .15s var(--ease-out);backdrop-filter:blur(6px)}
@@ -238,7 +238,7 @@ nav{
 .gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
 .gal-item:hover .gal-item-inner,.gal-item:hover img{transform:scale(1.06)}
 .gal-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,transparent 55%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:.9rem}
-.gal-overlay span{font-size:14px;font-weight:700;color:#fff}
+.gal-overlay span{font-size:14px;font-weight:700;color:#fff;display:none}
 .albums-grid-public{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
 .album-cover-card{position:relative;border-radius:20px;overflow:hidden;cursor:pointer;aspect-ratio:4/3;background:var(--card);border:1px solid var(--border);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s}
 .album-cover-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px -10px rgba(0,0,0,.5)}
@@ -663,8 +663,8 @@ nav{
           </a>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-          <div id="gallery-filters" style="display:flex;gap:8px;flex-wrap:wrap"></div>
-          <button class="ctrl-btn-sm green" id="upload-to-album-btn" style="width:auto;margin:0;padding:8px 16px" onclick="openGalModal(galActiveAlbum)">+ Subir Fotos</button>
+          <div id="gallery-filters" style="display:none"></div>
+          <button class="ctrl-btn-sm green" id="upload-to-album-btn" style="display:none" onclick="openGalModal(galActiveAlbum)">+ Subir Fotos</button>
         </div>
       </div>
       <div class="gallery-masonry" id="gallery-masonry"></div>
@@ -1552,6 +1552,37 @@ function deleteGalPhoto(id){
   renderHomeGalleryAdminList();
   toast('Foto eliminada');
 }
+function moveAlbum(idx, dir){
+  const newIdx = idx + dir;
+  if(newIdx < 0 || newIdx >= D.albums.length) return;
+  pauseAndSave(()=>{
+    const tmp = D.albums[idx];
+    D.albums[idx] = D.albums[newIdx];
+    D.albums[newIdx] = tmp;
+  });
+  renderAlbumsOverview();
+  if(currentEditor==='galeria') buildControls('galeria');
+  toast(dir===-1?'Álbum subido':'Álbum bajado');
+}
+function moveGalPhoto(photoId, dir){
+  const photo = D.gallery.find(g=>g.id===photoId);
+  if(!photo) return;
+  const albumPhotos = D.gallery.filter(g=>g.albumId===photo.albumId);
+  const currentIdx = albumPhotos.findIndex(g=>g.id===photoId);
+  const targetIdx = currentIdx + dir;
+  if(targetIdx < 0 || targetIdx >= albumPhotos.length) return;
+  // Swap en el array global D.gallery
+  const globalIdxA = D.gallery.indexOf(photo);
+  const globalIdxB = D.gallery.indexOf(albumPhotos[targetIdx]);
+  pauseAndSave(()=>{
+    const tmp = D.gallery[globalIdxA];
+    D.gallery[globalIdxA] = D.gallery[globalIdxB];
+    D.gallery[globalIdxB] = tmp;
+  });
+  renderAlbumsOverview(); renderGallery();
+  if(currentEditor==='galeria') buildControls('galeria');
+  toast(dir===-1?'Foto subida':'Foto bajada');
+}
 function openAlbumModal(editId){
   sv('am-id', editId||'');
   if(editId){
@@ -2142,15 +2173,19 @@ function buildControls(k){
     html=`<div class="adm-section-grid">
     ${card('📁','Álbumes',`
       <div class="adm-row-list" id="ctrl-albums-list">
-        ${D.albums.map(a=>{
+        ${D.albums.map((a,idx)=>{
           const count = D.gallery.filter(g=>g.albumId===a.id).length;
           const cover = a.cover || (D.gallery.find(g=>g.albumId===a.id)||{}).url || '';
           return `<div class="adm-row-item">
+            <div style="display:flex;flex-direction:column;gap:2px;flex-shrink:0">
+              <button class="adm-row-btn" onclick="moveAlbum(${idx},-1)" title="Subir" ${idx===0?'disabled style="opacity:.3"':''}>↑</button>
+              <button class="adm-row-btn" onclick="moveAlbum(${idx},1)" title="Bajar" ${idx===D.albums.length-1?'disabled style="opacity:.3"':''}>↓</button>
+            </div>
             <div class="adm-row-thumb">${cover?`<img src="${cover}">`:'📁'}</div>
             <div class="adm-row-text"><div class="t">${a.name}</div><div class="s" style="color:var(--gray)">${count} foto(s)</div></div>
-            <button class="adm-row-btn" onclick="openGalModal(${a.id})" title="Subir fotos a este álbum">📁+</button>
-            <button class="adm-row-btn warn" onclick="openAlbumModal(${a.id})" title="Editar nombre">✏</button>
-            <button class="adm-row-btn danger" onclick="deleteAlbum(${a.id})" title="Eliminar álbum">✕</button>
+            <button class="adm-row-btn" onclick="openGalModal(${a.id})" title="Subir fotos">📁+</button>
+            <button class="adm-row-btn warn" onclick="openAlbumModal(${a.id})" title="Editar">✏</button>
+            <button class="adm-row-btn danger" onclick="deleteAlbum(${a.id})" title="Eliminar">✕</button>
           </div>`;
         }).join('') || '<div class="adm-empty" style="padding:18px"><div class="ic">📁</div><p>Aún no hay álbumes creados.</p></div>'}
       </div>
@@ -2158,9 +2193,15 @@ function buildControls(k){
     `)}
     ${card('🖼','Fotos de la Galería',`
       <div class="adm-row-list" id="ctrl-gal-list">
-        ${D.gallery.map(g=>{
+        ${D.gallery.map((g,idx)=>{
           const album = D.albums.find(a=>a.id===g.albumId);
+          const albumPhotos = D.gallery.filter(p=>p.albumId===g.albumId);
+          const photoIdx = albumPhotos.indexOf(g);
           return `<div class="adm-row-item">
+            <div style="display:flex;flex-direction:column;gap:2px;flex-shrink:0">
+              <button class="adm-row-btn" onclick="moveGalPhoto(${g.id},-1)" title="Subir" ${photoIdx===0?'disabled style="opacity:.3"':''}>↑</button>
+              <button class="adm-row-btn" onclick="moveGalPhoto(${g.id},1)" title="Bajar" ${photoIdx===albumPhotos.length-1?'disabled style="opacity:.3"':''}>↓</button>
+            </div>
             <div class="adm-row-thumb">${g.url?`<img src="${g.url}" onerror="this.parentElement.textContent='${g.emoji||'🖼'}'">`:(g.emoji||'🖼')}</div>
             <div class="adm-row-text"><div class="t">${g.desc}</div>${album?`<div class="s">📁 ${album.name}</div>`:''}</div>
             <button class="adm-row-btn danger" onclick="deleteGalPhoto(${g.id})">✕</button>
